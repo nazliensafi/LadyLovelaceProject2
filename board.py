@@ -36,9 +36,6 @@ class Board(object):
 
         input_file.close()
 
-
-
-
         #make a 2D array for each puzzle found
         for puzzle in puzzles_list:
             print(len(puzzle))
@@ -66,6 +63,71 @@ class Board(object):
 
 
         return puzzles_array
+    
+    def print_board(boardString):
+        """ 
+        Prints board to output in 2D array 
+        """
+
+        string=""
+        if len(boardString) == 36:
+            for i in range(0, len(boardString), 6):
+                string+=boardString[i: i + 6]
+                string+="\n"
+        else: 
+            new_str = str[0:35]
+            for i in range(0, len(new_str), 6):
+                string+=boardString[i: i + 6]
+                string+="\n"
+        return string
+    
+    def car_list(str):
+        """ 
+        returns a list of string with unique alphabet character representing each car
+        """
+
+        res = []
+        car = ''.join(set(str))
+
+        for c in car:
+            if c == '.':
+                continue
+            elif c == '\n':
+                continue
+            else:
+                res.append(c)
+
+        return res
+    
+    def fuel_level(boardString):
+        """
+        returns a list containing char representing cars and int representing fuel level
+        """
+        car_fuel = []
+
+        # if the original line does not contain specification of initial fuel_level
+        if len(boardString) == 36:
+            cars = Board.car_list(boardString)
+            for c in cars:
+                car_fuel.append(c+":"+str(100))
+        
+        if len(boardString)>36:
+            # the fuel-level specification is separated by a space
+            new_str = boardString[37:]
+            cars = Board.car_list(boardString[:35])
+            for i in range(0, len(new_str), 3):
+                if new_str[i] in cars:
+                    car_fuel.append(new_str[i]+":"+ new_str[i+1])
+
+            # for cars without fuel-level specification, add 100
+            for c in cars:
+                if c in car_fuel:
+                    continue
+                else:
+                    car_fuel.append(c+":"+str(100))
+        return car_fuel
+
+
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
         #         return (value, {'y': row_idx, 'x': col_idx})
