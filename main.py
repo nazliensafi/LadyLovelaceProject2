@@ -26,6 +26,7 @@ def boardSolOutput(puzzleString):
             f.write('\n')
         f.write("--------------------------------------------------------------------------------")
 
-puzzle1 = "BBIJ....IJCC..IAAMGDDK.MGH.KL.GHFFL."
-boardSolOutput(puzzle1)
-#print(fuel_level(puzzle1))
+#main function
+if __name__ == '__main__':
+    puzzle1 = "BBIJ....IJCC..IAAMGDDK.MGH.KL.GHFFL."
+    boardSolOutput(puzzle1)
