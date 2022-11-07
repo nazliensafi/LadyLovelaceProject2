@@ -29,5 +29,5 @@ def boardSolOutput(puzzleString):
 #main function
 if __name__ == '__main__':
     puzzle1 = "BBIJ....IJCC..IAAMGDDK.MGH.KL.GHFFL."
-    #boardSolOutput(puzzle1)
+    boardSolOutput(puzzle1)
     Board.create_grid(puzzle1, 6)

@@ -143,6 +143,7 @@ class Board(object):
                 for j in sub:
                     lst.append(j)
                 print(' '.join(lst))
+        return lst
 
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
