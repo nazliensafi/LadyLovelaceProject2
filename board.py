@@ -127,7 +127,6 @@ class Board(object):
                     car_fuel.append(c+":"+str(100))
         return car_fuel
 
-
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
         #         return (value, {'y': row_idx, 'x': col_idx})

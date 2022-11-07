@@ -10,13 +10,28 @@ Coordinates = namedtuple('Position', 'y x')
 
 class Car():
     """
-    Attributes of car: name, position, size, orientation
+    Attributes of car: name, position, length, orientation
     """
-    def __init__(self, name='_', coord=Coordinates(0,0), size=1, isHorizontal=True):
+    def __init__(self, name, coord, length, orientation):
         self.name = name
-        self.coord = coord
-        self.size = size
-        self.isHorizontal = isHorizontal
+        self.coord = Coordinates(0,0)
+        self.length = 2
+        self.orientation = orientation
+        
+    def move(self, distance, direction):
+        """
+        If valid, Moves car to the given distance parameter, in particular direction
+        """
+        y, x = self.coord
+        if direction == "up":
+            x = x - distance
+        elif direction == "down":
+            x = x + distance
+        elif direction == "right":
+            y = y + distance
+        else:
+            y = y - distance
+        self.coord = Coordinates(y, x)
         
     def exploreNewPosition(self, distance):
         """
@@ -30,17 +45,6 @@ class Car():
         else:
             y += distance
         return Coordinates(y, x)
-    
-    def move(self, distance):
-        """
-        Moves car to the given distance parameter
-        """
-        y, x = self.coord
-        if self.isHorizontal:
-            x += distance
-        else:
-            y += distance
-        self.coord = Coordinates(y, x)
         
     def finalPosition(self):
         """
