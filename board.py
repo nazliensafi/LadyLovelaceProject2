@@ -139,7 +139,12 @@ class Board(object):
         boardAsList = list(boardString)
         grid = [boardAsList[j:j + 6] for j in range(0, len(boardAsList), 6)]
         return grid
-        
+    
+    def valid_moves(boardString):
+        """
+        returns a list of possible moves, their new position, new fuel
+        eg, [[B, up, (0,1), 100], [C, down, (3,2), 30]]
+        """
 
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
