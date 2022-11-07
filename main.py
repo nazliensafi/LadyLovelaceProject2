@@ -30,4 +30,4 @@ def boardSolOutput(puzzleString):
 if __name__ == '__main__':
     puzzle1 = "BBIJ....IJCC..IAAMGDDK.MGH.KL.GHFFL."
     boardSolOutput(puzzle1)
-    Board.create_grid(puzzle1)
+    print(Board.create_grid(puzzle1)[0][3])

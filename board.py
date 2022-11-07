@@ -138,8 +138,7 @@ class Board(object):
         """
         boardAsList = list(boardString)
         grid = [boardAsList[j:j + 6] for j in range(0, len(boardAsList), 6)]
-        print(grid)
-        #print(grid[0][3])
+        return grid
         
 
         # def get_coord(row_idx):
