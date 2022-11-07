@@ -131,19 +131,16 @@ class Board(object):
         CREATE 2D ARRAY BOARD
         LIST OF VALID MOVES FUNCTION
         """
-    
-    def create_grid(boardString, k):
+
+    def create_grid(boardString):
         """
         return 2D array of the board
         """
-        for i in range(len(boardString)):
-            if i %k == 0:
-                sub = boardString[i:i+k]
-                lst = []
-                for j in sub:
-                    lst.append(j)
-                print(' '.join(lst))
-        return lst
+        boardAsList = list(boardString)
+        grid = [boardAsList[j:j + 6] for j in range(0, len(boardAsList), 6)]
+        print(grid)
+        #print(grid[0][3])
+        
 
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
