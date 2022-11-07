@@ -127,6 +127,23 @@ class Board(object):
                     car_fuel.append(c+":"+str(100))
         return car_fuel
 
+        """
+        CREATE 2D ARRAY BOARD
+        LIST OF VALID MOVES FUNCTION
+        """
+    
+    def create_grid(boardString, k):
+        """
+        return 2D array of the board
+        """
+        for i in range(len(boardString)):
+            if i %k == 0:
+                sub = boardString[i:i+k]
+                lst = []
+                for j in sub:
+                    lst.append(j)
+                print(' '.join(lst))
+
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
         #         return (value, {'y': row_idx, 'x': col_idx})
