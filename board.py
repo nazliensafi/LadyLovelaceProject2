@@ -2,6 +2,7 @@
 This module implements 'board' class.
 """
 import numpy as np
+from car import Car
 class Board(object):
     """Setting up the playing board
 
@@ -17,53 +18,6 @@ class Board(object):
         self.size = {'x': height, 'y': width}
         self.cars = cars
 
-
-    @staticmethod
-    def readfile(input_file):
-        """ Reads an input file (where each line contains a puzzle, a comment started by a #, or an empty line)
-            skips empty lines and lines and comments
-            stores each puzzle in a list called puzzles_list
-            then stores each puzzle from the list in a 6 by 6 2D array
-        """
-        input_file = open('input.txt', 'r')
-        puzzles_list = list()
-        puzzles_array = []
-        car_length_dict = {}
-
-        for line in input_file:
-            if line.strip() and line[0]!='#': #if there line is not empty and doesn't start with #
-                puzzles_list.append(line)
-
-        input_file.close()
-
-        #make a 2D array for each puzzle found
-        for puzzle in puzzles_list:
-            print(len(puzzle))
-            print(puzzle)
-            a = np.full((6, 6), '*', dtype='U1')
-            k=0
-            for a_row in range(6):
-                for a_col in range(6):
-                    a[a_row][a_col] = puzzle[k]
-                    k += 1
-            puzzles_array.append(a)
-
-            for char in "ABCDEFGHIJKLMNOP":
-                 count = 0
-                 for k in range(36):
-                    if char == puzzle[k]:
-                        count += 1
-                 if count == 0:
-                    break
-                 else:
-                    car_length_dict[char] = count
-        print(car_length_dict)
-        print (puzzles_array[0])
-        print (puzzles_array[1])
-
-
-        return puzzles_array
-    
     def print_board(boardString):
         """ 
         Prints board to output in 2D array 
@@ -99,33 +53,33 @@ class Board(object):
 
         return res
     
-    def fuel_level(boardString):
-        """
-        returns a list containing char representing cars and int representing fuel level
-        """
-        car_fuel = []
-
-        # if the original line does not contain specification of initial fuel_level
-        if len(boardString) == 36:
-            cars = Board.car_list(boardString)
-            for c in cars:
-                car_fuel.append(c+":"+str(100))
-        
-        if len(boardString)>36:
-            # the fuel-level specification is separated by a space
-            new_str = boardString[37:]
-            cars = Board.car_list(boardString[:35])
-            for i in range(0, len(new_str), 3):
-                if new_str[i] in cars:
-                    car_fuel.append(new_str[i]+":"+ new_str[i+1])
-
-            # for cars without fuel-level specification, add 100
-            for c in cars:
-                if c in car_fuel:
-                    continue
-                else:
-                    car_fuel.append(c+":"+str(100))
-        return car_fuel
+    # def fuel_level(boardString):
+    #     """
+    #     returns a list containing char representing cars and int representing fuel level
+    #     """
+    #     car_fuel = []
+    #
+    #     # if the original line does not contain specification of initial fuel_level
+    #     if len(boardString) == 36:
+    #         cars = Board.car_list(boardString)
+    #         for c in cars:
+    #             car_fuel.append(c+":"+str(100))
+    #
+    #     if len(boardString)>36:
+    #         # the fuel-level specification is separated by a space
+    #         new_str = boardString[37:]
+    #         cars = Board.car_list(boardString[:35])
+    #         for i in range(0, len(new_str), 3):
+    #             if new_str[i] in cars:
+    #                 car_fuel.append(new_str[i]+":"+ new_str[i+1])
+    #
+    #         # for cars without fuel-level specification, add 100
+    #         for c in cars:
+    #             if c in car_fuel:
+    #                 continue
+    #             else:
+    #                 car_fuel.append(c+":"+str(100))
+    #     return car_fuel
 
         """
         CREATE 2D ARRAY BOARD
@@ -228,3 +182,95 @@ class Board(object):
     #     """Check if the red_car is free"""
     #     red_car = [car for car in self.cars if car.is_red_car][0]
     #     return red_car.coord['x'] + red_car.length == self.size['x'] - 1
+
+
+
+
+def readfile(input_file):
+    """ Reads an input file (where each line contains a puzzle, a comment started by a #, or an empty line)
+        skips empty lines and lines and comments
+        stores each puzzle in a list called puzzles_list
+        then stores each puzzle from the list in a 6 by 6 2D array
+    """
+    input_file = open('input.txt', 'r')
+    puzzles_list = list()
+    puzzles_array = []
+    car_length_dict = {}
+    car_fuel_dict = {}
+    #car = Car.__new__(Car)
+
+    #extracts puzzles and stores them in puzzles_list
+    for line in input_file:
+        if line.strip() and line[0]!='#': #if there line is not empty and doesn't start with #
+            puzzles_list.append(line)
+
+    input_file.close()
+
+    #make a 2D array for each puzzle found in the input file and initialize car objects
+    for puzzle in puzzles_list:
+        #print(len(puzzle))
+        print("puzzle string: " + puzzle)
+        a = np.empty((6, 6), dtype=object)
+
+
+        #collects car lengths in car_length_dict with keys : car chars
+        for char in "ABCDEFGHIJKLMNOP":
+            car_count = 0
+            for k in range(36):
+                if char == puzzle[k]:
+                    car_count += 1
+            if car_count == 0:
+                break
+            else:
+                car_length_dict[char] = car_count
+
+        print("\nCar Length Dictionary: ")
+        print(car_length_dict)
+
+
+
+        #returns a dictionary called car_fuel_dict containing char representing cars and int representing fuel level
+        #if the original puzzle does not contain specification of initial fuel_level
+        if len(puzzle) == 36:
+            for c in puzzle:
+                car_fuel_dict[c] = 100
+
+        if len(puzzle)>36:
+            # the fuel-level specification is separated by a space
+            new_str = puzzle[37:]
+            cars = puzzle[:35]
+            for i in range(0, len(new_str), 3):
+                if new_str[i] in cars:
+                    car_fuel_dict[new_str[i]] = int(new_str[i+1])
+            # for cars without fuel-level specification, add 100
+            for c in cars:
+                if c in car_fuel_dict.keys():
+                    continue
+                else:
+                    car_fuel_dict[c] = 100
+
+        del car_fuel_dict['.']
+        print("\nCar Fuel Dictionary: ")
+        print(car_fuel_dict)
+
+        print("puzzle in 2D")
+
+
+        k=0
+        for a_row in range(6):
+            for a_col in range(6):
+                if puzzle[k] == ".":
+                    print(".", end =" ")
+                else:
+                    car = Car.__new__(Car) #create an empty Car object
+                    car.name = puzzle[k] #set the car name
+                    car.length = car_length_dict.get(puzzle[k]) #set the car length
+                    car.fuel = car_fuel_dict.get(puzzle[k]) #set the car fuel
+                    a[a_row][a_col] = car
+                    print(a[a_row][a_col].name,  end =" ")
+                k += 1
+            print("\n")
+
+        puzzles_array.append(a)
+
+    return puzzles_array
