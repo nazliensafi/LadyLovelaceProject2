@@ -196,6 +196,7 @@ def readfile(input_file):
     puzzles_list = list()
     puzzles_array = []
     car_length_dict = {}
+    car_orient_dict ={}
     car_fuel_dict = {}
     #car = Car.__new__(Car)
 
@@ -227,7 +228,16 @@ def readfile(input_file):
         print("\nCar Length Dictionary: ")
         print(car_length_dict)
 
+        #collects car orientation in car_orint_dict with keys : car chars
+        for i in range(35):
+            if puzzle[i] == puzzle[i+1]:
+                car_orient_dict[puzzle[i]] = 0
+            else:
+                car_orient_dict[puzzle[i+1]] = 1
 
+        del car_orient_dict['.']
+        print("\nCar Orientation Dictionary: ")
+        print(car_orient_dict)
 
         #returns a dictionary called car_fuel_dict containing char representing cars and int representing fuel level
         #if the original puzzle does not contain specification of initial fuel_level
@@ -257,6 +267,8 @@ def readfile(input_file):
 
 
         k=0
+        chars = []
+        car_coord_dict = {}
         for a_row in range(6):
             for a_col in range(6):
                 if puzzle[k] == ".":
@@ -265,11 +277,19 @@ def readfile(input_file):
                     car = Car.__new__(Car) #create an empty Car object
                     car.name = puzzle[k] #set the car name
                     car.length = car_length_dict.get(puzzle[k]) #set the car length
+                    car.orientation = car_orient_dict.get(puzzle[k]) #set the car orientation
                     car.fuel = car_fuel_dict.get(puzzle[k]) #set the car fuel
                     a[a_row][a_col] = car
-                    print(a[a_row][a_col].name,  end =" ")
+                    if puzzle[k] not in chars:
+                        car.x, car.y = a_row, a_col
+                        car_coord_dict[puzzle[k]] = (str(a_row), str(a_col))
+                        chars += puzzle[k]
+                    print(a[a_row][a_col].name,   end =" ")
                 k += 1
             print("\n")
+
+        print("\nCar Coordinate Dictionary: ")
+        print(car_coord_dict)
 
         puzzles_array.append(a)
 
