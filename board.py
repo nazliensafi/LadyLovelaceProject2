@@ -213,9 +213,8 @@ def readfile(input_file):
         print("puzzle string: " + puzzle)
         a = np.empty((6, 6), dtype=object)
 
-
         #collects car lengths in car_length_dict with keys : car chars
-        for char in "ABCDEFGHIJKLMNOP":
+        for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
             car_count = 0
             for k in range(36):
                 if char == puzzle[k]:

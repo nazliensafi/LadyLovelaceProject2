@@ -12,8 +12,6 @@ class Car:
     """
     Attributes of car: name, position, length, orientation, and fuel level
     """
-
-
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             if key == "name":
@@ -71,7 +69,7 @@ class Car:
 
 
 
-        
+    # Need to add validation() method    
     def move(self, distance, direction):
         """
         If valid, Moves car to the given distance parameter, in particular direction
@@ -86,7 +84,8 @@ class Car:
         else:
             y = y - distance
         self.coord(x, y)    #set the new coord's
-        
+    
+    
     # def exploreNewPosition(self, distance):
     #     """
     #     Car possible position according to available distance

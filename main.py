@@ -33,3 +33,16 @@ if __name__ == '__main__':
     # boardSolOutput(puzzle1)
     # print(Board.create_grid(puzzle1)[0][3])
     board = Board.readfile('input.txt')
+
+
+# TODO
+# Board.py -> read unique alphabets in the list from the input text to determine what cars are in the puzzle
+# Car.py -> valide_move() method
+# Car.py -> explore_move() method: 
+#   part 1: if car = horizontal, allow left-right, check the head and tail of the car
+#   part 2: if car = vertical, allow top-bottom, check the head and tail of the car
+# Car.py -> goals() method: check if head or tail of A is in position (2,5) 
+# Search algorithms
+# UCS
+# GBFS h1, h2, h3, h4
+# Algorithm A/A* h1, h2, h3, h4
