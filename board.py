@@ -293,3 +293,15 @@ def readfile(input_file):
         puzzles_array.append(a)
 
     return puzzles_array
+
+# determines if car A has reached (2,5) in the board
+def goal(self):
+    exited = False
+    i = self.cars.index('A')
+    if(self.cars[i].x == 2 and self.cars[i].y == 5):
+        exited = True
+    # add elif to check the position of the tail
+    else:
+        exited = False
+    
+    return exited
