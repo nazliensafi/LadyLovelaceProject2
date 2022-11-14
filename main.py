@@ -41,7 +41,7 @@ if __name__ == '__main__':
 # Car.py -> explore_move() method: 
 #   part 1: if car = horizontal, allow left-right, check the head and tail of the car
 #   part 2: if car = vertical, allow top-bottom, check the head and tail of the car
-# Car.py -> goals() method: check if head or tail of A is in position (2,5) 
+# Board.py -> goals() method: check if head or tail of A is in position (2,5) 
 # Search algorithms
 # UCS
 # GBFS h1, h2, h3, h4
