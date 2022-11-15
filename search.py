@@ -34,34 +34,32 @@ def ucs(board):
             print("No solution")
             break #stop while loop
 
-        # #if next move is found and we reach the goal, we finished the search
-        # if (nextMove != []):
-        #     for m in nextMove:
-        #         if(m is goal):
-        #            goalstate = (m, parentIndex+1, index+1, cost+1)
-        #            visited.pop()
-        #            stop = time.time()
-        #            break
+        if (nextMove != []):
+            cost+=1
+            # the new parent node is the state-node in the visited, so we get the index
+            parentIndex = visited[2]
 
-        #else, we do the following steps:
-        else:
-            #It always costs 1 to go from a parent node to the child node
-            cost = cost+1
-
-            #the new parent node is the child node from the previous loop
-            parentIndex = index     
-            
-            #for each of the possible move we found (for each element of the array nextMove)
-            #we create a new tuple to append to 'open' queue: (nextMove element, parent state, new cost)
             for m in nextMove:
-                for n in open:
-                    #verify if we have equivalent board already in open queue
-                    if (n[0] != m):
-                        open.append(m,parentIndex,index+1,cost)
-                    #if we do, continue without adding, since the cost of the newly found state will be higher
-                    elif(n[0] == m):
-                        continue
-            
+                #if next move is found and we reach the goal, we finished the search
+                if(m is goal()):
+                   goalstate = (m, parentIndex, index+1, cost+1)
+                   visited.pop()
+                   stop = time.time()
+                   break
+
+                #else, we do the following steps:
+                else:
+                    #for each of the possible move we found (for each element of the array nextMove)
+                    #we create a new tuple to append to 'open' queue: (nextMove element, parent state, index, new cost)
+                    for n in open:
+                        #verify if we have equivalent board already in open queue
+                        if (n[0] != m):
+                            open.append(m,parentIndex,index+1,cost)
+                        #if we do, continue without adding, since the cost of the newly found state will be higher
+                        elif(n[0] == m):
+                            continue
+
+            #after verifying each child node        
             #empty nextMove
             nextMove.clear()
             #append the element from visited queue to closed queue
@@ -77,11 +75,18 @@ def ucs(board):
     #find the actual path by tracking the parent node
     path = [goalstate]
     currentNode = goalstate
-    for node in closed:
-        if (node[2] == currentNode[1]):
-            path.insert(0, currentNode)
-        else:
-            continue
+    while(currentNode == initial_state):
+        for node in closed:
+            #the index of the node = the parent node's index of current node
+            if (node[2] == currentNode[1]):
+                path.insert(0, currentNode)
+                currentNode = node
+                break
+            else:
+                continue
+    
+    #lastly, we insert the initial_state in the beginning of the path
+    path.insert(0, initial_state)
     
     #in output.txt file, write:
     # "Runtime :" + runtime + "seconds\n"
