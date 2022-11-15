@@ -95,3 +95,8 @@ def ucs(board):
     # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
     # final Board object displayed as 2D matrix
 
+
+#TODO
+def gbfs_h1(board):
+    return 0
+

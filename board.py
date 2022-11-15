@@ -349,3 +349,41 @@ def goal(self):
         exited = False
     
     return exited
+
+#Heuristic functions
+#H1: the number of vehicles blocking A
+def h1(self):
+    hn = 0
+    #get the position of A    
+    i=0
+    for c in self.cars:
+        if (c.name!='A'):
+            i+=1
+        else:
+            break
+    Ay = self.cars[i].y + 1
+    
+    if(Ay == 5):
+        hn = 0
+    
+    #check if any cars is positioned between A and the exit(2,5)
+    else:
+        for c in self.cars:
+            #if the car is horizontal, then its x value is equal to Ax
+            if c.orientation == 0:
+                if(c.x == 2 and c.y > Ay and (c.y+c.length-1)<= 5):
+                    hn+=1
+                else:
+                    continue
+            #if the car is vertical, its y value is greater than Ay
+            elif c.orientation == 1:
+                if(c.y > Ay and ((c.x+c.length-1)==2 or 2==c.x)):
+                    hn+=1
+                else:
+                    continue
+    
+    return hn
+
+#H2: the number of positions blocked (regardless of vehicle number)
+
+#H3: the value of h1 * lamda (value of choice > 1)
