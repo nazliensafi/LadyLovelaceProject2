@@ -186,35 +186,54 @@ class Board(object):
 
 
 
-def readfile(input_file):
+def readfile(problem_file):
     """ Reads an input file (where each line contains a puzzle, a comment started by a #, or an empty line)
         skips empty lines and lines and comments
         stores each puzzle in a list called puzzles_list
         then stores each puzzle from the list in a 6 by 6 2D array
+
+        Returns an array of Board objectcs where each Board object represent the initial state of a game
     """
-    input_file = open('input.txt', 'r')
+    input_file = open(problem_file, 'r')
     puzzles_list = list()
     puzzles_array = []
     car_length_dict = {}
     car_orient_dict ={}
     car_fuel_dict = {}
+    car_name = []
     #car = Car.__new__(Car)
 
-    #extracts puzzles and stores them in puzzles_list
+    #resulting array = an array of Board objects where each Board object represent the initial state of one game
+    resCars = []
+    resBoard = []
+
+    #extracts puzzles in 1D and stores them in puzzles_list
     for line in input_file:
-        if line.strip() and line[0]!='#': #if there line is not empty and doesn't start with #
+        #if there line is not empty and doesn't start with #
+        if line.strip() and line[0]!='#': 
             puzzles_list.append(line)
 
     input_file.close()
 
     #make a 2D array for each puzzle found in the input file and initialize car objects
     for puzzle in puzzles_list:
-        #print(len(puzzle))
+        
+        #To delete after testing the readfile()
         print("puzzle string: " + puzzle)
         a = np.empty((6, 6), dtype=object)
 
+        #list of unique car names
+        uniqueCar = ''.join(set(puzzle))
+        for c in uniqueCar:
+            if c == '.':
+                continue
+            elif c == '\n':
+                continue
+            else:
+                car_name.append(c)
+        
         #collects car lengths in car_length_dict with keys : car chars
-        for char in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        for char in car_name:
             car_count = 0
             for k in range(36):
                 if char == puzzle[k]:
@@ -292,15 +311,40 @@ def readfile(input_file):
 
         puzzles_array.append(a)
 
-    return puzzles_array
+        #build the resulting array of Boards
+        for c in car_name:
+            newCar = Car(c,car_coord_dict.get(c)[0],car_coord_dict.get(c)[1],car_length_dict.get(c),car_orient_dict.get(c),car_fuel_dict.get(c))
+            resCars.append(newCar)
+        for res in resCars:
+            resBoard.append(Board(res, 6, 6))
+
+    return resBoard
 
 # determines if car A has reached (2,5) in the board
 def goal(self):
     exited = False
-    i = self.cars.index('A')
+    i=0
+    for c in self.cars:
+        if (c.name!='A'):
+            i+=1
+        else:
+            break
+
     if(self.cars[i].x == 2 and self.cars[i].y == 5):
         exited = True
     # add elif to check the position of the tail
+    #case when A is horizontal
+    elif(self.cars[i].orientation == 0):
+        if(self.cars[i].x + self.cars[i].length == 2 and self.cars[i].y == 5):
+            exited = True
+        else:
+            exited = False
+    #case when A is vertical
+    elif(self.cars[i].orientation == 1):
+        if(self.cars[i].x == 2 and self.cars[i].y + self.cars[i].length == 5):
+            exited = True
+        else:
+            exited = False
     else:
         exited = False
     

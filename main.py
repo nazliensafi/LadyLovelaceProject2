@@ -32,7 +32,13 @@ if __name__ == '__main__':
     # puzzle1 = "BBIJ....IJCC..IAAMGDDK.MGH.KL.GHFFL."
     # boardSolOutput(puzzle1)
     # print(Board.create_grid(puzzle1)[0][3])
-    board = Board.readfile('input.txt')
+    # board = Board.readfile('input.txt')
+
+    goaltest = Board.readfile('goaltest.txt')
+    if(Board.goal(goaltest[0])):
+        print("Goal reached")
+    else:
+        print("Goal failed")    
 
 
 # TODO
