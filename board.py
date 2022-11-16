@@ -363,7 +363,8 @@ def h1(self):
             break
     Ay = self.cars[i].y + 1
     
-    if(Ay == 5):
+    #either the head or the tail of the A is at the exit(2,5)
+    if(Ay == 5 or Ay == 4):
         hn = 0
     
     #check if any cars is positioned between A and the exit(2,5)
@@ -371,7 +372,7 @@ def h1(self):
         for c in self.cars:
             #if the car is horizontal, then its x value is equal to Ax
             if c.orientation == 0:
-                if(c.x == 2 and c.y > Ay and (c.y+c.length-1)<= 5):
+                if(c.x == 2 and (c.y > Ay or (c.y+c.length-1)<= 5)):
                     hn+=1
                 else:
                     continue
@@ -385,5 +386,42 @@ def h1(self):
     return hn
 
 #H2: the number of positions blocked (regardless of vehicle number)
+def h2(self):
+    hn = 0
+    #get the position of A
+    i=0
+    for c in self.cars:
+        if(c.name != 'A'):
+            i+=1
+        else:
+            break
+    Ay = self.cars[i].y + 1
+
+    #either the head or the tail of A is at the exit(2,5)
+    if(Ay == 5 or Ay == 4):
+        hn = 0
+
+    #if A is not in exit, check if any coordinate (2, y) is between A and exit
+    else:
+        for c in self.cars:
+            #if the car is horizontal, at coordinate x = 2 and y > Ay, then its length is included in h(n)
+            if c.orientation == 0:
+                if(c.x == 2 and (c.y > Ay or (c.y+c.length-1)<= 5)):
+                    hn = hn + c.length
+                else:
+                    continue
+            #if the car is vertical, its y value is greater than Ay, then it only blocks one position
+            elif c.orientation == 1:
+                if(c.y > Ay and ((c.x+c.length-1)==2 or 2==c.x)):
+                    hn+=1
+                else:
+                    continue
+
+    return hn
 
 #H3: the value of h1 * lamda (value of choice > 1)
+def h3(self, ld):
+    hn = self.h1()*ld
+    return hn
+
+#H4: heuristic of our choice
