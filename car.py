@@ -1,13 +1,6 @@
 from collections import *
 from board import *
 
-"""
-Shows attributes of car, where it can move
-and its coordinates
-"""
-
-#Coordinates = namedtuple('Position', 'y x')
-
 class Car:
     """
     Attributes of car: name, position, length, orientation, and fuel level
@@ -35,45 +28,15 @@ class Car:
         self.orientation = orientation
         self.fuel = fuel
 
-    # def __repr__ (self):
-    #     # if self._orientation == 0:
-    #     #     orientation = "Horizontal"
-    #     # else:
-    #     #     orientation = "Vertical"
-    #     #
-    #     # rep = 'Car(' + self._name + ',' + str(self._x) + ',' + str(self._y) \
-    #     #       + ',' + str(self._length) + ',' + orientation + ',' + str(self._fuel) +  ')'
-    #     rep = 'Car(' + str(self.name) + ')'
-    #     return rep
+    def __repr__ (self):
+        if self.orientation == 0:
+            rep = 'Car(' + self.name + ', (' + str(self.x) + ', ' + str(self.y) \
+                  + '), ' + str(self.length) + ', ' + "Horizontal" + ', ' + str(self.fuel) +  ')'
+        else:
+            rep = 'Car(' + self.name + ', (' + str(self.x) + ', ' + str(self.y) \
+              + '), ' + str(self.length) + ', ' + "Vertical" + ', ' + str(self.fuel) +  ')'
 
-    #GETTERS:
-
-    #name getter
-    def name(self):
-        return self._name
-
-    #coord getter
-    def coord(self):
-        return self._coord
-
-    #length getter
-    def length(self):
-        return self._length
-
-    #orientation getter
-    def orientation(self):
-        return self._orientation
-
-    #fuel_level getter
-    def fuel(self):
-        return self._fuel
-
-    #x coord getter
-    def x(self):
-        return self._x
-    #y coord getter
-    def y(self):
-        return self._y
+        return rep
 
 
 
@@ -82,7 +45,7 @@ class Car:
         """
         If valid, Moves car to the given distance parameter, in particular direction
         """
-        x, y = self._coord.get("x"), self._coord.get("y") #get the coord's
+        x, y = self.x, self.y #get the coord's
         if direction == "up":
             x = x - distance
         elif direction == "down":
@@ -91,31 +54,48 @@ class Car:
             y = y + distance
         else:
             y = y - distance
-        self.coord(x, y)    #set the new coord's
+        self.x = x    #set the new x
+        self.y = y  #set the new y
     
-    
-    # def exploreNewPosition(self, distance):
-    #     """
-    #     Car possible position according to available distance
-    #     """
-    #     y, x = self.coord
-    #     if distance > 0:
-    #         y, x = self.end
-    #     if self.isHorizontal:
-    #         x += distance
-    #     else:
-    #         y += distance
-    #     return Coordinates(y, x)
-    #
-    # def finalPosition(self):
-    #     """
-    #     Return car's final position
-    #     """
-    #     y, x = self.coord
-    #     if self.isHorizontal:
-    #         x += self.size - 1
-    #     else:
-    #         y += self.size - 1
-    #     return Coordinates(y, x)
-    #
-    # end=property(finalPosition)
+    # levels of the search tree:
+    # root of the search is the first state of the board (original 2D array)
+    # 1st level: the car heads that can move
+    # 2nd level: possible moves of each car
+
+    def is_blocked(self):
+        """
+
+        :return: true if the calling car is not blocked on both sides by either cars or walls
+        """
+
+    # Reminder: x goes from 0 to 5, starting from the left
+    #           y goes from 0 to 5, starting from the top
+    #           e.g. 1st position on the grid ia [0][0] on the top left
+    #           2nd position on the grid ia [5][5] on the bottom right
+    def explore_moves(self, board):
+        """
+        given a car head checks if it can how many different moves are possible
+        :return: (car_name, distance, direction) in a list of possible moves
+        """
+        if self.orientation == 0: # horizontal cars
+            print()
+            # check if it can move to the right and by how many positions
+            if self.y + self.length != 5 and isinstance(board[self.x][self.y + self.length + 1], 'NoneType'):
+                # check if it can move to the left and by how many positions
+                print()
+        elif self.orientation == 1: # vertical cars
+            print()
+            # check if it can move up and by how many positions
+            # check if it can move down and by how many positions
+
+        possible_moves =[]
+        return possible_moves
+
+
+    def goal(self):
+        """
+
+        :return: True if the A car's tail is at poaition [2][5]
+        """
+        if self.name == 'A' and self.x == 2 and self.y + self.length == 5:
+            return True
