@@ -2,7 +2,9 @@
 This module implements 'board' class.
 """
 import numpy as np
-from car import Car
+from car import *
+
+
 class Board(object):
     """Setting up the playing board
 
@@ -196,6 +198,7 @@ def readfile(problem_file):
     """
     input_file = open(problem_file, 'r')
     puzzles_list = list()
+    unique_chars = []
     puzzles_array = []
     car_length_dict = {}
     car_orient_dict ={}
@@ -203,19 +206,19 @@ def readfile(problem_file):
     car_name = []
     #car = Car.__new__(Car)
 
-    #resulting array = an array of Board objects where each Board object represent the initial state of one game
-    resCars = []
-    resBoard = []
+    # resulting array = an array of Board objects where each Board object represent the initial state of one game
+    resulting_cars = []
+    resulting_boards = []
 
-    #extracts puzzles in 1D and stores them in puzzles_list
+    # extracts puzzles in 1D and stores them in puzzles_list
     for line in input_file:
-        #if there line is not empty and doesn't start with #
-        if line.strip() and line[0]!='#': 
+        # if there line is not empty and doesn't start with #
+        if line.strip() and line[0] != '#':
             puzzles_list.append(line)
 
     input_file.close()
 
-    #make a 2D array for each puzzle found in the input file and initialize car objects
+    # make a 2D array for each puzzle found in the input file and initialize car objects
     for puzzle in puzzles_list:
         
         #To delete after testing the readfile()
@@ -232,7 +235,7 @@ def readfile(problem_file):
             else:
                 car_name.append(c)
         
-        #collects car lengths in car_length_dict with keys : car chars
+        # collects car lengths in car_length_dict with keys : car chars
         for char in car_name:
             car_count = 0
             for k in range(36):
@@ -246,7 +249,7 @@ def readfile(problem_file):
         print("\nCar Length Dictionary: ")
         print(car_length_dict)
 
-        #collects car orientation in car_orint_dict with keys : car chars
+        # collects car orientation in car_orint_dict with keys : car chars
         for i in range(35):
             if puzzle[i] == puzzle[i+1]:
                 car_orient_dict[puzzle[i]] = 0
@@ -257,13 +260,13 @@ def readfile(problem_file):
         print("\nCar Orientation Dictionary: ")
         print(car_orient_dict)
 
-        #returns a dictionary called car_fuel_dict containing char representing cars and int representing fuel level
-        #if the original puzzle does not contain specification of initial fuel_level
+        # returns a dictionary called car_fuel_dict containing char representing cars and int representing fuel level
+        # if the original puzzle does not contain specification of initial fuel_level
         if len(puzzle) == 36:
             for c in puzzle:
                 car_fuel_dict[c] = 100
 
-        if len(puzzle)>36:
+        if len(puzzle) > 36:
             # the fuel-level specification is separated by a space
             new_str = puzzle[37:]
             cars = puzzle[:35]
@@ -284,7 +287,7 @@ def readfile(problem_file):
         print("puzzle in 2D")
 
 
-        k=0
+        k = 0
         chars = []
         car_coord_dict = {}
         for a_row in range(6):
@@ -300,7 +303,7 @@ def readfile(problem_file):
                     a[a_row][a_col] = car
                     if puzzle[k] not in chars:
                         car.x, car.y = a_row, a_col
-                        car_coord_dict[puzzle[k]] = (str(a_row), str(a_col))
+                        car_coord_dict[puzzle[k]] = (a_row, a_col)
                         chars += puzzle[k]
                     print(a[a_row][a_col].name,   end =" ")
                 k += 1
@@ -309,46 +312,71 @@ def readfile(problem_file):
         print("\nCar Coordinate Dictionary: ")
         print(car_coord_dict)
 
+        # Uncomment to check if the Car objects are properly instantiated
+        # for a_row in range(6):
+        #     for a_col in range(6):
+        #          if isinstance(a[a_row][a_col], Car) and isinstance(a[a_row][a_col].x, int):
+        #              print(a[a_row][a_col])
+
         puzzles_array.append(a)
 
-        #build the resulting array of Boards
+        # build the resulting array of Boards
         for c in car_name:
-            newCar = Car(c,car_coord_dict.get(c)[0],car_coord_dict.get(c)[1],car_length_dict.get(c),car_orient_dict.get(c),car_fuel_dict.get(c))
-            resCars.append(newCar)
-        for res in resCars:
-            resBoard.append(Board(res, 6, 6))
+            new_car = Car(c, car_coord_dict.get(c)[0], car_coord_dict.get(c)[1], car_length_dict.get(c), car_orient_dict.get(c), car_fuel_dict.get(c))
+            #print(new_car)
+            resulting_cars.append(new_car)
 
-    return resBoard
+        #print(resulting_cars)
+        resulting_boards.append(Board(resulting_cars, 6, 6))
+        print(resulting_boards)
+        # for cars in resulting_cars:
+        #     resulting_boards.append(Board(cars, 6, 6))
 
-# determines if car A has reached (2,5) in the board
+    return resulting_boards
+
+
 def goal(self):
-    exited = False
-    i=0
-    for c in self.cars:
-        if (c.name!='A'):
-            i+=1
-        else:
-            break
+    """
+    given a board of cars checks if the A car's tail is at position [2][5]
+    since A is always horizontal we don't need to check for a vertical case
+    since if tail reaches the exit a solution is found, we only need to check the tail
+    :return: True if the A car's tail is at position [2][5]
+    """
+    cars = self.cars
+    print(type(self))
+    for car in cars:
+        if car.name == 'A' and car.x == 2 and car.y + car.length - 1 == 5:
+            return True
 
-    if(self.cars[i].x == 2 and self.cars[i].y == 5):
-        exited = True
-    # add elif to check the position of the tail
-    #case when A is horizontal
-    elif(self.cars[i].orientation == 0):
-        if(self.cars[i].x + self.cars[i].length == 2 and self.cars[i].y == 5):
-            exited = True
-        else:
-            exited = False
-    #case when A is vertical
-    elif(self.cars[i].orientation == 1):
-        if(self.cars[i].x == 2 and self.cars[i].y + self.cars[i].length == 5):
-            exited = True
-        else:
-            exited = False
-    else:
-        exited = False
-    
-    return exited
+# # determines if car A has reached (2,5) in the board
+# def goal(self):
+#     exited = False
+#     i=0
+#     for Car in self.cars:
+#         if Car.name != 'A':
+#             i += 1
+#         else:
+#             break
+#
+#     if(self.cars[i].x == 2 and self.cars[i].y == 5):
+#         exited = True
+#     # add elif to check the position of the tail
+#     #case when A is horizontal
+#     elif(self.cars[i].orientation == 0):
+#         if(self.cars[i].x + self.cars[i].length == 2 and self.cars[i].y == 5):
+#             exited = True
+#         else:
+#             exited = False
+#     #case when A is vertical
+#     elif(self.cars[i].orientation == 1):
+#         if(self.cars[i].x == 2 and self.cars[i].y + self.cars[i].length == 5):
+#             exited = True
+#         else:
+#             exited = False
+#     else:
+#         exited = False
+#
+#     return exited
 
 #Heuristic functions
 #H1: the number of vehicles blocking A

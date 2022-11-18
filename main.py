@@ -1,5 +1,5 @@
-import board as Board
-import car as Car
+import board
+import car
 
 """
 Main Runner File
@@ -34,11 +34,11 @@ if __name__ == '__main__':
     # print(Board.create_grid(puzzle1)[0][3])
     # board = Board.readfile('input.txt')
 
-    goaltest = Board.readfile('goaltest.txt')
-    if(Board.goal(goaltest[0])):
+    goaltest = board.readfile('goaltest.txt')
+    if board.goal(goaltest[0]):
         print("Goal reached")
     else:
-        print("Goal failed")    
+        print("Goal failed")
 
 
 # TODO
