@@ -34,12 +34,42 @@ if __name__ == '__main__':
     # print(Board.create_grid(puzzle1)[0][3])
     # board = Board.readfile('input.txt')
 
-    goaltest = board.readfile('goaltest.txt')
+    goaltest = board.strToBoard(board.readFile('goaltest.txt'))
     if board.goal(goaltest[0]):
         print("Goal reached")
     else:
         print("Goal failed")
 
+
+    hn = 0
+    #get the position of A    
+    i=0
+    for c in goaltest[0].cars:
+        if (c.name!='A'):
+            i+=1
+        else:
+            break
+    Ay = goaltest[0].cars[i].y + 1
+    
+    # #either the head or the tail of the A is at the exit(2,5)
+    # if(Ay == 5 or Ay == 4):
+    #     hn = 0
+    # #check if any cars is positioned between A and the exit(2,5)
+    # else:
+    #     for c in goaltest[0].cars:
+    #         #if the car is horizontal, then its x value is equal to Ax
+    #         if c.orientation == 0:
+    #             if(c.x == 2 and (c.y > Ay or (c.y+c.length-1)<= 5)):
+    #                 hn+=1
+    #             else:
+    #                 continue
+    #         #if the car is vertical, its y value is greater than Ay
+    #         elif c.orientation == 1:
+    #             if(c.y > Ay and ((c.x+c.length-1)==2 or 2==c.x)):
+    #                 hn+=1
+    #             else:
+    #                 continue
+    print(i)
 
 # TODO
 # Board.py -> read unique alphabets in the list from the input text to determine what cars are in the puzzle

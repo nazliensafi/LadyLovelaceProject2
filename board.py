@@ -186,47 +186,53 @@ class Board(object):
     #     return red_car.coord['x'] + red_car.length == self.size['x'] - 1
 
 
-
-
-def readfile(problem_file):
+def readFile(filename):
     """ Reads an input file (where each line contains a puzzle, a comment started by a #, or an empty line)
         skips empty lines and lines and comments
-        stores each puzzle in a list called puzzles_list
-        then stores each puzzle from the list in a 6 by 6 2D array
+        stores each puzzle as a string in an array called puzzles
+        each string represents the initial state of a game
 
-        Returns an array of Board objectcs where each Board object represent the initial state of a game
+        Returns puzzles
     """
-    input_file = open(problem_file, 'r')
-    puzzles_list = list()
-    unique_chars = []
-    puzzles_array = []
-    car_length_dict = {}
-    car_orient_dict ={}
-    car_fuel_dict = {}
-    car_name = []
+    puzzles = []
+    input_file = open(filename, 'r')
+    # extracts puzzles in 1D and stores them in puzzles_list
+    for line in input_file:
+        # if line is not empty and doesn't start with #
+        if line.strip() and line[0] != '#':
+            puzzles+=[line]
+    
+    input_file.close()
+
+    return puzzles
+
+def strToBoard(puzzleArr):
+    """ Reads an array containing strings representing the initial state of a game
+        and creates a Board object with each string
+
+        Returns an array of Board objectcs 
+    """
+    
     #car = Car.__new__(Car)
 
     # resulting array = an array of Board objects where each Board object represent the initial state of one game
-    resulting_cars = []
     resulting_boards = []
 
-    # extracts puzzles in 1D and stores them in puzzles_list
-    for line in input_file:
-        # if there line is not empty and doesn't start with #
-        if line.strip() and line[0] != '#':
-            puzzles_list.append(line)
-
-    input_file.close()
-
     # make a 2D array for each puzzle found in the input file and initialize car objects
-    for puzzle in puzzles_list:
-        
+    for puzzle in puzzleArr:
+        resulting_cars = []
+        car_length_dict = {}
+        car_orient_dict ={}
+        car_fuel_dict = {}
+        car_name = []
+
         #To delete after testing the readfile()
         print("puzzle string: " + puzzle)
         a = np.empty((6, 6), dtype=object)
 
         #list of unique car names
-        uniqueCar = ''.join(set(puzzle))
+        prob = puzzle[0:36]
+        uniqueCar = ''.join(set(prob))
         for c in uniqueCar:
             if c == '.':
                 continue
@@ -318,17 +324,17 @@ def readfile(problem_file):
         #          if isinstance(a[a_row][a_col], Car) and isinstance(a[a_row][a_col].x, int):
         #              print(a[a_row][a_col])
 
-        puzzles_array.append(a)
+        # puzzles_array.append(a)
 
         # build the resulting array of Boards
         for c in car_name:
             new_car = Car(c, car_coord_dict.get(c)[0], car_coord_dict.get(c)[1], car_length_dict.get(c), car_orient_dict.get(c), car_fuel_dict.get(c))
             #print(new_car)
-            resulting_cars.append(new_car)
+            resulting_cars+=[(new_car)]
 
         #print(resulting_cars)
-        resulting_boards.append(Board(resulting_cars, 6, 6))
-        print(resulting_boards)
+        resulting_boards+=[Board(resulting_cars, 6, 6)]
+        
         # for cars in resulting_cars:
         #     resulting_boards.append(Board(cars, 6, 6))
 
@@ -381,35 +387,47 @@ def goal(self):
 #Heuristic functions
 #H1: the number of vehicles blocking A
 def h1(self):
+    """
+        given a board, read the coordinates of each car's position to determine
+        the number of the vehicles blocking A from the exit(2,5)
+
+        return the number of vehicles blocking A
+    """
+    #result to return
     hn = 0
-    #get the position of A    
+
+    #find the index of A in the list of cars    
     i=0
     for c in self.cars:
         if (c.name!='A'):
             i+=1
         else:
             break
-    Ay = self.cars[i].y + 1
+
+    #using the index, determine the coordinate of A's edge
+    Alength=self.cars[i].length
+    Ay=self.cars[i].y+Alength-1
+    Ax=self.cars[i].x
     
-    #either the head or the tail of the A is at the exit(2,5)
-    if(Ay == 5 or Ay == 4):
+    #verify if A is at the exit
+    if(Ax == 2 and Ay == 5):
         hn = 0
     
     #check if any cars is positioned between A and the exit(2,5)
     else:
         for c in self.cars:
-            #if the car is horizontal, then its x value is equal to Ax
-            if c.orientation == 0:
-                if(c.x == 2 and (c.y > Ay or (c.y+c.length-1)<= 5)):
-                    hn+=1
-                else:
-                    continue
-            #if the car is vertical, its y value is greater than Ay
-            elif c.orientation == 1:
-                if(c.y > Ay and ((c.x+c.length-1)==2 or 2==c.x)):
-                    hn+=1
-                else:
-                    continue
+            #skip A
+            if(c.name != 'A'):
+                #if the car is horizontal and blocking, then its x value is equal to Ax and y value greater than Ay
+                if c.orientation == 0:
+                    if(c.x==Ax and c.y > Ay):
+                        hn+=1
+                    else:
+                        continue
+                #if the car is vertical and blocking, its y value is greater than Ay, and its x value is equal to Ax or x+length surpasses 2 when x < 2
+                elif c.orientation == 1:
+                    if((c.x == Ax and c.y>Ay) or (c.x<=2 and (c.x+c.length-1 >= 2) and c.y>Ay)):
+                        hn+=1
     
     return hn
 
