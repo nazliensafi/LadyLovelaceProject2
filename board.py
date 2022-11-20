@@ -487,3 +487,28 @@ def h3(self, ld):
     return hn
 
 #H4: heuristic of our choice
+
+
+#Method to draw 2D board based on cars coordinate
+def drawBoard(self):
+    board2D = [['.' for i in range(6)] for j in range(6)]
+    boardToPrint = []
+
+    for c in self.cars:
+        char = c.name
+        #if car is horizontal
+        if c.orientation == 0:
+            for i in range(c.length):
+                board2D[c.x][c.y+i] = char
+        elif c.orientation == 1:
+            for i in range(c.length):
+                board2D[c.x+i][c.y] = char
+    
+    for i in range(6):
+        str = ""
+        for j in range(6):
+            str = str + board2D[i][j] + " "
+        boardToPrint+=[str]
+    
+    for line in boardToPrint:
+        print(line)
