@@ -433,41 +433,57 @@ def h1(self):
 
 #H2: the number of positions blocked (regardless of vehicle number)
 def h2(self):
+    """
+        given a board, verify the number of cars blocking row 2
+
+        return the number of vehicles blocking the row 2
+    """
     hn = 0
-    #get the position of A
+
+    #find the index of A in the list of cars
     i=0
     for c in self.cars:
         if(c.name != 'A'):
             i+=1
         else:
             break
+
     Ay = self.cars[i].y + 1
 
+    #using the index, determine the coordinate of A's edge
+    Alength=self.cars[i].length
+    Ay=self.cars[i].y+Alength-1
+    Ax=self.cars[i].x
+
     #either the head or the tail of A is at the exit(2,5)
-    if(Ay == 5 or Ay == 4):
+    if(Ax == 2 and Ay == 5):
         hn = 0
 
-    #if A is not in exit, check if any coordinate (2, y) is between A and exit
+    #if A is not in exit, check if any vehicle is blocking coordinate (2, y) between A and exit
     else:
         for c in self.cars:
-            #if the car is horizontal, at coordinate x = 2 and y > Ay, then its length is included in h(n)
-            if c.orientation == 0:
-                if(c.x == 2 and (c.y > Ay or (c.y+c.length-1)<= 5)):
-                    hn = hn + c.length
-                else:
-                    continue
-            #if the car is vertical, its y value is greater than Ay, then it only blocks one position
-            elif c.orientation == 1:
-                if(c.y > Ay and ((c.x+c.length-1)==2 or 2==c.x)):
-                    hn+=1
-                else:
-                    continue
+            #skip A
+            if(c.name != 'A'):
+                #if the car is horizontal, at coordinate x = 2 and y > Ay, then its length is included in h(n)
+                if c.orientation == 0:
+                    if(c.x == 2 and (c.y > Ay or (c.y+c.length-1)<= 5)):
+                        hn = hn + c.length
+                    else:
+                        continue
+                
+                #if the car is vertical and its y value is greater than Ay, then it only blocks one position
+                elif c.orientation == 1:
+                    if(c.y > Ay and (c.x==Ax or (c.x==1 and c.length>=2) or (c.x==0 and c.length>=3))):
+                        hn+=1
+                    else:
+                        continue
 
     return hn
 
 #H3: the value of h1 * lamda (value of choice > 1)
 def h3(self, ld):
-    hn = self.h1()*ld
+    hx = h1(self)
+    hn = hx*ld
     return hn
 
 #H4: heuristic of our choice
