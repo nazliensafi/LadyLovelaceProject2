@@ -485,11 +485,37 @@ def h3(self, ld):
 
 #TODO
 #H4: heuristic of our choice
+def h4(self):
     """
-       The distance of the red car from the exit + the number of blocked blocking cars 
+       The distance of the red car from the exit + the number of cars blocking A
        This heuristic is clearly admissible too, as the actual number of steps to the goal is at least the distance of the red car from the exit 
        (in order to drive it to the exit) + the number of blocked blocking cars as every such car adds a movement of the car blocking it and a movement of the car itself.
     """
+
+    #the number of cars blocking A = value of h1(n)
+    ha = h1(self)
+
+    #the distance of the red car from the exit
+    
+    #find the index of A in the list of cars
+    i=0
+    for c in self.cars:
+        if(c.name != 'A'):
+            i+=1
+        else:
+            break
+    
+    #the coordinate y of A's head
+    Ay = self.cars[i].y + 1
+
+    #distance from the exit
+    hd = 5 - Ay
+
+    #final h4(n) value
+    hn = ha + hd
+
+    return hn
+
 
 #Method to draw 2D board based on cars coordinate
 def drawBoard(self):
