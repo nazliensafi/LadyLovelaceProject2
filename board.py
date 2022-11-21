@@ -83,11 +83,6 @@ class Board(object):
     #                 car_fuel.append(c+":"+str(100))
     #     return car_fuel
 
-        """
-        CREATE 2D ARRAY BOARD
-        LIST OF VALID MOVES FUNCTION
-        """
-
     def create_grid(boardString):
         """
         return 2D array of the board
@@ -100,7 +95,9 @@ class Board(object):
         """
         returns a list of possible moves, their new position, new fuel
         eg, [[B, up, (0,1), 100], [C, down, (3,2), 30]]
+        or, the whole board string after moving?
         """
+        
 
         # def get_coord(row_idx):
         #     def result((col_idx, value)):
