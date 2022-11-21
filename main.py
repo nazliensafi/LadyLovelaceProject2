@@ -82,3 +82,4 @@ if __name__ == '__main__':
 # UCS
 # GBFS h1, h2, h3, h4
 # Algorithm A/A* h1, h2, h3, h4
+# h4 = distance of red car to the exit + number of blocked blocking cars
