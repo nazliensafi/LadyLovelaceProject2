@@ -483,13 +483,13 @@ def h3(self, ld):
     hn = hx*ld
     return hn
 
-#TODO
 #H4: heuristic of our choice
 def h4(self):
     """
-       The distance of the red car from the exit + the number of cars blocking A
-       This heuristic is clearly admissible too, as the actual number of steps to the goal is at least the distance of the red car from the exit 
-       (in order to drive it to the exit) + the number of blocked blocking cars as every such car adds a movement of the car blocking it and a movement of the car itself.
+       The distance of A's head from the exit + the number of cars blocking A
+       H4 is admissible:
+       - A must traverse the distance between himself and the exit
+       - All cars blocking A from the exit must be moved at least once to allow A to traverse to the exit
     """
 
     #the number of cars blocking A = value of h1(n)
