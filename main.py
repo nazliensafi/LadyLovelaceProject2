@@ -72,14 +72,18 @@ if __name__ == '__main__':
     print(i)
 
 # TODO
-# Board.py -> read unique alphabets in the list from the input text to determine what cars are in the puzzle
 # Car.py -> valide_move() method
 # Car.py -> explore_move() method: 
 #   part 1: if car = horizontal, allow left-right, check the head and tail of the car
 #   part 2: if car = vertical, allow top-bottom, check the head and tail of the car
-# Board.py -> goals() method: check if head or tail of A is in position (2,5) 
-# Search algorithms
+
+# Search algorithms (implementation and test)
 # UCS
 # GBFS h1, h2, h3, h4
 # Algorithm A/A* h1, h2, h3, h4
-# h4 = distance of red car to the exit + number of blocked blocking cars
+
+#For submission
+#50 sample questions
+#output.txt after the test
+#slides for presentation
+# READ.Me for instructions on running the code
