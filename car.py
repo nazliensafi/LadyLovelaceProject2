@@ -34,7 +34,7 @@ class Car:
         self.orientation = orientation
         self.fuel = fuel
 
-    def __repr__ (self):
+    def __repr__(self):
         if self.orientation == 0:
             rep = 'Car(' + self.name + ', (' + str(self.x) + ', ' + str(self.y) \
                   + '), ' + str(self.length) + ', ' + "Horizontal" + ', ' + str(self.fuel) +  ')'
@@ -91,33 +91,5 @@ class Car:
     # 1st level: the car heads that can move
     # 2nd level: possible moves of each car
 
-    def explore_moves(self, board):
-        """
-        given a board of car objects, checks how many different moves are possible
-        e.g.
-        move 1: B left 1 and the respective board
-        move 2: B left 2 and the respective board
-        move 3: C up 1 and the respective board
-        :return:  list of boards and the move that made it different from the parent board
-        """
-        cars = board.cars
-        if self.orientation == 0: # horizontal cars
-            print()
-            # check if it can move to the right and by how many positions
-            if self.y + self.length != 5 and isinstance(board[self.x][self.y + self.length + 1], 'NoneType'):
-                # check if it can move to the left and by how many positions
-                print()
-        elif self.orientation == 1: # vertical cars
-            print()
-            # check if it can move up and by how many positions
-            # check if it can move down and by how many positions
 
-        possible_moves =[]
-        return possible_moves
 
-    # def goal(self):
-    #     """
-    #     :return: True if the A car's tail is at poaition [2][5]
-    #     """
-    #     if self.name == 'A' and self.x == 2 and self.y + self.length == 5:
-    #         return True

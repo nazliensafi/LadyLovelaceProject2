@@ -65,6 +65,7 @@ class Board(object):
 
 
 
+
 def readFile(filename):
     """ Reads an input file (where each line contains a puzzle, a comment started by a #, or an empty line)
         skips empty lines and lines and comments
@@ -84,6 +85,7 @@ def readFile(filename):
     input_file.close()
 
     return puzzles
+
 
 def strToBoard(puzzleArr):
     """ Reads an array containing strings representing the initial state of a game
@@ -226,6 +228,53 @@ def strToBoard(puzzleArr):
     return resulting_boards, resulting_grids
 
 
+def explore_moves(b, g):
+    """
+    given a board of car objects, checks how many different moves are possible
+     e.g.
+     move 1: B left 1 and the respective board
+     move 2: B left 2 and the respective board
+     move 3: C up 1 and the respective board
+     :return:  list of boards and the move that made it different from the parent board
+    """
+    cars = b.cars
+    grid = g
+    new_boards = []
+    new_grids = []
+
+    for car in cars:
+        x, y, length = car.x, car.y, car.length
+        if car.orientation == 0:  # horizontal cars
+            # if positions to the left of the HEAD is empty
+            step_l = step_r = 1
+            for i in range(y):
+                if grid[x][y-step_l] == '.':
+                    print(car.name, "left", step_l)
+                    step_l += 1
+
+            for j in range(5-y+length):
+                # if positions to the right of the TAIL is empty
+                if y+length-1+step_r <= 5 and grid[x][y+length-1+step_r] == '.':
+                    print(car.name, "right", step_r)
+                    step_r += 1
+
+        elif car.orientation == 1: # vertical cars
+            # if positions up from the HEAD is empty
+            step_u = step_d = 1
+            for i in range(x):
+                if grid[x-step_u][y] == '.':
+                    print(car.name, "up", step_u)
+                    step_u += 1
+
+            # if positions down from the TAIL is empty
+            for j in range(5-x+length):
+                if x+length-1+step_d <= 5 and grid[x+length-1+step_d][y] == '.':
+                    print(car.name, "down", step_d)
+                    step_d += 1
+
+    return new_boards
+
+
 def goal(self):
     """
     given a board of cars checks if the A car's tail is at position [2][5]
@@ -233,8 +282,7 @@ def goal(self):
     since if tail reaches the exit a solution is found, we only need to check the tail
     :return: True if the A car's tail is at position [2][5]
     """
-    cars = self.cars
-    print(type(self))
+    cars = self.cars  # get the cars attribute of the calling board
     for car in cars:
         if car.name == 'A' and car.x == 2 and car.y + car.length - 1 == 5:
             return True

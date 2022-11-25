@@ -33,23 +33,30 @@ if __name__ == '__main__':
     # boardSolOutput(puzzle1)
     # print(Board.create_grid(puzzle1)[0][3])
     # board = Board.readfile('input.txt')
+    b, g = board.strToBoard(board.readFile('goaltest.txt'))
+    brd = b[0]
+    grid = g[0]
+    board.explore_moves(brd, grid)
+    # #  Uncomment to see the look-up table aka grid
+    # for a_row in range(6):
+    #     for a_col in range(6):
+    #         print(lu[a_row][a_col], end =" ")
+    #     print("\n")
+    # if board.goal(b[0]):
+    #     print("Goal reached")
+    # else:
+    #     print("Goal failed")
 
-    goaltest = board.strToBoard(board.readFile('goaltest.txt'))
-    if board.goal(goaltest[0]):
-        print("Goal reached")
-    else:
-        print("Goal failed")
 
-
-    hn = 0
-    #get the position of A    
-    i=0
-    for c in goaltest[0].cars:
-        if (c.name!='A'):
-            i+=1
-        else:
-            break
-    Ay = goaltest[0].cars[i].y + 1
+    # hn = 0
+    # #get the position of A
+    # i=0
+    # for c in goaltest[0].cars:
+    #     if (c.name!='A'):
+    #         i+=1
+    #     else:
+    #         break
+    #Ay = goaltest[0].cars[i].y + 1
     
     # #either the head or the tail of the A is at the exit(2,5)
     # if(Ay == 5 or Ay == 4):
@@ -69,7 +76,7 @@ if __name__ == '__main__':
     #                 hn+=1
     #             else:
     #                 continue
-    print(i)
+    #print(i)
 
 # TODO
 # Car.py -> valide_move() method
