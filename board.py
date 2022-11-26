@@ -3,6 +3,7 @@ This module implements 'board' class.
 """
 import numpy as np
 from car import *
+import copy
 
 
 class Board(object):
@@ -64,6 +65,11 @@ class Board(object):
         return grid
 
 
+def print_2d_array(self):
+    for a_row in range(6):
+        for a_col in range(6):
+            print(self[a_row][a_col], end =" ")
+        print("\n")
 
 
 def readFile(filename):
@@ -247,32 +253,54 @@ def explore_moves(b, g):
         if car.orientation == 0:  # horizontal cars
             # if positions to the left of the HEAD is empty
             step_l = step_r = 1
+            fuel = car.fuel
             for i in range(y):
-                if grid[x][y-step_l] == '.':
+                if grid[x][y-step_l] == '.' and fuel > 0:
                     print(car.name, "left", step_l)
                     step_l += 1
+                    fuel -= 1
+                    print(car.name, fuel)
+                    # update the grid append new_grids
+                    # grid_l = copy.deepcopy(grid)
+                    # grid_l[x][y-step_l] = car.name
+                    # grid_l[x][y+step_l] = '.'
+                    # print_2d_array(grid_l)
+                    # update the car object in the board object append new_boards
 
             for j in range(5-y+length):
                 # if positions to the right of the TAIL is empty
-                if y+length-1+step_r <= 5 and grid[x][y+length-1+step_r] == '.':
+                if y+length-1+step_r <= 5 and grid[x][y+length-1+step_r] == '.' and fuel > 0:
                     print(car.name, "right", step_r)
                     step_r += 1
+                    fuel -= 1
+                    print(car.name, fuel)
+                    # update the grid append new_grids
+                    # update the car object in the board object append new_boards
 
         elif car.orientation == 1: # vertical cars
             # if positions up from the HEAD is empty
             step_u = step_d = 1
+            fuel = car.fuel
             for i in range(x):
-                if grid[x-step_u][y] == '.':
+                if grid[x-step_u][y] == '.' and fuel > 0:
                     print(car.name, "up", step_u)
                     step_u += 1
+                    fuel -= 1
+                    print(car.name, fuel)
+                    # update the grid append new_grids
+                    # update the car object in the board object append new_boards
 
             # if positions down from the TAIL is empty
             for j in range(5-x+length):
-                if x+length-1+step_d <= 5 and grid[x+length-1+step_d][y] == '.':
+                if x+length-1+step_d <= 5 and grid[x+length-1+step_d][y] == '.' and fuel > 0:
                     print(car.name, "down", step_d)
                     step_d += 1
+                    fuel -= 1
+                    print(car.name, fuel)
+                    # update the grid append new_grids
+                    # update the car object in the board object append new_boards
 
-    return new_boards
+    return new_boards, new_grids
 
 
 def goal(self):
