@@ -261,11 +261,24 @@ def explore_moves(b, g):
                     fuel -= 1
                     print(car.name, fuel)
                     # update the grid append new_grids
-                    # grid_l = copy.deepcopy(grid)
-                    # grid_l[x][y-step_l] = car.name
-                    # grid_l[x][y+step_l] = '.'
-                    # print_2d_array(grid_l)
-                    # update the car object in the board object append new_boards
+                    new_grid = copy.deepcopy(grid)
+                    new_grid[x][y-1] = car.name
+                    new_grid[x][y+length-1] = '.'
+                    new_grids.append(new_grid)
+                    print_2d_array(new_grid)
+                    del new_grid
+                    # update the board object (fuel and new x and y of the head) append new_boards
+                    new_board = copy.deepcopy(b)
+                    for c in new_board.cars:
+                        if c.name == car.name:
+                            c.fuel = fuel
+                            c.x = x
+                            c.y = y-1
+                            new_boards.append(new_board)
+                            print(new_board.cars)
+                            del new_board
+                            fuel = car.fuel # to reset it for possible double moves
+                            break
 
             for j in range(5-y+length):
                 # if positions to the right of the TAIL is empty
@@ -275,7 +288,24 @@ def explore_moves(b, g):
                     fuel -= 1
                     print(car.name, fuel)
                     # update the grid append new_grids
-                    # update the car object in the board object append new_boards
+                    new_grid = copy.deepcopy(grid)
+                    new_grid[x][y+length] = car.name
+                    new_grid[x][y] = '.'
+                    new_grids.append(new_grid)
+                    print_2d_array(new_grid)
+                    del new_grid
+                    # update the board object (fuel and new x and y of the head) append new_boards
+                    new_board = copy.deepcopy(b)
+                    for c in new_board.cars:
+                        if c.name == car.name:
+                            c.fuel = fuel
+                            c.x = x
+                            c.y = y+length
+                            new_boards.append(new_board)
+                            print(new_board.cars)
+                            del new_board
+                            fuel = car.fuel # to reset it for possible double moves
+                            break
 
         elif car.orientation == 1: # vertical cars
             # if positions up from the HEAD is empty
@@ -288,7 +318,32 @@ def explore_moves(b, g):
                     fuel -= 1
                     print(car.name, fuel)
                     # update the grid append new_grids
-                    # update the car object in the board object append new_boards
+                    new_grid = copy.deepcopy(grid)
+                    new_grid[x-1][y] = car.name
+                    new_grid[x+length-1][y] = '.'
+                    new_grids.append(new_grid)
+                    print_2d_array(new_grid)
+                    del new_grid
+                    # update the board object (fuel and new x and y of the head) append new_boards
+                    new_board = copy.deepcopy(b)
+                    for c in new_board.cars:
+                        if c.name == car.name:
+                            c.fuel = fuel
+                            c.x = x-1
+                            c.y = y
+                            new_boards.append(new_board)
+                            print(new_board.cars)
+                            del new_board
+                            fuel = car.fuel # to reset it for possible double moves
+                            break
+
+
+
+
+
+
+
+
 
             # if positions down from the TAIL is empty
             for j in range(5-x+length):
@@ -298,7 +353,24 @@ def explore_moves(b, g):
                     fuel -= 1
                     print(car.name, fuel)
                     # update the grid append new_grids
-                    # update the car object in the board object append new_boards
+                    new_grid = copy.deepcopy(grid)
+                    new_grid[x+length][y] = car.name
+                    new_grid[x][y] = '.'
+                    new_grids.append(new_grid)
+                    print_2d_array(new_grid)
+                    del new_grid
+                    # update the board object (fuel and new x and y of the head) append new_boards
+                    new_board = copy.deepcopy(b)
+                    for c in new_board.cars:
+                        if c.name == car.name:
+                            c.fuel = fuel
+                            c.x = x+length
+                            c.y = y
+                            new_boards.append(new_board)
+                            print(new_board.cars)
+                            del new_board
+                            fuel = car.fuel # to reset it for possible double moves
+                            break
 
     return new_boards, new_grids
 

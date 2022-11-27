@@ -36,7 +36,9 @@ if __name__ == '__main__':
     b, g = board.strToBoard(board.readFile('goaltest.txt'))
     brd = b[0]
     grid = g[0]
-    board.explore_moves(brd, grid)
+    brds , grds = board.explore_moves(brd, grid)
+    print(len(grds), "possible moves detected")
+    #print(len(brds))
     # #  Uncomment to see the look-up table aka grid
     # for a_row in range(6):
     #     for a_col in range(6):
