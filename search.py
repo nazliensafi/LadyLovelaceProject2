@@ -142,6 +142,11 @@ def gbfs_h1(board):
     initial_state = board
     open = []
     closed = []
+    parentIndex = 0
+    index = 0
+    cost = 0
+    notFound = False
+    foundGoal = False
 
     #index in the closed set to keep track of the path
     parentIndex = 0
@@ -159,7 +164,8 @@ def gbfs_h1(board):
         # find a list of next possible moves from the current state
         # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
         # ex. nextMove = possibleMove(visited[0])
-        nextMove = []
+        nextMove, nextGrid = board.explore_moves(brd, grid)
+        print(len(nextMove))
    
         #if there is no next move and we did not reach the goal, there is no solution
         if(nextMove == []):
