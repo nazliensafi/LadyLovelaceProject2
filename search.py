@@ -55,7 +55,7 @@ def ucs(brd,grid):
 
                 #else, we do the following steps:
                 else:
-                    print("APPEND EACH MOVE IN OPEN")
+                    print("Next Move is not Goal")
                     #for each of the possible move we found (for each element of the array nextMove)
                     #we create a new tuple to append to 'open' queue: (nextMove element, parent state, index, new cost)
                     if open == []:
@@ -64,13 +64,26 @@ def ucs(brd,grid):
                         print("appending first element in open queue")
                     else:
                         for n in open:
+                            check = (n[0].cars == m.cars)
                             #verify if we have equivalent board already in open queue
-                            if (n[0] != m):
-                                notFound = True
                             #if we do, continue without adding, since the cost of the newly found state will be higher
-                            elif(n[0] == m):
+                            if (check == True):
                                 notFound = False
+                                print("same board found in open queue")
                                 break
+                            elif(check==False):
+                                notFound = True
+                        
+                        for n in closed:
+                            check = (n[0].cars == m.cars)
+                            #verify if we have equivalent board already in open queue
+                            #if we do, continue without adding, since the cost of the newly found state will be higher
+                            if (check == True):
+                                notFound = False
+                                print("same board found in closed queue")
+                                break
+                            elif(check==False):
+                                notFound = True
                         
                         if(notFound == True):
                             nextOpen = (m, g, parentIndex,index+1,cost)
@@ -89,34 +102,34 @@ def ucs(brd,grid):
             print("append visited node to closed queue")
             #append next state in the 'open' queue to visited and delete the same element from the open queue
             visited = open[0]
-            print(open[0][0].cars)
+            print(open[0][1])
             open.pop(0)
             print("new visited, open queue first element popped")
-            nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
-            print("new next moves from the visited node")
+            # nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
+            # print("Open Node into the visited queue")
 
 
     #as result, we should display:
     runtime = stop-start
 
-    #find the actual path by tracking the parent node
-    path = [goalstate]
-    currentNode = goalstate
-    while(currentNode != initial_state):
-        for node in closed:
-            #the index of the node = the parent node's index of current node
-            if (node[3] == currentNode[2]):
-                path.insert(0, currentNode)
-                currentNode = node
-                break
-            else:
-                continue
+    # #find the actual path by tracking the parent node
+    # path = [goalstate]
+    # currentNode = goalstate
+    # while(currentNode != initial_state):
+    #     for node in closed:
+    #         #the index of the node = the parent node's index of current node
+    #         if (node[3] == currentNode[2]):
+    #             path.insert(0, currentNode)
+    #             currentNode = node
+    #             break
+    #         else:
+    #             continue
     
-    #lastly, we insert the initial_state in the beginning of the path
-    path.insert(0, initial_state)
+    # #lastly, we insert the initial_state in the beginning of the path
+    # path.insert(0, initial_state)
     
     print("Runtime: " + runtime)
-    print("Solution path length: " + (len(path)-1))
+    # print("Solution path length: " + (len(path)-1))
     #in output.txt file, write:
     # "Runtime :" + runtime + "seconds\n"
     # "Search path lenght: " + len(closed) + " states\n"
