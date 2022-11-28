@@ -43,7 +43,10 @@ class Car:
                   + '), ' + str(self.length) + ', ' + "Vertical" + ', ' + str(self.fuel) +  ')'
 
         return rep
-
+    
+    def __eq__(self, other):
+        return (self.x, self.y, self.name, self.fuel,self.orientation) == (other.x, other.y, self.name,self.fuel,self.orientation)
+    
     # name getter
     def name(self):
         return self.name

@@ -92,21 +92,21 @@ def ucs(brd,grid):
                         elif(notFound==False):
                             print("board already in the open queue")
 
-            #after verifying each child node        
-            #empty nextMove
-            nextMove.clear()
-            nextGrid.clear()
-            print("delete NextMove array")
-            #append the element from visited queue to closed queue
-            closed.append(visited)
-            print("append visited node to closed queue")
-            #append next state in the 'open' queue to visited and delete the same element from the open queue
-            visited = open[0]
-            print(open[0][1])
-            open.pop(0)
-            print("new visited, open queue first element popped")
-            # nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
-            # print("Open Node into the visited queue")
+        #after verifying each child node        
+        #empty nextMove
+        nextMove.clear()
+        nextGrid.clear()
+        print("delete NextMove array")
+        #append the element from visited queue to closed queue
+        closed.append(visited)
+        print("append visited node to closed queue")
+        #append next state in the 'open' queue to visited and delete the same element from the open queue
+        visited = open[0]
+        print(open[0][1])
+        open.pop(0)
+        print("new visited, open queue first element popped")
+        # nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
+        # print("Open Node into the visited queue")
 
 
     #as result, we should display:
