@@ -386,6 +386,37 @@ def goal(self):
     for car in cars:
         if car.name == 'A' and car.x == 2 and car.y + car.length - 1 == 5:
             return True
+        else:
+            return False
+        
+def brdToGrd(self):
+
+    new_grid = [['.' for x in range(6)] for y in range(6)]
+    cars = self.cars
+
+    for c in cars:
+        #car c is horizontal
+        if(c.orientation == 0):
+            new_grid[c.x][c.y] = c.name
+            for i in range(c.length):
+                if(c.y+i > 5):
+                    y = 5
+                else:
+                    y = c.y+i
+                new_grid[c.x][y] = c.name
+        #car c is vertical
+        if(c.orientation == 1):
+            new_grid[c.x][c.y] = c.name
+            
+            for i in range(c.length):
+                if(c.x+i > 5):
+                    x = 5
+                else:
+                    x = c.x+i
+                new_grid[x][c.y] = c.name
+
+
+    return new_grid
 
 # # determines if car A has reached (2,5) in the board
 # def goal(self):

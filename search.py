@@ -2,70 +2,98 @@ from car import Car
 from board import *
 import time
 
-#TODO
-def ucs(board):
-    initial_state = board
+def ucs(brd,grid):
+    initial_state = brd
     open = []
     closed = []
     parentIndex = 0
     index = 0
     cost = 0
-
+    notFound = False
+    foundGoal = False
+    
     #to calculate the runtime
     start = time.time()
 
     #each node passed in the queues = a tuple where the elements are: (board, parent state's index, cost)
-    visited = (initial_state, parentIndex, index, cost)
+    visited = (initial_state, [], parentIndex, index, cost)
+    print(board.brdToGrd(initial_state))
+    # find a list of next possible moves from the current state
+    # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
+    # ex. nextMove = possibleMove(visited[0])
+    nextMove, nextGrid = board.explore_moves(brd, grid)
+    print(len(nextMove))
     
     #current configuration: visited = [(S, 0, 0)], open = [], closed = () 
     # S = initial game state
 
-    while(visited != []):
-        # find a list of next possible moves from the current state
-        # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
-        # ex. nextMove = possibleMove(visited[0])
-        nextMove = [] 
-   
-        
+    while(foundGoal == False):
+
         #if there is no next move and we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
             print("No solution")
+            foundGoal = True
             break #stop while loop
 
         if (nextMove != []):
             cost+=1
             # the new parent node is the state-node in the visited, so we get the index
-            parentIndex = visited[2]
+            parentIndex = visited[3]
 
-            for m in nextMove:
+            for i in range(len(nextMove)):
+                m = nextMove[i]
+                g = nextGrid[i]
                 #if next move is found and we reach the goal, we finished the search
-                if(m is goal()):
-                   goalstate = (m, parentIndex, index+1, cost+1)
-                   visited.pop()
+                print(board.goal(m))
+                if(board.goal(m)):
+                   goalstate = (m, g, parentIndex, index+1, cost)
+                   visited.clear()
                    stop = time.time()
+                   foundGoal = True
                    break
 
                 #else, we do the following steps:
                 else:
+                    print("APPEND EACH MOVE IN OPEN")
                     #for each of the possible move we found (for each element of the array nextMove)
                     #we create a new tuple to append to 'open' queue: (nextMove element, parent state, index, new cost)
-                    for n in open:
-                        #verify if we have equivalent board already in open queue
-                        if (n[0] != m):
-                            open.append(m,parentIndex,index+1,cost)
-                        #if we do, continue without adding, since the cost of the newly found state will be higher
-                        elif(n[0] == m):
-                            continue
+                    if open == []:
+                        nextOpen = (m, g, parentIndex,index+1,cost)
+                        open.append(nextOpen)
+                        print("appending first element in open queue")
+                    else:
+                        for n in open:
+                            #verify if we have equivalent board already in open queue
+                            if (n[0] != m):
+                                notFound = True
+                            #if we do, continue without adding, since the cost of the newly found state will be higher
+                            elif(n[0] == m):
+                                notFound = False
+                                break
+                        
+                        if(notFound == True):
+                            nextOpen = (m, g, parentIndex,index+1,cost)
+                            open.append(nextOpen)
+                            print("appending next element in open")
+                        elif(notFound==False):
+                            print("board already in the open queue")
 
             #after verifying each child node        
             #empty nextMove
             nextMove.clear()
+            nextGrid.clear()
+            print("delete NextMove array")
             #append the element from visited queue to closed queue
             closed.append(visited)
+            print("append visited node to closed queue")
             #append next state in the 'open' queue to visited and delete the same element from the open queue
             visited = open[0]
+            print(open[0][0].cars)
             open.pop(0)
+            print("new visited, open queue first element popped")
+            nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
+            print("new next moves from the visited node")
 
 
     #as result, we should display:
@@ -77,7 +105,7 @@ def ucs(board):
     while(currentNode != initial_state):
         for node in closed:
             #the index of the node = the parent node's index of current node
-            if (node[2] == currentNode[1]):
+            if (node[3] == currentNode[2]):
                 path.insert(0, currentNode)
                 currentNode = node
                 break
@@ -87,6 +115,8 @@ def ucs(board):
     #lastly, we insert the initial_state in the beginning of the path
     path.insert(0, initial_state)
     
+    print("Runtime: " + runtime)
+    print("Solution path length: " + (len(path)-1))
     #in output.txt file, write:
     # "Runtime :" + runtime + "seconds\n"
     # "Search path lenght: " + len(closed) + " states\n"
@@ -116,7 +146,7 @@ def gbfs_h1(board):
         # find a list of next possible moves from the current state
         # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
         # ex. nextMove = possibleMove(visited[0])
-        nextMove = [] 
+        nextMove = []
    
         #if there is no next move and we did not reach the goal, there is no solution
         if(nextMove == []):
