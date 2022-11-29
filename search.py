@@ -175,17 +175,19 @@ def ucs(brd, grd):
             solution = False
             break
 
-        # elif(open == [] and index !=0):
-        #     stop = time.time()
-        #     print("No solution")
-        #     solution = False
-        #     foundGoal = True
-        #     break
+        elif(board.goal(visited[0])==True):
+            stop = time.time()
+            print("TRUE: Solution found")
+            solution=True
+            goalstate = visited
+            visited = []
+            foundGoal = True
+            break
 
         else:
-            if(closed == [] or len(closed)==1):
+            if(closed == []):
                 cost=1
-            elif(parentIndex == 1):
+            elif(visited[3] == 1):
                 cost = 2
             else:
                 cost = closed[parentIndex][4]+1
@@ -195,19 +197,23 @@ def ucs(brd, grd):
                 b = nextMove[i]
                 g = nextGrid[i]
                 valid = True
+
+                #the next move is the goal state
                 if(board.goal(b) == True):
                     stop = time.time()
                     print("TRUE: Goal is Found")
                     print(g)
                     solution = True
+                    index = index + 1
                     goalstate = (b, g, parentIndex-1, index, cost,valid)
                     visited = []
                     foundGoal = True
                     break
 
+                #The next move is not a goal state
                 else:
                     print("FALSE: Goal is not Found")
-
+                    #verify if next move is already in closed
                     if (closed != []):
                         for n in closed:
                             brdFound = False
@@ -219,6 +225,8 @@ def ucs(brd, grd):
                                     else:
                                         res = False
                                         break
+                                if(res==False):
+                                    break
                             if(res):
                                 brdInClosed = True
                                 print("***Board already in closed queue***Skipping")
@@ -232,14 +240,13 @@ def ucs(brd, grd):
 
                     brdFound = brdInClosed
                     #if same node was found in Closed Queue, we don't add the board to the open list, so brdFound = True
-                    if(brdFound):
+                    if(brdFound==True):
                         print("Moving to the next possible move")
                     else:
                         #if Open Queue is empty, add the board as the first node
                         if(open == []):
                             print("Adding the first element to Open Queue")
                             print(g)
-                            index = index + 1
                             nextOpen = (b, g, parentIndex,index,cost, valid)
                             open.append(nextOpen)
                         
@@ -259,10 +266,14 @@ def ucs(brd, grd):
                                 
                                 if(res):
                                     print("Board already in Open Queue")
-                                    if(n[4] < cost):
-                                        print("Found lower cost, delete current node in open")
+                                    if(open[k][4]> cost):
+                                        print("Found lower cost, keep current node in open and pop the previous node")
                                         brdFound = False
-                                        valid = False
+                                        valid = True
+                                        notvalid = False
+                                        open[k][4] = notvalid
+                                        closed += [open[k]]
+                                        open.pop(k)
                                     else:
                                         brdFound = True
                                     break
@@ -321,9 +332,10 @@ def ucs(brd, grd):
     #if solution = True, find path
     #find the actual path by tracking the parent node
     if(solution == True):
-        for node in closed:
-            print(node[2], node[3], node[4])
-        currentNode = goalstate
+        # for node in closed:
+        #     print(node[1])
+        #     print(node[2], node[3], node[4])
+        # currentNode = goalstate
         print(goalstate[2], goalstate[3], goalstate[4])
         while(currentNode[3] != 0):
             for node in closed:
