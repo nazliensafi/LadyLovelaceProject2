@@ -335,8 +335,8 @@ def ucs(brd, grd):
         # for node in closed:
         #     print(node[1])
         #     print(node[2], node[3], node[4])
-        # currentNode = goalstate
-        print(goalstate[2], goalstate[3], goalstate[4])
+        currentNode = goalstate
+        # print(goalstate[2], goalstate[3], goalstate[4])
         while(currentNode[3] != 0):
             for node in closed:
                 #the index of the node = the parent node's index of current node
@@ -348,7 +348,7 @@ def ucs(brd, grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, sourceNode)
         
-        print("Solution path length: %.1d" % (len(path)))
+        print("Solution path length: %.1d" % (len(path)-1))
         for p in path:
             print(p[2], p[3], p[4])
             print(p[1])
