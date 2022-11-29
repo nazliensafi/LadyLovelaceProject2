@@ -365,13 +365,20 @@ def ucs(brd, grd):
     
 
 #TODO
-def gbfs_h1(board):
-    initial_state = board
+def gbfs_h1(brd,grd):
+    
     open = []
     closed = []
-
+    finished = False
+    found = False
+    res = False
+    o_res = False
+    added = False
+    addOpen = False
+    vopen = False
     #index in the closed set to keep track of the path
     parentIndex = 0
+    idx = 0
 
     #to calculate the runtime
     start = time.time()
@@ -379,71 +386,187 @@ def gbfs_h1(board):
     #each node passed in the queues = a tuple where the elements are: (board, parent state's index, cost)
     #current configuration: visited = [(S, 0, 0)], open = [], closed = () 
     # S = initial game state
-    visited = (initial_state, parentIndex, board.h1())
+    source = (brd, grd, parentIndex, idx, board.h2(brd))
+    visited = source
 
 
-    while(visited != []):
-        # find a list of next possible moves from the current state
-        # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
-        # ex. nextMove = possibleMove(visited[0])
-        nextMove = []
+    while(not finished):
+
+        #verify if the state in visited is a goal state
+        if(board.goal(visited[0]) == True):
+            stop = time.time()
+            print("TRUE: Goal Found")
+            goalstate = visited
+            finished = True
+            found = True
+            break #stop while loop
+
+        # if current node is not a goal state,
+        # find a list of next possible moves from the current state in visited
+        nextMove, nextGrid = board.explore_moves(visited[0], visited[1])
    
-        #if there is no next move and we did not reach the goal, there is no solution
+        #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
             print("No solution")
+            finished = True
+            found = False
             break #stop while loop
 
+        #if there are children nodes from the current node
         if (nextMove != []):
             
-            parentIndex+=1
+            #parentIndex = the current node's index
+            parentIndex = visited[3]
 
-            for m in nextMove:
-                #if next move is found and we reach the goal, we finished the search
-                if(m is goal()):
-                   goalstate = (m, parentIndex, 0)
-                   visited.pop()
-                   stop = time.time()
-                   break
 
-                #else, we do the following steps:
+            #for each children node:
+            for i in range(len(nextMove)):
+                b = nextMove[i]
+                g = nextGrid[i]
+                h = board.h1(b)
+
+                #verify if the children node is in goal state
+                if(board.goal(b) == True):
+                    print("TRUE: Goal state found")
+                    goalstate = (b, g, parentIndex, idx+1, 0)
+                    closed+=[goalstate]
+                    visited = []
+                    stop = time.time()
+                    finished = True
+                    found = True
+                    break
+
+                #if the children node is not in goal state, must add it into open queue
                 else:
-                    #for each of the possible move we found (for each element of the array nextMove)
-                    #calculate the value of h1()
-                    hn = m.h1()
-                    #find the right index where to insert the new m
-                    i = 0
-                    for n in open:
-                        if(n[2] < hn):
-                            i+=1
+                    #verify whehter the children node is already in the closed queue
+                    for node in closed:
+                        ng = node[1]
+                        for k in range(6):
+                            for j in range(6):
+                                if(ng[k][j] == g[k][j]):
+                                    res = True
+                                else:
+                                    res = False
+                                    break #stop inner for loop if inequality
+                            if(res == False):
+                                break #stop outer for loop in case of inequality
+                        if(res == True):
+                            break #stop iteration over CLOSED queue
+
+                    #after the grid check on all nodes of CLOSED, if res = False, then verify OPEN Queue
+                    if(res == False):
+                        vopen = True
+                    else:
+                        print("***Board Already in CLOSED Queue***Skipping")
+                        vopen = False
+
+                    #verifying open queue
+                    if(vopen == True):                
+                        for node in open:
+                            ng = node[1]
+                            nh = node[4]
+                            for k in range(6):
+                                for j in range(6):
+                                    if(ng[k][j] == g[k][j]):
+                                        o_res = True
+                                    else:
+                                        o_res = False
+                                        break #stop inner for loop if inequality
+                                if(o_res == False):
+                                    break #stop outer for loop in case of inequality
+                            if(o_res == True):
+                                break #stop iteration over OPEN queue in case of equality
+
+                        #after grid check on all nodes of OPEN queue, if o_res = False, then we can add the new child node to the Open
+                        if(o_res == False):
+                            addOpen = True
+                        
+                        #if o_res = True, then the same node is already in OPEN queue
                         else:
-                            open.insert(i, m)
+                            addOpen = False
 
+                    #Adding child node into OPEN queue depending on h(n)
+                    if(addOpen == True and vopen == True):
+                        for i in range(len(open)):
+                            nh = open[i][4]
+                            #if h(n) of the node in OPEN queue is greater, then place the child node before 
+                            if(nh > h):
+                                child = (b, g, parentIndex, idx, h)
+                                open.insert(i, child)
+                                added = True
+                                break #end iteration
+                            #if h(n) of the node in OPEN queue is equal to the h(n) of the child node
+                            #place the child node after, since the path to the child node is longer
+                            elif(nh == h):
+                                child = (b, g, parentIndex, idx, h)
+                                open.insert(i+1, child)
+                                added = True
+                                break #end iteration
+                            # if h(n) of the child node is greater, continue iteration 
+                            else:
+                                added = False
+                                continue
+                    
+                    #if the child node's h(n) is the greatest, append as the last element of the OPEN queue
+                    if(added == False and addOpen == True and vopen == True):
+                        child =(b, g, parentIndex, idx, h)
+                        open+=[child]
+                    
+                    #if the same node is already in OPEN queue, the path of the child node will be longer
+                    # child node appended in CLOSED Queue
+                    elif(addOpen == False and vopen == True):
+                        idx = len(closed)
+                        child = (b, g, parentIndex, idx, h)
+                        closed += [child]
+                        added = True
+                        break #end iteration
 
-            #after verifying each child node        
-            #empty nextMove
+            #after verifying each child node
+            #empty list of children nodes
             nextMove.clear()
-            #append the element from visited queue to closed queue
+            nextGrid.clear()
+
+            #index of the next visited node will be the length of the current CLOSED queue (before appending the next node)
+            idx = len(closed)
+
+            #append the current(visited) node to CLOSED queue
             closed.append(visited)
-            #append next state in the 'open' queue to visited and delete the same element from the open queue
-            visited = open[0]
-            open.pop(0)
+
+            if(open != []):
+                #append next node in the OPEN queue to visited and delete the same element from the OPEN queue
+                bd = open[0][0]
+                gd = open[0][1]
+                pd = open[0][2]
+                hd = open[0][4]
+                visited = (bd, gd, pd, idx, hd)
+                open.pop(0)
+            else:
+                stop = time.time()
+                print("OPEN queue empty. No solution")
+                finished = True
+                found = False
 
 
     #as result, we should display:
     runtime = stop-start
-
+    print("Runtime: %.3f" % runtime)
     #find the actual path by tracking the parent node
-    path = [goalstate]
-    currentNode = goalstate
-    while(currentNode != initial_state):
-        #get the state at the index of the parent node of the current node
-        i = currentNode[1]
-        path.insert(0, closed[i])
-        currentNode = closed[i]
+    if(found == True):
+        path = [goalstate]
+        currentNode = goalstate
+        while(currentNode[3] != 0):
+            #get the state at the index of the parent node of the current node
+            i = currentNode[2]
+            path.insert(0, closed[i])
+            currentNode = closed[i]
     
-    #lastly, we insert the initial_state in the beginning of the path
-    path.insert(0, initial_state)
+        #lastly, we insert the initial_state in the beginning of the path
+        path.insert(0, source)
+
+        print("The length of the path: %.1d" % (len(path)-1))
+    else:
+        print("No Solution is found")
     
     #in output.txt file, write:
     # "Runtime :" + runtime + "seconds\n"
