@@ -475,6 +475,7 @@ def gbfs_h1(brd,grd):
                                         break #stop inner for loop if inequality
                                 if(o_res == False):
                                     break #stop outer for loop in case of inequality
+                            
                             if(o_res == True):
                                 break #stop iteration over OPEN queue in case of equality
 
@@ -495,6 +496,7 @@ def gbfs_h1(brd,grd):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i, child)
                                 added = True
+                                print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
                             #if h(n) of the node in OPEN queue is equal to the h(n) of the child node
                             #place the child node after, since the path to the child node is longer
@@ -502,7 +504,9 @@ def gbfs_h1(brd,grd):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i+1, child)
                                 added = True
+                                print("Adding to the OPEN Queue at index %.1d" % (i+1))
                                 break #end iteration
+                                continue
                             # if h(n) of the child node is greater, continue iteration 
                             else:
                                 added = False
@@ -512,6 +516,7 @@ def gbfs_h1(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h)
                         open+=[child]
+                        print("Adding to the end of OPEN Queue")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -540,8 +545,8 @@ def gbfs_h1(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
-                open+=[visited]
                 open.pop(0)
+                print("Moved next node in OPEN to VISITED")
             else:
                 stop = time.time()
                 print("OPEN queue empty. No solution")
@@ -754,7 +759,6 @@ def gbfs_h2(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
-                open+=[visited]
                 open.pop(0)
             else:
                 stop = time.time()
@@ -968,7 +972,6 @@ def gbfs_h3(brd,grd, ld):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
-                open+=[visited]
                 open.pop(0)
             else:
                 stop = time.time()
@@ -1182,7 +1185,6 @@ def gbfs_h4(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
-                open+=[visited]
                 open.pop(0)
             else:
                 stop = time.time()

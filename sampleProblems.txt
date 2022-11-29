@@ -13,3 +13,6 @@ BBB..K..H..K..HAAKCCIJDDG.IJEEGFFF.. B0 C3
 # extreme, solution in 39 moves
 .BBBCC..JDDLAAJ.KLIEE.KMIFF..MGGHHHM
 
+#1 No Solution
+TDD.RRT..L.MAA.L.M.FFF..G.IOOTG.I..T D0 G50
+
