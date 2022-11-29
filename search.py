@@ -144,15 +144,19 @@ def ucs(brd, grd):
     parentIndex = 0
     index = 0
     cost = 0
+    valid = True
     brdFound = False
     brdInClosed = False
     foundGoal = False
+    solution = False
+    path = []
 
     #to calculate the runtime
     start = time.time()
 
     # initialize visited
-    visited = (initial_state, grd, parentIndex, index, cost)
+    sourceNode = (initial_state, grd, parentIndex, index, cost, valid)
+    visited = sourceNode
     print("Initial Game Board")
     print(board.brdToGrd(initial_state))
     print()
@@ -168,27 +172,35 @@ def ucs(brd, grd):
             stop = time.time()
             print("No solution")
             foundGoal = True
+            solution = False
             break
 
-        elif(open == [] and index !=0):
-            stop = time.time()
-            print("No solution")
-            foundGoal = True
-            break
+        # elif(open == [] and index !=0):
+        #     stop = time.time()
+        #     print("No solution")
+        #     solution = False
+        #     foundGoal = True
+        #     break
 
         else:
-            cost += 1
-            parentIndex = visited[3]
+            if(closed == [] or len(closed)==1):
+                cost=1
+            elif(parentIndex == 1):
+                cost = 2
+            else:
+                cost = closed[parentIndex][4]+1
 
+            parentIndex = int(visited[3])
             for i in range(len(nextMove)):
                 b = nextMove[i]
                 g = nextGrid[i]
-                
+                valid = True
                 if(board.goal(b) == True):
                     stop = time.time()
                     print("TRUE: Goal is Found")
                     print(g)
-                    goalstate = (b, g, parentIndex, index+1, cost)
+                    solution = True
+                    goalstate = (b, g, parentIndex-1, index, cost,valid)
                     visited = []
                     foundGoal = True
                     break
@@ -200,9 +212,9 @@ def ucs(brd, grd):
                         for n in closed:
                             brdFound = False
                             ng = n[1]
-                            for i in range(6):
+                            for l in range(6):
                                 for j in range(6):
-                                    if(g[i][j] == ng[i][j]):
+                                    if(g[l][j] == ng[l][j]):
                                         res = True
                                     else:
                                         res = False
@@ -227,24 +239,32 @@ def ucs(brd, grd):
                         if(open == []):
                             print("Adding the first element to Open Queue")
                             print(g)
-                            nextOpen = (b, g, parentIndex,index+1,cost)
+                            index = index + 1
+                            nextOpen = (b, g, parentIndex,index,cost, valid)
                             open.append(nextOpen)
                         
                         else:
-                            for n in open:
-                                ng = n[1]
+                            for k in range(len(open)):
+                                ng = open[k][1]
                                 #for every node in the Open Queue, verify any board with the same board/grid: res = True if same board was found
-                                for i in range(6):
+                                for l in range(6):
                                     for j in range(6):
-                                        if(g[i][j] == ng[i][j]):
+                                        if(g[l][j] == ng[l][j]):
                                             res = True
                                         else:
                                             res = False
                                             break
+                                    if(res == False):
+                                        break
                                 
                                 if(res):
-                                    brdFound = True
                                     print("Board already in Open Queue")
+                                    if(n[4] < cost):
+                                        print("Found lower cost, delete current node in open")
+                                        brdFound = False
+                                        valid = False
+                                    else:
+                                        brdFound = True
                                     break
                                 else: 
                                     brdFound = False
@@ -253,35 +273,84 @@ def ucs(brd, grd):
                             if(brdFound==False):
                                 print("Adding the following child node in the Open Queue")
                                 print(g)
-                                nextOpen = (b, g, parentIndex,index+1,cost)
+                                index = index + 1
+                                nextOpen = (b, g, parentIndex,index,cost,valid)
                                 open.append(nextOpen)
             #end of for loop to verift all child node  
             #after verifying each child node        
             #empty nextMove
-            nextMove = []
-            nextGrid = []
-            print("delete NextMove array")
-            #append the element from visited queue to closed queue
-            closed+=[visited]
-            print("append visited node to Closed Queue")
-            #append next state in the 'open' queue to visited and delete the same element from the open queue
-            if(open == []):
-                print("Open Queue Empty, No solution")
-                stop = time.time()
+            if(solution == False):
+                nextMove = []
+                nextGrid = []
+                print("delete NextMove array")
+                #append the element from visited queue to closed queue
+                closed+=[visited]
+                print("append visited node to Closed Queue")
+                #append next state in the 'open' queue to visited and delete the same element from the open queue
+                if(open == []):
+                    print("Open Queue Empty, No solution")
+                    stop = time.time()
+                    foundGoal = True
+                else :
+                    if(open[0][5] == False):
+                        closed+=[open[0]]
+                        open.pop(0)
+                        visited = open[0]
+                        print("The next node in visited:")
+                        print(visited[1])
+                        open.pop(0)
+                        print("Open queue first element popped, current lenght:")
+                        print(len(open))
+                        nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
+                        print("Open Node into the visited queue")
+                    else:
+                        visited = open[0]
+                        print("The next node in visited:")
+                        print(visited[1])
+                        open.pop(0)
+                        print("Open queue first element popped, current lenght:")
+                        print(len(open))
+                        nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
+                        print("Open Node into the visited queue")
+            elif(solution == True):
                 foundGoal = True
-            else :
-                visited = open[0]
-                print("The next node in visited:")
-                print(visited[1])
-                open.pop(0)
-                print("Open queue first element popped, current lenght:")
-                print(len(open))
-                nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
-                print("Open Node into the visited queue")
 
     runtime = stop - start
 
     print("Runtime: %.3f s" % runtime)
+    #if solution = True, find path
+    #find the actual path by tracking the parent node
+    if(solution == True):
+        for node in closed:
+            print(node[2], node[3], node[4])
+        currentNode = goalstate
+        print(goalstate[2], goalstate[3], goalstate[4])
+        while(currentNode[3] != 0):
+            for node in closed:
+                #the index of the node = the parent node's index of current node
+                if (node[3] == currentNode[2]):
+                    path.insert(0, currentNode)
+                    currentNode = node
+                    break
+        
+        #lastly, we insert the initial_state in the beginning of the path
+        path.insert(0, sourceNode)
+        
+        print("Solution path length: %.1d" % (len(path)))
+        for p in path:
+            print(p[2], p[3], p[4])
+            print(p[1])
+
+    elif(solution == False):
+        print("No Solution found")
+#     # if solution = False, print("No Solution")
+#     #in output.txt file, write:
+#     # "Runtime :" + runtime + "seconds\n"
+#     # "Search path lenght: " + len(closed) + " states\n"
+#     # "Solution path lenght: "+(len(path)-1)+" moves\n" #-1 to not count the initial state
+#     # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
+#     # final Board object displayed as 2D matrix
+    
 
 #TODO
 def gbfs_h1(board):
