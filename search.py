@@ -586,13 +586,6 @@ def gbfs_h2(brd,grd):
     
     open = []
     closed = []
-<<<<<<< HEAD
-    parentIndex = 0
-    index = 0
-    cost = 0
-    notFound = False
-    foundGoal = False
-=======
     finished = False
     found = False
     res = False
@@ -747,7 +740,6 @@ def gbfs_h2(brd,grd):
                         closed += [child]
                         added = True
                         break #end iteration
->>>>>>> b9ba5541e95d30dcddd9ac7b08198b354d4138ce
 
             #after verifying each child node
             #empty list of children nodes
@@ -828,14 +820,6 @@ def gbfs_h3(brd,grd, ld):
     visited = source
 
 
-<<<<<<< HEAD
-    while(visited != []):
-        # find a list of next possible moves from the current state
-        # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
-        # ex. nextMove = possibleMove(visited[0])
-        nextMove, nextGrid = board.explore_moves(brd, grid)
-        print(len(nextMove))
-=======
     while(not finished):
 
         #verify if the state in visited is a goal state
@@ -850,7 +834,6 @@ def gbfs_h3(brd,grd, ld):
         # if current node is not a goal state,
         # find a list of next possible moves from the current state in visited
         nextMove, nextGrid = board.explore_moves(visited[0], visited[1])
->>>>>>> b9ba5541e95d30dcddd9ac7b08198b354d4138ce
    
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
