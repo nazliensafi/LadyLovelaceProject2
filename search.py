@@ -1233,6 +1233,10 @@ def astar_h1(brd,grd):
     added = False
     addOpen = False
     vopen = False
+    cost = 0
+    valid = True
+    path = []
+    
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -1242,9 +1246,12 @@ def astar_h1(brd,grd):
 
     #each node passed in the queues = a tuple where the elements are: (board, parent state's index, cost)
     #current configuration: visited = [(S, 0, 0)], open = [], closed = () 
-    # S = initial game state
-    source = (brd, grd, parentIndex, idx, board.h1(brd))
+    # S = initial game state, initialise the visited board
+    source = (brd, grd, parentIndex, idx, cost, valid, board.h1(brd))
     visited = source
+    print("Initial Game Board")
+    print(board.brdToGrd(brd))
+    print()
 
 
     while(not finished):
@@ -1270,12 +1277,17 @@ def astar_h1(brd,grd):
             found = False
             break #stop while loop
 
-        #if there are children nodes from the current node
+        #calculate cost for every move
         if (nextMove != []):
-            
+            if(closed == []):
+                cost=1
+            elif(visited[3] == 1):
+                cost = 2
+            else:
+                cost = closed[parentIndex][4]+1
+
             #parentIndex = the current node's index
             parentIndex = visited[3]
-
 
             #for each children node:
             for i in range(len(nextMove)):
@@ -1348,17 +1360,17 @@ def astar_h1(brd,grd):
                     if(addOpen == True and vopen == True):
                         for i in range(len(open)):
                             nh = open[i][4]
-                            #if h(n) of the node in OPEN queue is greater, then place the child node before 
-                            if(nh > h):
-                                child = (b, g, parentIndex, idx, h)
+                            #if h(n)+cost of the node in OPEN queue is greater, then place the child node before 
+                            if(nh > h+cost):
+                                child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i, child)
                                 added = True
                                 print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
-                            #if h(n) of the node in OPEN queue is equal to the h(n) of the child node
+                            #if h(n)+cost of the node in OPEN queue is equal to the h(n)+cost of the child node
                             #place the child node after, since the path to the child node is longer
-                            elif(nh == h):
-                                child = (b, g, parentIndex, idx, h)
+                            elif(nh == h+cost):
+                                child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i+1, child)
                                 added = True
                                 print("Adding to the OPEN Queue at index %.1d" % (i+1))
@@ -1369,9 +1381,9 @@ def astar_h1(brd,grd):
                                 added = False
                                 continue
                     
-                    #if the child node's h(n) is the greatest, append as the last element of the OPEN queue
+                    #if the child node's h(n)+cost is the greatest, append as the last element of the OPEN queue
                     if(added == False and addOpen == True and vopen == True):
-                        child =(b, g, parentIndex, idx, h)
+                        child =(b, g, parentIndex, idx, h+cost)
                         open+=[child]
                         print("Adding to the end of OPEN Queue")
                     
@@ -1379,7 +1391,7 @@ def astar_h1(brd,grd):
                     # child node appended in CLOSED Queue
                     elif(addOpen == False and vopen == True):
                         idx = len(closed)
-                        child = (b, g, parentIndex, idx, h)
+                        child = (b, g, parentIndex, idx, h+cost)
                         closed += [child]
                         added = True
                         break #end iteration
