@@ -250,32 +250,37 @@ def explore_moves(b, g):
 
     for car in cars:
         x, y, length = car.x, car.y, car.length
+        step_l = step_r = step_u = step_d = 1
         if car.orientation == 0:  # horizontal cars
-            # if positions to the left of the HEAD is empty
-            step_l = step_r = 1
             fuel = car.fuel
+            # if positions to the left of the HEAD is empty
             for i in range(y):
-                if grid[x][y-step_l] == '.' and fuel > 0:
-                    print(car.name, "left", step_l)
-                    step_l += 1
-                    fuel -= 1
-                    print(car.name, fuel)
+                if y-step_l >= 0 and grid[x][y-step_l] == '.' and fuel > 0:
                     # update the grid append new_grids
                     new_grid = copy.deepcopy(grid)
-                    new_grid[x][y-1] = car.name
-                    new_grid[x][y+length-1] = '.'
+                    #print("tail=", y+length-1-step_l, "y=", y - step_l, "step_l =", step_l)
+                    for j in range(length):  # erase the tail to the left
+                        #print(". at", y+length-1-j)
+                        new_grid[x][y+length-1-j] = '.'
+                    for j in range(length):  # add to the head to the left
+                        new_grid[x][y-step_l+j] = car.name
+                        #print(car.name, y-step_l+j)
+                    print(car.name, "left", step_l)
                     new_grids.append(new_grid)
                     print_2d_array(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
+                    fuel = fuel - step_l
                     new_board = copy.deepcopy(b)
                     for c in new_board.cars:
                         if c.name == car.name:
                             c.fuel = fuel
                             c.x = x
-                            c.y = y-1
+                            c.y = y-step_l
                             new_boards.append(new_board)
                             print(new_board.cars)
+                            #print("next")
+                            step_l += 1
                             del new_board
                             fuel = car.fuel # to reset it for possible double moves
                             break
@@ -283,91 +288,101 @@ def explore_moves(b, g):
             for j in range(5-y+length):
                 # if positions to the right of the TAIL is empty
                 if y+length-1+step_r <= 5 and grid[x][y+length-1+step_r] == '.' and fuel > 0:
-                    print(car.name, "right", step_r)
-                    step_r += 1
-                    fuel -= 1
-                    print(car.name, fuel)
                     # update the grid append new_grids
                     new_grid = copy.deepcopy(grid)
-                    new_grid[x][y+length] = car.name
-                    new_grid[x][y] = '.'
-                    new_grids.append(new_grid)
+                    #print("tail=", y+length-1+step_r, "y=", y + step_r, "step_r =", step_r)
+                    for i in range(length):
+                        new_grid[x][y+i] = '.'
+                        #print(". at ", y+i)
+                    for i in range(length):
+                        #print(car.name, "at ", y+step_r-i)
+                        new_grid[x][y+length-1+step_r-i] = car.name
+                    print(car.name, "right", step_r)
                     print_2d_array(new_grid)
+                    new_grids.append(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
+                    fuel = fuel - step_r
                     new_board = copy.deepcopy(b)
                     for c in new_board.cars:
                         if c.name == car.name:
                             c.fuel = fuel
                             c.x = x
-                            c.y = y+length
+                            c.y = y+step_r
                             new_boards.append(new_board)
                             print(new_board.cars)
+                            #print("next")
+                            step_r += 1
                             del new_board
                             fuel = car.fuel # to reset it for possible double moves
                             break
 
         elif car.orientation == 1: # vertical cars
             # if positions up from the HEAD is empty
-            step_u = step_d = 1
             fuel = car.fuel
             for i in range(x):
-                if grid[x-step_u][y] == '.' and fuel > 0:
-                    print(car.name, "up", step_u)
-                    step_u += 1
-                    fuel -= 1
-                    print(car.name, fuel)
+                if x-step_u >= 0 and grid[x-step_u][y] == '.' and fuel > 0:
                     # update the grid append new_grids
                     new_grid = copy.deepcopy(grid)
-                    new_grid[x-1][y] = car.name
-                    new_grid[x+length-1][y] = '.'
+                    #print("tail=", x+length-1-step_u, "x=", x - step_u, "step_u =", step_u)
+
+                    for j in range(length):  # erase the tail upwards
+                        print(". at", x+length-1-j)
+                        new_grid[x+length-1-j][y] = '.'
+                    for j in range(length):  # add to the head upwards
+                        new_grid[x-step_u+j][y] = car.name
+                        print(car.name, x-step_u+j)
+
+                    print(car.name, "up", step_u)
                     new_grids.append(new_grid)
                     print_2d_array(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
+                    fuel = fuel - step_u
                     new_board = copy.deepcopy(b)
                     for c in new_board.cars:
                         if c.name == car.name:
                             c.fuel = fuel
-                            c.x = x-1
+                            c.x = x-step_u
                             c.y = y
                             new_boards.append(new_board)
                             print(new_board.cars)
+                            #print("next")
+                            step_u += 1
                             del new_board
                             fuel = car.fuel # to reset it for possible double moves
                             break
 
-
-
-
-
-
-
-
-
             # if positions down from the TAIL is empty
             for j in range(5-x+length):
                 if x+length-1+step_d <= 5 and grid[x+length-1+step_d][y] == '.' and fuel > 0:
-                    print(car.name, "down", step_d)
-                    step_d += 1
-                    fuel -= 1
-                    print(car.name, fuel)
                     # update the grid append new_grids
                     new_grid = copy.deepcopy(grid)
-                    new_grid[x+length][y] = car.name
-                    new_grid[x][y] = '.'
-                    new_grids.append(new_grid)
+                    #print("tail=", x+length-1+step_d, "x=", x+ step_d, "step_d =", step_d)
+                    # new_grid[x+step_d][y] = car.name
+                    # new_grid[x][y] = '.'
+                    for i in range(length):
+                        new_grid[x+i][y] = '.'
+                        #print(". at ", x+i)
+                    for i in range(length):
+                        #print(car.name, "at ", x+step_d-i)
+                        new_grid[x+length-1+step_d-i][y] = car.name
+                    print(car.name, "down", step_d)
                     print_2d_array(new_grid)
+                    new_grids.append(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
+                    fuel = fuel - step_d
                     new_board = copy.deepcopy(b)
                     for c in new_board.cars:
                         if c.name == car.name:
                             c.fuel = fuel
-                            c.x = x+length
+                            c.x = x+step_d
                             c.y = y
                             new_boards.append(new_board)
                             print(new_board.cars)
+                            #print("next")
+                            step_d += 1
                             del new_board
                             fuel = car.fuel # to reset it for possible double moves
                             break
@@ -386,37 +401,6 @@ def goal(self):
     for car in cars:
         if car.name == 'A' and car.x == 2 and car.y + car.length - 1 == 5:
             return True
-        else:
-            return False
-        
-def brdToGrd(self):
-
-    new_grid = [['.' for x in range(6)] for y in range(6)]
-    cars = self.cars
-
-    for c in cars:
-        #car c is horizontal
-        if(c.orientation == 0):
-            new_grid[c.x][c.y] = c.name
-            for i in range(c.length):
-                if(c.y+i > 5):
-                    y = 5
-                else:
-                    y = c.y+i
-                new_grid[c.x][y] = c.name
-        #car c is vertical
-        if(c.orientation == 1):
-            new_grid[c.x][c.y] = c.name
-            
-            for i in range(c.length):
-                if(c.x+i > 5):
-                    x = 5
-                else:
-                    x = c.x+i
-                new_grid[x][c.y] = c.name
-
-
-    return new_grid
 
 # # determines if car A has reached (2,5) in the board
 # def goal(self):
@@ -706,3 +690,32 @@ def drawBoard(self):
 
     for line in boardToPrint:
         print(line)
+
+def brdToGrd(self):
+
+    new_grid = [['.' for x in range(6)] for y in range(6)]
+    cars = self.cars
+
+    for c in cars:
+        #car c is horizontal
+        if(c.orientation == 0):
+            new_grid[c.x][c.y] = c.name
+            for i in range(c.length):
+                if(c.y+i > 5):
+                    y = 5
+                else:
+                    y = c.y+i
+                new_grid[c.x][y] = c.name
+        #car c is vertical
+        if(c.orientation == 1):
+            new_grid[c.x][c.y] = c.name
+            
+            for i in range(c.length):
+                if(c.x+i > 5):
+                    x = 5
+                else:
+                    x = c.x+i
+                new_grid[x][c.y] = c.name
+
+
+    return new_grid

@@ -1,14 +1,58 @@
-# easy, solution in 4 moves
+#1 easy, solution in 4 moves
 ...CC.DD.K.LIAAK.LI.JEEMFFJ..M.GGG..
 
-# medium, solution in 14 moves
+#2 medium, solution in 14 moves
 BBICCLG.IJKLGAAJKMGHDDDM.H.....FF...
 
-# hard, solution in 30 moves
+#3 hard, solution in 30 moves
 BBCCK...I.KL..IAALEEIJ.LH..JFFHGGG..
 
-# extreme, Error: no solution found after 0.08 seconds
+#4 extreme, Error: no solution found after 0.08 seconds
 BBB..K..H..K..HAAKCCIJDDG.IJEEGFFF.. B0 C3
 
-# extreme, solution in 39 moves
+#5 extreme, solution in 39 moves
 .BBBCC..JDDLAAJ.KLIEE.KMIFF..MGGHHHM
+
+#6 No Solution
+TDD.RRT..L.MAA.L.M.FFF..G.IOOTG.I..T D0 G50
+
+#7 solution in 3 moves
+...CCCMM...LAA...LK.GG..K..BBB...FFF
+
+#8 no solution
+...L.....LCCMAA..KM.FFFK..B..K..BGGG K0
+
+#9 
+...L.....LCCMAA..KM.FFFK..B..K..BGGG 
+
+#10 No solution
+BBICCLG.IJKLGAAJKMGHDDDM.H.....FF... F0 C0
+
+#11 solution in 3 move
+...CCCMM...LAA...LK..GGGK..DD.......
+
+#12 solution in 3 moves...CCCII..M.AA..MKL..GGKL..EEE......
+
+#13
+I..CCLIFF..LIAA..M.D...M.D.EEE......
+
+#14 solution in 6 moves
+CC..LLI...KMIAAGKMB..G..B..DD.......
+
+#15 solution in 7 moves
+CC.KBB.DDKL.AAMKL...M...IF.HH.IFPP..
+
+#16 solution in 9 moves
+..DD.K.....K.AA..K..MLCCF.ML..F..LBB
+
+#17 
+..MMMKL..GFKLAAGFKLIJCCC.IJ.....DD.. 
+
+#18 solution in 7 moves
+..KK.L...CCL.AA..LGGMFII.DMF...DM.JJ
+
+#19 solution in 10 moves
+..KMMLGGK.FL.AA.FL.I..C..I..C..IDDBB
+
+#20 solution in 10 moves
+.DD.BB..CCK.AAIJKLM.IJKLMHQQ.L.HPPRR
