@@ -573,14 +573,6 @@ def gbfs_h1(brd,grd):
         print("The length of the path: %.1d" % (len(path)-1))
     else:
         print("No Solution is found")
-    
-    #in output.txt file, write:
-    # "Runtime :" + runtime + "seconds\n"
-    # "Search path lenght: " + len(closed) + " states\n"
-    # "Solution path lenght: "+(len(path)-1)+" moves\n" 
-    # ** -1 to not count the initial state
-    # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
-    # final Board object displayed as 2D matrix
 
 def gbfs_h2(brd,grd):
     
@@ -786,14 +778,6 @@ def gbfs_h2(brd,grd):
         print("The length of the path: %.1d" % (len(path)-1))
     else:
         print("No Solution is found")
-    
-    #in output.txt file, write:
-    # "Runtime :" + runtime + "seconds\n"
-    # "Search path lenght: " + len(closed) + " states\n"
-    # "Solution path lenght: "+(len(path)-1)+" moves\n" 
-    # ** -1 to not count the initial state
-    # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
-    # final Board object displayed as 2D matrix
 
 def gbfs_h3(brd,grd, ld):
     
@@ -1000,14 +984,6 @@ def gbfs_h3(brd,grd, ld):
     else:
         print("No Solution is found")
     
-    #in output.txt file, write:
-    # "Runtime :" + runtime + "seconds\n"
-    # "Search path lenght: " + len(closed) + " states\n"
-    # "Solution path lenght: "+(len(path)-1)+" moves\n" 
-    # ** -1 to not count the initial state
-    # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
-    # final Board object displayed as 2D matrix
-
 def gbfs_h4(brd,grd):
     
     open = []
@@ -1212,14 +1188,6 @@ def gbfs_h4(brd,grd):
         print("The length of the path: %.1d" % (len(path)-1))
     else:
         print("No Solution is found")
-    
-    #in output.txt file, write:
-    # "Runtime :" + runtime + "seconds\n"
-    # "Search path lenght: " + len(closed) + " states\n"
-    # "Solution path lenght: "+(len(path)-1)+" moves\n" 
-    # ** -1 to not count the initial state
-    # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
-    # final Board object displayed as 2D matrix
 
 
 # A Star algorithm: calclate for heuristic AND cost 
@@ -1439,11 +1407,10 @@ def astar_h1(brd,grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
+        print("The length of the path: %.1d" % (len(path)-2))
     else:
         print("No Solution is found")
         
-#A* Algorithm for h2
 def astar_h2(brd,grd):
     
     open = []
@@ -1665,7 +1632,6 @@ def astar_h2(brd,grd):
     else:
         print("No Solution is found")
         
-        
 def astar_h3(brd,grd, ld):
     open = []
     closed = []
@@ -1884,8 +1850,7 @@ def astar_h3(brd,grd, ld):
 
         print("The length of the path: %.1d" % (len(path)-1))
     else:
-        print("No Solution is found")
-        
+        print("No Solution is found")     
         
 def astar_h4(brd,grd):
     open = []
