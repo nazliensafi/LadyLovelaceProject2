@@ -770,7 +770,7 @@ def gbfs_h2(brd,grd):
     else:
         print("No Solution is found")
 
-def gbfs_h3(brd,grd, ld):
+def gbfs_h3(brd,grd,ld):
     
     open = []
     closed = []
@@ -1398,7 +1398,7 @@ def astar_h1(brd,grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-2))
+        print("The length of the path: %.1d" % (len(path)-1))
     else:
         print("No Solution is found")
         
@@ -1623,7 +1623,7 @@ def astar_h2(brd,grd):
     else:
         print("No Solution is found")
         
-def astar_h3(brd,grd, ld):
+def astar_h3(brd,grd,ld):
     open = []
     closed = []
     finished = False
