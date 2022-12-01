@@ -355,16 +355,7 @@ def ucs(brd, grd):
 
     elif(solution == False):
         print("No Solution found")
-#     # if solution = False, print("No Solution")
-#     #in output.txt file, write:
-#     # "Runtime :" + runtime + "seconds\n"
-#     # "Search path lenght: " + len(closed) + " states\n"
-#     # "Solution path lenght: "+(len(path)-1)+" moves\n" #-1 to not count the initial state
-#     # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
-#     # final Board object displayed as 2D matrix
     
-
-#TODO
 def gbfs_h1(brd,grd):
     
     open = []
@@ -1190,7 +1181,7 @@ def gbfs_h4(brd,grd):
         print("No Solution is found")
 
 
-# A Star algorithm: calclate for heuristic AND cost 
+# A Star algorithm
 def astar_h1(brd,grd):
     open = []
     closed = []
