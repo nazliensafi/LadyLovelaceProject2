@@ -1,4 +1,4 @@
-import board
+from board import *
 import car
 
 """
@@ -33,11 +33,31 @@ if __name__ == '__main__':
     # boardSolOutput(puzzle1)
     # print(Board.create_grid(puzzle1)[0][3])
     # board = Board.readfile('input.txt')
-    b, g = board.strToBoard(board.readFile('goaltest.txt'))
-    brd = b[0]
-    grid = g[0]
-    brds , grds = board.explore_moves(brd, grid)
-    print(len(grds), "possible moves detected")
+    #b, g = board.strToBoard(board.readFile('goaltest.txt'))
+    #brd = b[0]
+    #grid = g[0]
+    #brds , grds = board.explore_moves(brd, grid)
+    #print(len(grds), "possible moves detected")
+    for puzzle in board.readFile('goaltest.txt'):
+        print(puzzle)
+        solOutputArr = []
+        solOutputArr.append("Initial Board Configuration: " + puzzle + '\n')
+        #solOutputArr.append("!" + '\n' + Board.create_grid(puzzle))
+        carFuelString = ', '.join(str(car) for car in Board.fuel_level(puzzle))
+        solOutputArr.append("Car fuel available: " + carFuelString + '\n')
+        solOutputArr.append("Runtime: ")
+        solOutputArr.append("Search path length: ")
+        solOutputArr.append("Solution path length: ")
+        solOutputArr.append("Solution path: ")
+
+        with open('outputTEST.txt', 'w') as f:
+            f.write("--------------------------------------------------------------------------------")
+            f.write('\n')
+            for line in solOutputArr:
+                f.write(line)
+                f.write('\n')
+                f.write("--------------------------------------------------------------------------------")
+    
     #print(len(brds))
     # #  Uncomment to see the look-up table aka grid
     # for a_row in range(6):

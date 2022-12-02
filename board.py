@@ -60,9 +60,17 @@ class Board(object):
         """
         return 2D array of the board
         """
-        boardAsList = list(boardString)
-        grid = [boardAsList[j:j + 6] for j in range(0, len(boardAsList), 6)]
-        return grid
+        #boardAsList = list(boardString)
+        #grid = [boardAsList[j:j + 6] for j in range(0, len(boardAsList), 6)]
+        #return grid
+        for i in range(len(boardString)):
+            if i%6 == 0:
+                sub = boardString[i:i+6]
+                lst = []
+                for j in sub:
+                    lst.append(j)
+                print(' '.join(lst))
+        return lst
 
 
 def print_2d_array(self):
@@ -91,6 +99,45 @@ def readFile(filename):
     input_file.close()
 
     return puzzles
+
+def fuel_level(puzzle):
+    car_name = []
+    car_fuel_dict = {}
+
+    #list of unique car names
+    prob = puzzle[0:36]
+    uniqueCar = ''.join(set(prob))
+    for c in uniqueCar:
+        if c == '.':
+            continue
+        elif c == '\n':
+            continue
+        else:
+            car_name.append(c)
+    
+    # returns a dictionary called car_fuel_dict containing char representing cars and int representing fuel level
+    # if the original puzzle does not contain specification of initial fuel_level
+    if len(puzzle) == 36:
+        for c in puzzle:
+            car_fuel_dict[c] = 100
+
+    if len(puzzle) > 36:
+        # the fuel-level specification is separated by a space
+        new_str = puzzle[37:]
+        cars = puzzle[:35]
+        for i in range(0, len(new_str), 3):
+            if new_str[i] in cars:
+                car_fuel_dict[new_str[i]] = int(new_str[i+1])
+        # for cars without fuel-level specification, add 100
+        for c in cars:
+            if c in car_fuel_dict.keys():
+                continue
+            else:
+                car_fuel_dict[c] = 100
+
+    del car_fuel_dict['.']
+    print("\nCar Fuel Dictionary: ")
+    return car_fuel_dict
 
 
 def strToBoard(puzzleArr):

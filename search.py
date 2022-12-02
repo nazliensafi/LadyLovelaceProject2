@@ -1210,7 +1210,7 @@ def astar_h1(brd,grd):
     visited = source
     print("Initial Game Board")
     print(board.brdToGrd(brd))
-    print()
+    #print()
 
 
     while(not finished):
@@ -1286,7 +1286,7 @@ def astar_h1(brd,grd):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        #print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -1324,7 +1324,7 @@ def astar_h1(brd,grd):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % i)
+                                #print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
                             #if h(n)+cost of the node in OPEN queue is equal to the h(n)+cost of the child node
                             #place the child node after, since the path to the child node is longer
@@ -1332,10 +1332,9 @@ def astar_h1(brd,grd):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i+1, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % (i+1))
+                                #print("Adding to the OPEN Queue at index %.1d" % (i+1))
                                 break #end iteration
-                                continue
-                            # if h(n) of the child node is greater, continue iteration 
+                            # if h(n)+cost of the child node is greater, continue iteration 
                             else:
                                 added = False
                                 continue
@@ -1344,7 +1343,7 @@ def astar_h1(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h+cost)
                         open+=[child]
-                        print("Adding to the end of OPEN Queue")
+                        #print("Adding to the end of OPEN Queue")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -1374,10 +1373,10 @@ def astar_h1(brd,grd):
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
                 open.pop(0)
-                print("Moved next node in OPEN to VISITED")
+                #print("Moved next node in OPEN to VISITED")
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                #print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
@@ -1399,6 +1398,7 @@ def astar_h1(brd,grd):
         path.insert(0, source)
 
         print("The length of the path: %.1d" % (len(path)-1))
+        print(path)
     else:
         print("No Solution is found")
         
