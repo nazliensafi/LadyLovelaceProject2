@@ -356,6 +356,8 @@ def ucs(brd, grd):
     elif(solution == False):
         print("No Solution found")
     
+    return runtime, (len(path)-1)
+    
 def gbfs_h1(brd,grd):
     
     open = []
@@ -1401,6 +1403,7 @@ def astar_h1(brd,grd):
         print(path)
     else:
         print("No Solution is found")
+    return runtime, (len(path)-1)
         
 def astar_h2(brd,grd):
     
