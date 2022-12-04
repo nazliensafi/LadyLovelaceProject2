@@ -2,141 +2,6 @@ from car import Car
 from board import *
 import time
 
-# def ucs(brd,grid):
-#     initial_state = brd
-#     open = []
-#     closed = []
-#     parentIndex = 0
-#     index = 0
-#     cost = 0
-#     notFound = False
-#     foundGoal = False
-    
-#     #to calculate the runtime
-#     start = time.time()
-
-#     #each node passed in the queues = a tuple where the elements are: (board, parent state's index, cost)
-#     visited = (initial_state, [], parentIndex, index, cost)
-#     print(board.brdToGrd(initial_state))
-#     # find a list of next possible moves from the current state
-#     # #replace [] with a call to the function that checks all possible moves from the state in the visited queue and return a new Board
-#     # ex. nextMove = possibleMove(visited[0])
-#     nextMove, nextGrid = board.explore_moves(brd, grid)
-#     print(len(nextMove))
-    
-#     #current configuration: visited = [(S, 0, 0)], open = [], closed = () 
-#     # S = initial game state
-
-#     while(foundGoal == False):
-
-#         #if there is no next move and we did not reach the goal, there is no solution
-#         if(nextMove == []):
-#             stop = time.time()
-#             print("No solution")
-#             foundGoal = True
-#             break #stop while loop
-
-#         if (nextMove != []):
-#             cost+=1
-#             # the new parent node is the state-node in the visited, so we get the index
-#             parentIndex = visited[3]
-
-#             for i in range(len(nextMove)):
-#                 m = nextMove[i]
-#                 g = nextGrid[i]
-#                 #if next move is found and we reach the goal, we finished the search
-#                 print(board.goal(m))
-#                 if(board.goal(m)):
-#                    goalstate = (m, g, parentIndex, index+1, cost)
-#                    visited.clear()
-#                    stop = time.time()
-#                    foundGoal = True
-#                    break
-
-#                 #else, we do the following steps:
-#                 else:
-#                     print("Next Move is not Goal")
-#                     #for each of the possible move we found (for each element of the array nextMove)
-#                     #we create a new tuple to append to 'open' queue: (nextMove element, parent state, index, new cost)
-#                     if open == []:
-#                         nextOpen = (m, g, parentIndex,index+1,cost)
-#                         open.append(nextOpen)
-#                         print("appending first element in open queue")
-#                     else:
-#                         for n in open:
-#                             check = (n[0].cars == m.cars)
-#                             #verify if we have equivalent board already in open queue
-#                             #if we do, continue without adding, since the cost of the newly found state will be higher
-#                             if (check == True):
-#                                 notFound = False
-#                                 print("same board found in open queue")
-#                                 break
-#                             elif(check==False):
-#                                 notFound = True
-                        
-#                         for n in closed:
-#                             check = (n[0].cars == m.cars)
-#                             #verify if we have equivalent board already in open queue
-#                             #if we do, continue without adding, since the cost of the newly found state will be higher
-#                             if (check == True):
-#                                 notFound = False
-#                                 print("same board found in closed queue")
-#                                 break
-#                             elif(check==False):
-#                                 notFound = True
-                        
-#                         if(notFound == True):
-#                             nextOpen = (m, g, parentIndex,index+1,cost)
-#                             open.append(nextOpen)
-#                             print("appending next element in open")
-#                         elif(notFound==False):
-#                             print("board already in the open queue")
-
-#         #after verifying each child node        
-#         #empty nextMove
-#         nextMove.clear()
-#         nextGrid.clear()
-#         print("delete NextMove array")
-#         #append the element from visited queue to closed queue
-#         closed.append(visited)
-#         print("append visited node to closed queue")
-#         #append next state in the 'open' queue to visited and delete the same element from the open queue
-#         visited = open[0]
-#         print(open[0][1])
-#         open.pop(0)
-#         print("new visited, open queue first element popped")
-#         # nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
-#         # print("Open Node into the visited queue")
-
-
-#     #as result, we should display:
-#     runtime = stop-start
-
-#     # #find the actual path by tracking the parent node
-#     # path = [goalstate]
-#     # currentNode = goalstate
-#     # while(currentNode != initial_state):
-#     #     for node in closed:
-#     #         #the index of the node = the parent node's index of current node
-#     #         if (node[3] == currentNode[2]):
-#     #             path.insert(0, currentNode)
-#     #             currentNode = node
-#     #             break
-#     #         else:
-#     #             continue
-    
-#     # #lastly, we insert the initial_state in the beginning of the path
-#     # path.insert(0, initial_state)
-    
-#     print("Runtime: " + runtime)
-#     # print("Solution path length: " + (len(path)-1))
-#     #in output.txt file, write:
-#     # "Runtime :" + runtime + "seconds\n"
-#     # "Search path lenght: " + len(closed) + " states\n"
-#     # "Solution path lenght: "+(len(path)-1)+" moves\n" #-1 to not count the initial state
-#     # "Solution path : " #I'm not sure how to keep track of the actual moves made for the path :/
-#     # final Board object displayed as 2D matrix
-
 def ucs(brd, grd):
     initial_state = brd
     open = []
@@ -379,6 +244,7 @@ def gbfs_h1(brd,grd):
     addOpen = False
     vopen = False
     
+    path = []
     explored = 0
 
     #index in the closed set to keep track of the path
@@ -552,10 +418,10 @@ def gbfs_h1(brd,grd):
                 visited = (bd, gd, pd, idx, hd)
                 explored = explored + 1
                 open.pop(0)
-                print("Moved next node in OPEN to VISITED")
+                # print("Moved next node in OPEN to VISITED")
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
@@ -602,6 +468,7 @@ def gbfs_h2(brd,grd):
     addOpen = False
     vopen = False
 
+    path = []
     explored = 0 
 
     #index in the closed set to keep track of the path
@@ -821,6 +688,7 @@ def gbfs_h3(brd,grd,ld):
     addOpen = False
     vopen = False
 
+    path = []
     explored = 0
 
     #index in the closed set to keep track of the path
@@ -1040,6 +908,7 @@ def gbfs_h4(brd,grd):
     addOpen = False
     vopen = False
 
+    path = []
     explored = 0
 
     #index in the closed set to keep track of the path
@@ -1276,8 +1145,8 @@ def astar_h1(brd,grd):
     # S = initial game state, initialise the visited board
     source = (brd, grd, parentIndex, idx, cost, valid, board.h1(brd))
     visited = source
-    print("Initial Game Board")
-    print(board.brdToGrd(brd))
+    # print("Initial Game Board")
+    # print(board.brdToGrd(brd))
     #print()
 
 
@@ -1286,7 +1155,7 @@ def astar_h1(brd,grd):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -1299,7 +1168,7 @@ def astar_h1(brd,grd):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -1324,7 +1193,7 @@ def astar_h1(brd,grd):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -1452,7 +1321,7 @@ def astar_h1(brd,grd):
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
     if(found == True and closed != []):
         path = [goalstate]
@@ -1466,18 +1335,18 @@ def astar_h1(brd,grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
-        print(path)
+        # print("The length of the path: %.1d" % (len(path)-1))
+        # print(path)
         pl = len(path) - 1
     elif(found == True and closed == []):
         path = [goalstate]
-        print("The length of the path:  %.1d" % (len(path)))
+        # print("The length of the path:  %.1d" % (len(path)))
         pl = len(path)
     else:
-        print("No Solution is found")
+        # print("No Solution is found")
         pl = 0
     
-    return runtime, pl, explored
+    return runtime, path, pl, explored
         
 def astar_h2(brd,grd):
     
@@ -1494,6 +1363,8 @@ def astar_h2(brd,grd):
     valid = True
     path = []
     
+    explored = 0
+
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -1506,9 +1377,9 @@ def astar_h2(brd,grd):
     # S = initial game state, initialise the visited board
     source = (brd, grd, parentIndex, idx, cost, valid, board.h2(brd))
     visited = source
-    print("Initial Game Board")
-    print(board.brdToGrd(brd))
-    print()
+    # print("Initial Game Board")
+    # print(board.brdToGrd(brd))
+    # print()
 
 
     while(not finished):
@@ -1516,7 +1387,7 @@ def astar_h2(brd,grd):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -1529,7 +1400,7 @@ def astar_h2(brd,grd):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -1554,7 +1425,7 @@ def astar_h2(brd,grd):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -1584,7 +1455,7 @@ def astar_h2(brd,grd):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -1622,7 +1493,7 @@ def astar_h2(brd,grd):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % i)
+                                # print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
                             #if h(n)+cost of the node in OPEN queue is equal to the h(n)+cost of the child node
                             #place the child node after, since the path to the child node is longer
@@ -1630,7 +1501,7 @@ def astar_h2(brd,grd):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i+1, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % (i+1))
+                                # print("Adding to the OPEN Queue at index %.1d" % (i+1))
                                 break #end iteration
                                 continue
                             # if h(n) of the child node is greater, continue iteration 
@@ -1642,7 +1513,7 @@ def astar_h2(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h+cost)
                         open+=[child]
-                        print("Adding to the end of OPEN Queue")
+                        # print("Adding to the end of OPEN Queue")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -1671,20 +1542,21 @@ def astar_h2(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
-                print("Moved next node in OPEN to VISITED")
+                # print("Moved next node in OPEN to VISITED")
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed != []):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -1695,10 +1567,19 @@ def astar_h2(brd,grd):
     
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
-
-        print("The length of the path: %.1d" % (len(path)-1))
+        pl = len(path)-1
+        # print("The length of the path: %.1d" % (len(path)-1))
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        # print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+    
     else:
-        print("No Solution is found")
+        pl = 0
+        # print("No Solution is found")
+    
+    return runtime, path, pl, explored
         
 def astar_h3(brd,grd,ld):
     open = []
@@ -1713,6 +1594,8 @@ def astar_h3(brd,grd,ld):
     cost = 0
     valid = True
     path = []
+
+    explored = 0
     
     #index in the closed set to keep track of the path
     parentIndex = 0
@@ -1726,9 +1609,9 @@ def astar_h3(brd,grd,ld):
     # S = initial game state, initialise the visited board
     source = (brd, grd, parentIndex, idx, cost, valid, board.h3(brd, ld))
     visited = source
-    print("Initial Game Board")
-    print(board.brdToGrd(brd))
-    print()
+    # print("Initial Game Board")
+    # print(board.brdToGrd(brd))
+    # print()
 
 
     while(not finished):
@@ -1736,7 +1619,7 @@ def astar_h3(brd,grd,ld):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -1749,7 +1632,7 @@ def astar_h3(brd,grd,ld):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -1774,7 +1657,7 @@ def astar_h3(brd,grd,ld):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -1804,7 +1687,7 @@ def astar_h3(brd,grd,ld):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -1842,7 +1725,7 @@ def astar_h3(brd,grd,ld):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % i)
+                                # print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
                             #if h(n)+cost of the node in OPEN queue is equal to the h(n)+cost of the child node
                             #place the child node after, since the path to the child node is longer
@@ -1850,7 +1733,7 @@ def astar_h3(brd,grd,ld):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i+1, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % (i+1))
+                                # print("Adding to the OPEN Queue at index %.1d" % (i+1))
                                 break #end iteration
                                 continue
                             # if h(n) of the child node is greater, continue iteration 
@@ -1862,7 +1745,7 @@ def astar_h3(brd,grd,ld):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h+cost)
                         open+=[child]
-                        print("Adding to the end of OPEN Queue")
+                        # print("Adding to the end of OPEN Queue")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -1891,20 +1774,21 @@ def astar_h3(brd,grd,ld):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
-                print("Moved next node in OPEN to VISITED")
+                # print("Moved next node in OPEN to VISITED")
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed !=[]):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -1916,10 +1800,20 @@ def astar_h3(brd,grd,ld):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
+        pl=len(path)-1
+        # print("The length of the path: %.1d" % (len(path)-1))
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        # print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+    
     else:
-        print("No Solution is found")     
-        
+        pl = 0
+        # print("No Solution is found")     
+    
+    return runtime, path, pl, explored
+
 def astar_h4(brd,grd):
     open = []
     closed = []
@@ -1934,6 +1828,8 @@ def astar_h4(brd,grd):
     valid = True
     path = []
     
+    explored = 0
+
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -1946,9 +1842,9 @@ def astar_h4(brd,grd):
     # S = initial game state, initialise the visited board
     source = (brd, grd, parentIndex, idx, cost, valid, board.h4(brd))
     visited = source
-    print("Initial Game Board")
-    print(board.brdToGrd(brd))
-    print()
+    # print("Initial Game Board")
+    # print(board.brdToGrd(brd))
+    # print()
 
 
     while(not finished):
@@ -1956,7 +1852,7 @@ def astar_h4(brd,grd):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -1969,7 +1865,7 @@ def astar_h4(brd,grd):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -1994,7 +1890,7 @@ def astar_h4(brd,grd):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -2024,7 +1920,7 @@ def astar_h4(brd,grd):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -2062,7 +1958,7 @@ def astar_h4(brd,grd):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % i)
+                                # print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
                             #if h(n)+cost of the node in OPEN queue is equal to the h(n)+cost of the child node
                             #place the child node after, since the path to the child node is longer
@@ -2070,7 +1966,7 @@ def astar_h4(brd,grd):
                                 child = (b, g, parentIndex, idx, h+cost)
                                 open.insert(i+1, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % (i+1))
+                                # print("Adding to the OPEN Queue at index %.1d" % (i+1))
                                 break #end iteration
                                 continue
                             # if h(n) of the child node is greater, continue iteration 
@@ -2082,7 +1978,7 @@ def astar_h4(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h+cost)
                         open+=[child]
-                        print("Adding to the end of OPEN Queue")
+                        # print("Adding to the end of OPEN Queue")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -2111,20 +2007,22 @@ def astar_h4(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
-                print("Moved next node in OPEN to VISITED")
+                # print("Moved next node in OPEN to VISITED")
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
+    
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed != []):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -2135,7 +2033,16 @@ def astar_h4(brd,grd):
     
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
-
-        print("The length of the path: %.1d" % (len(path)-1))
+        pl = len(path)-1
+        # print("The length of the path: %.1d" % (len(path)-1))
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        # print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+    
     else:
-        print("No Solution is found")
+        pl = 0
+        # print("No Solution is found")     
+    
+    return runtime, path, pl, explored

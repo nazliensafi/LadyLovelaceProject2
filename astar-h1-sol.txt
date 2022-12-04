@@ -10,9 +10,9 @@ F F J . . M
 
 Car Fuel Available: 
 G : 100 K : 100 M : 100 E : 100 L : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:0.009973287582397461 s
-Search Path Length: 6
-Solution path length: 3
+Runtime:0.021941661834716797 s
+Search Path Length: 13
+Solution path length: 4
 
 Final Solution Board
 C C . K . L 
@@ -34,17 +34,17 @@ G H D D D M
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 H : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:57.043492794036865 s
-Search Path Length: 2378
-Solution path length: 105
+Runtime:200.77621841430664 s
+Search Path Length: 4676
+Solution path length: 16
 
 Final Solution Board
-B B C C . L 
-. . . . . L 
-. . . . A A 
-G D D D K M 
-G H I J K M 
-G H I J F F 
+G B B C C L 
+G . . . . L 
+G . . . A A 
+D D D J K M 
+. H I J K M 
+. H I F F . 
 
 
 Problem puzzle # 3
@@ -58,7 +58,7 @@ H G G G . .
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 E : 100 L : 0 H : 100 C : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:0.0029921531677246094 s
+Runtime:0.002991199493408203 s
 Search Path Length: 5
 No solution
 
@@ -88,7 +88,7 @@ G G H H H M
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 E : 100 L : 0 H : 100 C : 0 D : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:0.01795172691345215 s
+Runtime:0.01595759391784668 s
 Search Path Length: 19
 No solution
 
@@ -103,8 +103,8 @@ G . I . . .
 
 Car Fuel Available: 
 G : 5 I : 100 M : 100 L : 100 R : 100 D : 0 O : 100 T : 100 A : 100 F : 100 
-Runtime:8.742626428604126 s
-Search Path Length: 993
+Runtime:9.244284868240356 s
+Search Path Length: 1041
 No solution
 
 Problem puzzle # 7
@@ -118,17 +118,17 @@ K . . B B B
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 A : 100 F : 100 
-Runtime:0.0797872543334961 s
-Search Path Length: 21
-Solution path length: 7
+Runtime:0.7460050582885742 s
+Search Path Length: 118
+Solution path length: 6
 
 Final Solution Board
-C C C . . L 
-K M M . . L 
-K . . . A A 
-G G . . . . 
-. B B B . . 
-F F F . . . 
+. . C C C L 
+M M . . . L 
+. . . . A A 
+. G G . . . 
+K . . B B B 
+K . . F F F 
 
 
 Problem puzzle # 8
@@ -142,7 +142,7 @@ M . F F F K
 
 Car Fuel Available: 
 G : 100 K : 0 B : 100 M : 100 L : 100 C : 100 A : 100 F : 100 
-Runtime:0.8058445453643799 s
+Runtime:0.7669494152069092 s
 Search Path Length: 243
 No solution
 
@@ -157,17 +157,17 @@ M . F F F K
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 A : 100 F : 100 
-Runtime:1.8670082092285156 s
-Search Path Length: 294
-Solution path length: 54
+Runtime:10.880909442901611 s
+Search Path Length: 888
+Solution path length: 19
 
 Final Solution Board
 . . B L . . 
 C C B L . . 
 . . . . A A 
-F F F . . K 
+M F F F . K 
 M . . . . K 
-M . G G G K 
+. G G G . K 
 
 
 Problem puzzle # 10
@@ -181,7 +181,7 @@ G H D D D M
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 H : 100 C : 0 D : 100 I : 100 A : 100 J : 100 F : 0 
-Runtime:0.07679510116577148 s
+Runtime:0.07579731941223145 s
 Search Path Length: 69
 No solution
 
@@ -196,16 +196,16 @@ K . . D D .
 
 Car Fuel Available: 
 G : 100 K : 100 M : 100 L : 100 C : 100 D : 100 A : 100 
-Runtime:0.023936033248901367 s
-Search Path Length: 8
-Solution path length: 4
+Runtime:0.14162158966064453 s
+Search Path Length: 35
+Solution path length: 5
 
 Final Solution Board
-C C C . . L 
-M M . . . L 
+. . C C C L 
+. M M . . L 
 . . . . A A 
 K . . G G G 
-K . . . D D 
+K . . D D . 
 . . . . . . 
 
 
@@ -220,16 +220,16 @@ L . . E E E
 
 Car Fuel Available: 
 G : 100 K : 100 M : 100 E : 100 L : 100 C : 100 I : 100 A : 100 
-Runtime:0.05385565757751465 s
-Search Path Length: 21
+Runtime:24.428689002990723 s
+Search Path Length: 1205
 Solution path length: 7
 
 Final Solution Board
-C C C . M K 
-. . I I M K 
-. . . . A A 
-L . . . G G 
-L . . E E E 
+. C C C M K 
+I I . . M K 
+L . . . A A 
+L . . G G . 
+E E E . . . 
 . . . . . . 
 
 
@@ -244,7 +244,7 @@ I A A . . M
 
 Car Fuel Available: 
 M : 100 E : 100 L : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
-Runtime:0.006981372833251953 s
+Runtime:0.005983829498291016 s
 Search Path Length: 4
 Solution path length: 3
 
@@ -268,17 +268,17 @@ B . . D D .
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 
-Runtime:0.06283211708068848 s
-Search Path Length: 25
-Solution path length: 10
+Runtime:1.3902831077575684 s
+Search Path Length: 228
+Solution path length: 7
 
 Final Solution Board
 C C . G L L 
 I . . G . . 
 I . . . A A 
-B . . . . M 
-B D D . K M 
-. . . . K . 
+. . . . K M 
+B . D D K M 
+B . . . . . 
 
 
 Problem puzzle # 15
@@ -292,17 +292,17 @@ I F P P . .
 
 Car Fuel Available: 
 K : 100 B : 100 M : 100 L : 100 H : 100 C : 100 D : 100 P : 100 I : 100 A : 100 F : 100 
-Runtime:0.12366962432861328 s
-Search Path Length: 38
-Solution path length: 11
+Runtime:20.683701038360596 s
+Search Path Length: 1162
+Solution path length: 7
 
 Final Solution Board
 C C B B L . 
-. . D D L . 
+. D D . L . 
 . . . . A A 
-. F M K . . 
+. . . K . . 
 I F M K H H 
-I P P K . . 
+I F M K P P 
 
 
 Problem puzzle # 16
@@ -316,17 +316,17 @@ F . . L B B
 
 Car Fuel Available: 
 K : 100 B : 100 M : 100 L : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:28.58756995201111 s
-Search Path Length: 1616
-Solution path length: 62
+Runtime:105.28886342048645 s
+Search Path Length: 3360
+Solution path length: 11
 
 Final Solution Board
-. D D . . . 
-. . . . . . 
-. . . . A A 
+D D . . . . 
+F . . . . . 
+F . . . A A 
 C C M L . K 
-F . M L . K 
-F B B L . K 
+. . M L . K 
+B B . L . K 
 
 
 Problem puzzle # 17
@@ -340,17 +340,17 @@ L I J C C C
 
 Car Fuel Available: 
 G : 100 K : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:0.425861120223999 s
-Search Path Length: 100
-Solution path length: 26
+Runtime:8.285015344619751 s
+Search Path Length: 736
+Solution path length: 11
 
 Final Solution Board
-M M M G . . 
-. . . G . . 
-L . . . A A 
-L C C C F K 
-L I J . F K 
-. I J D D K 
+M M M G F . 
+. I J G F . 
+L I J . A A 
+L . C C C K 
+L . . . . K 
+. D D . . K 
 
 
 Problem puzzle # 18
@@ -364,17 +364,17 @@ G G M F I I
 
 Car Fuel Available: 
 G : 100 K : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:1.588752269744873 s
-Search Path Length: 308
-Solution path length: 67
+Runtime:6.162989854812622 s
+Search Path Length: 710
+Solution path length: 7
 
 Final Solution Board
-. K K F . . 
+K K . F . . 
 . C C F . . 
-. . M . A A 
+. . . . A A 
 G G M I I L 
 . D M . . L 
-. D . J J L 
+. D M J J L 
 
 
 Problem puzzle # 19
@@ -388,17 +388,17 @@ G G K . F L
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
-Runtime:0.3341066837310791 s
-Search Path Length: 121
-Solution path length: 24
+Runtime:6.178126335144043 s
+Search Path Length: 775
+Solution path length: 12
 
 Final Solution Board
 . . M M F . 
-. I G G F . 
+. . G G F . 
 . I . . A A 
+. I . . C L 
 . I K . C L 
-. . K . C L 
-D D B B . L 
+D D K B B L 
 
 
 Problem puzzle # 20
@@ -412,8 +412,8 @@ M H Q Q . L
 
 Car Fuel Available: 
 K : 0 B : 2 Q : 100 M : 100 L : 100 R : 100 H : 100 C : 0 D : 100 P : 100 I : 100 A : 100 J : 100 
-Runtime:227.83687114715576 s
-Search Path Length: 5171
+Runtime:286.4568381309509 s
+Search Path Length: 5690
 No solution
 
 Problem puzzle # 21
@@ -427,17 +427,17 @@ H H H . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.49866700172424316 s
-Search Path Length: 157
-Solution path length: 26
+Runtime:0.6594295501708984 s
+Search Path Length: 164
+Solution path length: 5
 
 Final Solution Board
-. D C C C . 
+. D . C C C 
 . D . . . . 
 . G . . A A 
 . G . . B F 
-E E E . B F 
-H H H . B . 
+. E E E B F 
+. H H H B . 
 
 
 Problem puzzle # 22
@@ -451,7 +451,7 @@ E . C C C .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:6.830737590789795 s
+Runtime:7.701208591461182 s
 Search Path Length: 525
 No solution
 
@@ -466,8 +466,8 @@ D D D K . .
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.008975744247436523 s
-Search Path Length: 7
+Runtime:0.009972572326660156 s
+Search Path Length: 8
 Solution path length: 4
 
 Final Solution Board
@@ -490,7 +490,7 @@ G G G C . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 A : 100 F : 100 
-Runtime:0.0009975433349609375 s
+Runtime:0.000997304916381836 s
 Search Path Length: 3
 No solution
 
@@ -505,16 +505,16 @@ D E . . C C
 
 Car Fuel Available: 
 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.12466645240783691 s
-Search Path Length: 70
-Solution path length: 23
+Runtime:0.34708166122436523 s
+Search Path Length: 126
+Solution path length: 6
 
 Final Solution Board
-. E . . . . 
-D E . . F F 
-D E . . A A 
-. C C . B . 
-. . . . B . 
+. . . . . . 
+F F . . . . 
+. E . . A A 
+D E C C B . 
+D E . . B . 
 . . . . B . 
 
 
@@ -529,7 +529,7 @@ G . . F . .
 
 Car Fuel Available: 
 G : 100 B : 0 E : 100 H : 100 C : 0 D : 100 I : 100 A : 100 F : 100 
-Runtime:0.013962745666503906 s
+Runtime:0.014960289001464844 s
 Search Path Length: 21
 No solution
 
@@ -544,17 +544,17 @@ G G G . F .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
-Runtime:0.5764589309692383 s
-Search Path Length: 119
-Solution path length: 28
+Runtime:0.012965202331542969 s
+Search Path Length: 12
+Solution path length: 4
 
 Final Solution Board
-. I C . F . 
-. I C . F . 
-H H . . A A 
-. . E E . B 
-D D D . . B 
-. . G G G B 
+. I . . . . 
+. I . . . . 
+H H C . A A 
+. . C E E B 
+. D D D F B 
+. G G G F B 
 
 
 Problem puzzle # 28
@@ -592,7 +592,7 @@ C . D . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.001993417739868164 s
+Runtime:0.001994609832763672 s
 Search Path Length: 6
 No solution
 
@@ -607,7 +607,7 @@ F F C . . .
 
 Car Fuel Available: 
 G : 100 B : 0 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:3.802833080291748 s
+Runtime:4.013306617736816 s
 Search Path Length: 501
 No solution
 
@@ -622,16 +622,16 @@ H H . . B .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 A : 100 F : 100 
-Runtime:0.3420858383178711 s
-Search Path Length: 93
-Solution path length: 23
+Runtime:16.821064233779907 s
+Search Path Length: 1151
+Solution path length: 9
 
 Final Solution Board
-. . E E E . 
-. . . . . . 
-. . . . A A 
-. G H H B C 
-. G . . B C 
+. . . E E E 
+. G . . . . 
+. G . . A A 
+. . H H B C 
+. . . . B C 
 F F F . B . 
 
 
@@ -646,17 +646,17 @@ A A A B C D
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
-Runtime:0.03789877891540527 s
-Search Path Length: 22
+Runtime:1.5418353080749512 s
+Search Path Length: 303
 Solution path length: 8
 
 Final Solution Board
-I . . G G G 
-I . . . . . 
+I G G G C . 
+I . . . C . 
 . . . A A A 
 . F . B . D 
-. F . B C D 
-E E E B C D 
+. F . B . D 
+E E E B . D 
 
 
 Problem puzzle # 33
@@ -670,7 +670,7 @@ F . . G G G
 
 Car Fuel Available: 
 G : 100 B : 0 E : 100 H : 0 C : 100 D : 100 A : 100 F : 100 
-Runtime:3.053835153579712 s
+Runtime:3.4501068592071533 s
 Search Path Length: 509
 No solution
 
@@ -685,9 +685,18 @@ C A A B . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:10.19873332977295 s
-Search Path Length: 805
-No solution
+Runtime:7.937016010284424 s
+Search Path Length: 635
+Solution path length: 9
+
+Final Solution Board
+C . . . . . 
+C . . . . . 
+. . . . A A 
+D D D B . G 
+. E . B . G 
+. E . B F F 
+
 
 Problem puzzle # 35
 Initial Board Configuration: .HH.D...B.DEAABCDE..BC.EI.FF..I...GG F0 C0 D2
@@ -700,7 +709,7 @@ I . . . G G
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 0 D : 2 I : 100 A : 100 F : 0 
-Runtime:7.484988689422607 s
+Runtime:6.906226634979248 s
 Search Path Length: 793
 No solution
 
@@ -715,7 +724,7 @@ A A B . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.30219221115112305 s
+Runtime:0.2817528247833252 s
 Search Path Length: 106
 No solution
 
@@ -730,8 +739,8 @@ C C C . . D
 
 Car Fuel Available: 
 B : 100 C : 100 D : 100 A : 100 
-Runtime:0.007978677749633789 s
-Search Path Length: 15
+Runtime:0.0069811344146728516 s
+Search Path Length: 12
 No solution
 
 Problem puzzle # 38
@@ -745,9 +754,18 @@ A A B . . .
 
 Car Fuel Available: 
 B : 100 E : 100 C : 100 D : 100 A : 100 
-Runtime:0.05186152458190918 s
-Search Path Length: 47
-No solution
+Runtime:0.19052577018737793 s
+Search Path Length: 117
+Solution path length: 14
+
+Final Solution Board
+. D . . . . 
+. D . . . . 
+. . . . A A 
+. . B . C . 
+E E B . C . 
+. . B . C . 
+
 
 Problem puzzle # 39
 Initial Board Configuration: ............AA.B..CC.BD..E.BD..EFFD.
@@ -760,18 +778,9 @@ C C . B D .
 
 Car Fuel Available: 
 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.6402883529663086 s
-Search Path Length: 186
-Solution path length: 39
-
-Final Solution Board
-. E . . . . 
-. E . . . . 
-. . . . A A 
-. C C B D . 
-. . . B D . 
-F F . B D . 
-
+Runtime:1.4240753650665283 s
+Search Path Length: 273
+No solution
 
 Problem puzzle # 40
 Initial Board Configuration: BBB..C..D..C..DAAC..EFGG..EF....EHH. C0
@@ -784,7 +793,7 @@ B B B . . C
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 0 D : 100 A : 100 F : 100 
-Runtime:0.0049860477447509766 s
+Runtime:0.004986763000488281 s
 Search Path Length: 11
 No solution
 
@@ -799,15 +808,15 @@ H H I J . G
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
-Runtime:13.957682371139526 s
-Search Path Length: 1039
-Solution path length: 49
+Runtime:38.811691999435425 s
+Search Path Length: 2015
+Solution path length: 20
 
 Final Solution Board
 C C E F . D 
 . . E F . D 
 . . . . A A 
-. . H H . G 
+. H H . . G 
 . B I J . G 
 . B I J . . 
 
@@ -823,17 +832,17 @@ F . B . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.5814452171325684 s
-Search Path Length: 168
-Solution path length: 26
+Runtime:13.379684925079346 s
+Search Path Length: 1135
+Solution path length: 12
 
 Final Solution Board
 G G G C . E 
 . . . C . E 
-F . . . A A 
-F D . . . . 
-. D B H H H 
+. . . . A A 
 . . B . . . 
+F D B H H H 
+F D . . . . 
 
 
 Problem puzzle # 43
@@ -847,18 +856,9 @@ G G G H H H
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.00997304916381836 s
-Search Path Length: 19
-Solution path length: 5
-
-Final Solution Board
-E E E D D C 
-. F F F . C 
-. . B . A A 
-. . B . . . 
-G G G H H H 
-. . . . . . 
-
+Runtime:0.01795172691345215 s
+Search Path Length: 26
+No solution
 
 Problem puzzle # 44
 Initial Board Configuration: EFFFDDE....BEAA..BCCG.....GHHH..G...
@@ -871,7 +871,7 @@ C C G . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.003989219665527344 s
+Runtime:0.004986763000488281 s
 Search Path Length: 9
 No solution
 
@@ -886,9 +886,18 @@ G . . . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.024933576583862305 s
+Runtime:0.02293872833251953 s
 Search Path Length: 34
-No solution
+Solution path length: 7
+
+Final Solution Board
+B B F F F C 
+E . . . . C 
+E . . . A A 
+G . . . . . 
+G D D H H H 
+G . . . . . 
+
 
 Problem puzzle # 46
 Initial Board Configuration: ...L.....LCCMAA..KM.FFFK..B..K..BGGG C0 
@@ -901,8 +910,8 @@ M . F F F K
 
 Car Fuel Available: 
 G : 100 K : 100 B : 100 M : 100 L : 100 C : 0 A : 100 F : 100 
-Runtime:0.11469316482543945 s
-Search Path Length: 77
+Runtime:0.130157470703125 s
+Search Path Length: 83
 No solution
 
 Problem puzzle # 47
@@ -916,7 +925,7 @@ H . . . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 0 D : 100 A : 100 F : 100 
-Runtime:0.000997304916381836 s
+Runtime:0.0009970664978027344 s
 Search Path Length: 2
 No solution
 
@@ -931,12 +940,12 @@ G G G A A B
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.005984067916870117 s
-Search Path Length: 10
-Solution path length: 5
+Runtime:0.02593088150024414 s
+Search Path Length: 35
+Solution path length: 6
 
 Final Solution Board
-D D D . . B 
+. D D D . B 
 F F F E E B 
 G G G . A A 
 . . . . . . 
@@ -955,9 +964,9 @@ G G G H H H
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.022938966751098633 s
-Search Path Length: 26
-Solution path length: 7
+Runtime:0.0359039306640625 s
+Search Path Length: 40
+Solution path length: 5
 
 Final Solution Board
 D D D E E C 
@@ -978,6 +987,6 @@ H . . . . .
 
 Car Fuel Available: 
 G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
-Runtime:0.003989219665527344 s
-Search Path Length: 8
+Runtime:0.009973526000976562 s
+Search Path Length: 17
 No solution
