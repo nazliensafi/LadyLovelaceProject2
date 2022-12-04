@@ -150,6 +150,7 @@ def ucs(brd, grd):
     foundGoal = False
     solution = False
     path = []
+    explored = 0
 
     #to calculate the runtime
     start = time.time()
@@ -157,27 +158,27 @@ def ucs(brd, grd):
     # initialize visited
     sourceNode = (initial_state, grd, parentIndex, index, cost, valid)
     visited = sourceNode
-    print("Initial Game Board")
-    print(board.brdToGrd(initial_state))
-    print()
+    # print("Initial Game Board")
+    # print(board.brdToGrd(initial_state))
+    # print()
 
     #get next possible moves
     nextMove, nextGrid = board.explore_moves(brd, grd)
 
-    print("The number of child nodes: ")
-    print(len(nextMove))
+    # print("The number of child nodes: ")
+    # print(len(nextMove))
 
     while(foundGoal == False):
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             foundGoal = True
             solution = False
             break
 
         elif(board.goal(visited[0])==True):
             stop = time.time()
-            print("TRUE: Solution found")
+            # print("TRUE: Solution found")
             solution=True
             goalstate = visited
             visited = []
@@ -201,8 +202,8 @@ def ucs(brd, grd):
                 #the next move is the goal state
                 if(board.goal(b) == True):
                     stop = time.time()
-                    print("TRUE: Goal is Found")
-                    print(g)
+                    #print("TRUE: Goal is Found")
+                    #print(g)
                     solution = True
                     index = index + 1
                     goalstate = (b, g, parentIndex-1, index, cost,valid)
@@ -212,7 +213,7 @@ def ucs(brd, grd):
 
                 #The next move is not a goal state
                 else:
-                    print("FALSE: Goal is not Found")
+                    #print("FALSE: Goal is not Found")
                     #verify if next move is already in closed
                     if (closed != []):
                         for n in closed:
@@ -229,7 +230,7 @@ def ucs(brd, grd):
                                     break
                             if(res):
                                 brdInClosed = True
-                                print("***Board already in closed queue***Skipping")
+                                #print("***Board already in closed queue***Skipping")
                                 break
                             else: 
                                 brdInClosed = False
@@ -240,13 +241,13 @@ def ucs(brd, grd):
 
                     brdFound = brdInClosed
                     #if same node was found in Closed Queue, we don't add the board to the open list, so brdFound = True
-                    if(brdFound==True):
-                        print("Moving to the next possible move")
-                    else:
+                    # if(brdFound==True):
+                    #     print("Moving to the next possible moves")
+                    if(brdFound == False):
                         #if Open Queue is empty, add the board as the first node
                         if(open == []):
-                            print("Adding the first element to Open Queue")
-                            print(g)
+                            #print("Adding the first element to Open Queue")
+                            #print(g)
                             nextOpen = (b, g, parentIndex,index,cost, valid)
                             open.append(nextOpen)
                         
@@ -265,9 +266,9 @@ def ucs(brd, grd):
                                         break
                                 
                                 if(res):
-                                    print("Board already in Open Queue")
+                                    #print("Board already in Open Queue")
                                     if(open[k][4]> cost):
-                                        print("Found lower cost, keep current node in open and pop the previous node")
+                                        #print("Found lower cost, keep current node in open and pop the previous node")
                                         brdFound = False
                                         valid = True
                                         notvalid = False
@@ -282,8 +283,8 @@ def ucs(brd, grd):
                             
                             #if board was not found after running through all the boards in Open Queu, add the new board to the Open Queue
                             if(brdFound==False):
-                                print("Adding the following child node in the Open Queue")
-                                print(g)
+                                #print("Adding the following child node in the Open Queue")
+                                #print(g)
                                 index = index + 1
                                 nextOpen = (b, g, parentIndex,index,cost,valid)
                                 open.append(nextOpen)
@@ -293,13 +294,13 @@ def ucs(brd, grd):
             if(solution == False):
                 nextMove = []
                 nextGrid = []
-                print("delete NextMove array")
+                #print("delete NextMove array")
                 #append the element from visited queue to closed queue
                 closed+=[visited]
-                print("append visited node to Closed Queue")
+                #print("append visited node to Closed Queue")
                 #append next state in the 'open' queue to visited and delete the same element from the open queue
                 if(open == []):
-                    print("Open Queue Empty, No solution")
+                    #print("Open Queue Empty, No solution")
                     stop = time.time()
                     foundGoal = True
                 else :
@@ -307,31 +308,33 @@ def ucs(brd, grd):
                         closed+=[open[0]]
                         open.pop(0)
                         visited = open[0]
-                        print("The next node in visited:")
-                        print(visited[1])
+                        #print("The next node in visited:")
+                        #print(visited[1])
+                        explored = explored + 1
                         open.pop(0)
-                        print("Open queue first element popped, current lenght:")
-                        print(len(open))
+                        #print("Open queue first element popped, current lenght:")
+                        #print(len(open))
                         nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
-                        print("Open Node into the visited queue")
+                        #print("Open Node into the visited queue")
                     else:
                         visited = open[0]
-                        print("The next node in visited:")
-                        print(visited[1])
+                        #print("The next node in visited:")
+                        #print(visited[1])
+                        explored = explored + 1
                         open.pop(0)
-                        print("Open queue first element popped, current lenght:")
-                        print(len(open))
+                        #print("Open queue first element popped, current lenght:")
+                        #print(len(open))
                         nextMove, nextGrid = board.explore_moves(visited[0], visited[1]) 
-                        print("Open Node into the visited queue")
+                        #print("Open Node into the visited queue")
+            
             elif(solution == True):
                 foundGoal = True
 
     runtime = stop - start
 
-    print("Runtime: %.3f s" % runtime)
     #if solution = True, find path
     #find the actual path by tracking the parent node
-    if(solution == True):
+    if(solution == True and closed != []):
         # for node in closed:
         #     print(node[1])
         #     print(node[2], node[3], node[4])
@@ -347,16 +350,22 @@ def ucs(brd, grd):
         
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, sourceNode)
-        
-        print("Solution path length: %.1d" % (len(path)-1))
-        for p in path:
-            print(p[2], p[3], p[4])
-            print(p[1])
+        pl = (len(path)-1)
+        #print("Solution path length: %.1d" % (len(path)-1))
+        # for p in path:
+        #     print(p[2], p[3], p[4])
+        #     print(p[1])
+            
+    elif(solution == True and closed == []):
+        path = [goalstate]
+        #print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
 
     elif(solution == False):
-        print("No Solution found")
+        #print("No Solution found")
+        pl = 0
     
-    return runtime, (len(path)-1)
+    return runtime, path, pl, explored
     
 def gbfs_h1(brd,grd):
     
@@ -369,6 +378,9 @@ def gbfs_h1(brd,grd):
     added = False
     addOpen = False
     vopen = False
+    
+    explored = 0
+
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -388,7 +400,7 @@ def gbfs_h1(brd,grd):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -401,7 +413,7 @@ def gbfs_h1(brd,grd):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -421,7 +433,7 @@ def gbfs_h1(brd,grd):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -451,7 +463,7 @@ def gbfs_h1(brd,grd):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -489,7 +501,7 @@ def gbfs_h1(brd,grd):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % i)
+                                # print("Adding to the OPEN Queue at index %.1d" % i)
                                 break #end iteration
                             #if h(n) of the node in OPEN queue is equal to the h(n) of the child node
                             #place the child node after, since the path to the child node is longer
@@ -497,7 +509,7 @@ def gbfs_h1(brd,grd):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i+1, child)
                                 added = True
-                                print("Adding to the OPEN Queue at index %.1d" % (i+1))
+                                # print("Adding to the OPEN Queue at index %.1d" % (i+1))
                                 break #end iteration
                                 continue
                             # if h(n) of the child node is greater, continue iteration 
@@ -509,7 +521,7 @@ def gbfs_h1(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h)
                         open+=[child]
-                        print("Adding to the end of OPEN Queue")
+                        # print("Adding to the end of OPEN Queue")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -538,6 +550,7 @@ def gbfs_h1(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
                 print("Moved next node in OPEN to VISITED")
             else:
@@ -549,9 +562,9 @@ def gbfs_h1(brd,grd):
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed!=[]):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -563,9 +576,19 @@ def gbfs_h1(brd,grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
+        # print("The length of the path: %.1d" % (len(path)-1))
+        pl = len(path)-1
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        #print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+
     else:
-        print("No Solution is found")
+        # print("No Solution is found")
+        pl = 0
+
+    return runtime, path, pl, explored
 
 def gbfs_h2(brd,grd):
     
@@ -578,6 +601,9 @@ def gbfs_h2(brd,grd):
     added = False
     addOpen = False
     vopen = False
+
+    explored = 0 
+
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -597,7 +623,7 @@ def gbfs_h2(brd,grd):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -610,7 +636,7 @@ def gbfs_h2(brd,grd):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -630,7 +656,7 @@ def gbfs_h2(brd,grd):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -660,7 +686,7 @@ def gbfs_h2(brd,grd):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -703,7 +729,7 @@ def gbfs_h2(brd,grd):
                             elif(nh == h):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i+1, child)
-                                print("Added child node to OPEN")
+                                # print("Added child node to OPEN")
                                 added = True
                                 break #end iteration
                             # if h(n) of the child node is greater, continue iteration 
@@ -715,7 +741,7 @@ def gbfs_h2(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h)
                         open+=[child]
-                        print("Added child node to OPEN")
+                        # print("Added child node to OPEN")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -744,19 +770,20 @@ def gbfs_h2(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed!=[]):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -768,9 +795,19 @@ def gbfs_h2(brd,grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
+        # print("The length of the path: %.1d" % (len(path)-1))
+        pl = len(path)-1
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        #print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+
     else:
-        print("No Solution is found")
+        # print("No Solution is found")
+        pl = 0
+    
+    return runtime, path, pl, explored
 
 def gbfs_h3(brd,grd,ld):
     
@@ -783,6 +820,9 @@ def gbfs_h3(brd,grd,ld):
     added = False
     addOpen = False
     vopen = False
+
+    explored = 0
+
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -802,7 +842,7 @@ def gbfs_h3(brd,grd,ld):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -815,7 +855,7 @@ def gbfs_h3(brd,grd,ld):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -835,7 +875,7 @@ def gbfs_h3(brd,grd,ld):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -865,7 +905,7 @@ def gbfs_h3(brd,grd,ld):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -908,7 +948,7 @@ def gbfs_h3(brd,grd,ld):
                             elif(nh == h):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i+1, child)
-                                print("Added child node to OPEN")
+                                # print("Added child node to OPEN")
                                 added = True
                                 break #end iteration
                             # if h(n) of the child node is greater, continue iteration 
@@ -920,7 +960,7 @@ def gbfs_h3(brd,grd,ld):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h)
                         open+=[child]
-                        print("Added child node to OPEN")
+                        # print("Added child node to OPEN")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -949,19 +989,20 @@ def gbfs_h3(brd,grd,ld):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed!=[]):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -973,9 +1014,19 @@ def gbfs_h3(brd,grd,ld):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
+        # print("The length of the path: %.1d" % (len(path)-1))
+        pl = len(path)-1
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        #print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+
     else:
-        print("No Solution is found")
+        # print("No Solution is found")
+        pl = 0
+
+    return runtime, path, pl, explored
     
 def gbfs_h4(brd,grd):
     
@@ -988,6 +1039,9 @@ def gbfs_h4(brd,grd):
     added = False
     addOpen = False
     vopen = False
+
+    explored = 0
+
     #index in the closed set to keep track of the path
     parentIndex = 0
     idx = 0
@@ -1007,7 +1061,7 @@ def gbfs_h4(brd,grd):
         #verify if the state in visited is a goal state
         if(board.goal(visited[0]) == True):
             stop = time.time()
-            print("TRUE: Goal Found")
+            # print("TRUE: Goal Found")
             goalstate = visited
             finished = True
             found = True
@@ -1020,7 +1074,7 @@ def gbfs_h4(brd,grd):
         #if there is no next move even though we did not reach the goal, there is no solution
         if(nextMove == []):
             stop = time.time()
-            print("No solution")
+            # print("No solution")
             finished = True
             found = False
             break #stop while loop
@@ -1040,7 +1094,7 @@ def gbfs_h4(brd,grd):
 
                 #verify if the children node is in goal state
                 if(board.goal(b) == True):
-                    print("TRUE: Goal state found")
+                    # print("TRUE: Goal state found")
                     goalstate = (b, g, parentIndex, idx+1, 0)
                     closed+=[goalstate]
                     visited = []
@@ -1070,7 +1124,7 @@ def gbfs_h4(brd,grd):
                     if(res == False):
                         vopen = True
                     else:
-                        print("***Board Already in CLOSED Queue***Skipping")
+                        # print("***Board Already in CLOSED Queue***Skipping")
                         vopen = False
 
                     #verifying open queue
@@ -1113,7 +1167,7 @@ def gbfs_h4(brd,grd):
                             elif(nh == h):
                                 child = (b, g, parentIndex, idx, h)
                                 open.insert(i+1, child)
-                                print("Added child node to OPEN")
+                                # print("Added child node to OPEN")
                                 added = True
                                 break #end iteration
                             # if h(n) of the child node is greater, continue iteration 
@@ -1125,7 +1179,7 @@ def gbfs_h4(brd,grd):
                     if(added == False and addOpen == True and vopen == True):
                         child =(b, g, parentIndex, idx, h)
                         open+=[child]
-                        print("Added child node to OPEN")
+                        # print("Added child node to OPEN")
                     
                     #if the same node is already in OPEN queue, the path of the child node will be longer
                     # child node appended in CLOSED Queue
@@ -1154,19 +1208,20 @@ def gbfs_h4(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
             else:
                 stop = time.time()
-                print("OPEN queue empty. No solution")
+                # print("OPEN queue empty. No solution")
                 finished = True
                 found = False
 
 
     #as result, we should display:
     runtime = stop-start
-    print("Runtime: %.3f s" % runtime)
+    # print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed!=[]):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -1178,9 +1233,19 @@ def gbfs_h4(brd,grd):
         #lastly, we insert the initial_state in the beginning of the path
         path.insert(0, source)
 
-        print("The length of the path: %.1d" % (len(path)-1))
+        # print("The length of the path: %.1d" % (len(path)-1))
+        pl = len(path)-1
+    
+    elif(found == True and closed == []):
+        path = [goalstate]
+        #print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
+
     else:
-        print("No Solution is found")
+        # print("No Solution is found")
+        pl = 0
+    
+    return runtime, path, pl, explored
 
 
 # A Star algorithm
@@ -1197,6 +1262,7 @@ def astar_h1(brd,grd):
     cost = 0
     valid = True
     path = []
+    explored = 0
     
     #index in the closed set to keep track of the path
     parentIndex = 0
@@ -1374,6 +1440,7 @@ def astar_h1(brd,grd):
                 pd = open[0][2]
                 hd = open[0][4]
                 visited = (bd, gd, pd, idx, hd)
+                explored = explored + 1
                 open.pop(0)
                 #print("Moved next node in OPEN to VISITED")
             else:
@@ -1387,7 +1454,7 @@ def astar_h1(brd,grd):
     runtime = stop-start
     print("Runtime: %.3f s" % runtime)
     #find the actual path by tracking the parent node
-    if(found == True):
+    if(found == True and closed != []):
         path = [goalstate]
         currentNode = goalstate
         while(currentNode[3] != 0):
@@ -1401,9 +1468,16 @@ def astar_h1(brd,grd):
 
         print("The length of the path: %.1d" % (len(path)-1))
         print(path)
+        pl = len(path) - 1
+    elif(found == True and closed == []):
+        path = [goalstate]
+        print("The length of the path:  %.1d" % (len(path)))
+        pl = len(path)
     else:
         print("No Solution is found")
-    return runtime, (len(path)-1)
+        pl = 0
+    
+    return runtime, pl, explored
         
 def astar_h2(brd,grd):
     

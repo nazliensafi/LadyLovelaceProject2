@@ -144,7 +144,7 @@ def strToBoard(puzzleArr):
         car_name = []
 
         #To delete after testing the readfile()
-        print("puzzle string: " + puzzle)
+        # print("puzzle string: " + puzzle)
         a = np.empty((6, 6), dtype=object)
         lu = np.empty((6, 6), dtype='str') # look-up board to use as a helper in explore_moves
 
@@ -170,8 +170,8 @@ def strToBoard(puzzleArr):
             else:
                 car_length_dict[char] = car_count
 
-        print("\nCar Length Dictionary: ")
-        print(car_length_dict)
+        # print("\nCar Length Dictionary: ")
+        # print(car_length_dict)
 
         # collects car orientation in car_orint_dict with keys : car chars
         for i in range(35):
@@ -181,8 +181,8 @@ def strToBoard(puzzleArr):
                 car_orient_dict[puzzle[i+1]] = 1
 
         del car_orient_dict['.']
-        print("\nCar Orientation Dictionary: ")
-        print(car_orient_dict)
+        # print("\nCar Orientation Dictionary: ")
+        # print(car_orient_dict)
 
         # returns a dictionary called car_fuel_dict containing char representing cars and int representing fuel level
         # if the original puzzle does not contain specification of initial fuel_level
@@ -205,10 +205,10 @@ def strToBoard(puzzleArr):
                     car_fuel_dict[c] = 100
 
         del car_fuel_dict['.']
-        print("\nCar Fuel Dictionary: ")
-        print(car_fuel_dict)
+        # print("\nCar Fuel Dictionary: ")
+        # print(car_fuel_dict)
 
-        print("puzzle in 2D")
+        # print("puzzle in 2D")
 
 
         k = 0
@@ -218,7 +218,7 @@ def strToBoard(puzzleArr):
             for a_col in range(6):
                 if puzzle[k] == ".":
                     lu[a_row][a_col] = puzzle[k]
-                    print(".", end =" ")
+                    # print(".", end =" ")
                 else:
                     car = Car.__new__(Car) #create an empty Car object
                     car.name = puzzle[k] #set the car name
@@ -231,12 +231,12 @@ def strToBoard(puzzleArr):
                         car.x, car.y = a_row, a_col
                         car_coord_dict[puzzle[k]] = (a_row, a_col)
                         chars += puzzle[k]
-                    print(a[a_row][a_col].name,   end =" ")
+                    # print(a[a_row][a_col].name,   end =" ")
                 k += 1
-            print("\n")
+            # print("\n")
 
-        print("\nCar Coordinate Dictionary: ")
-        print(car_coord_dict)
+        # print("\nCar Coordinate Dictionary: ")
+        # print(car_coord_dict)
 
         # Uncomment to check if the Car objects are properly instantiated
         # for a_row in range(6):
@@ -296,9 +296,9 @@ def explore_moves(b, g):
                     for j in range(length):  # add to the head to the left
                         new_grid[x][y-step_l+j] = car.name
                         #print(car.name, y-step_l+j)
-                    print(car.name, "left", step_l)
+                    # print(car.name, "left", step_l)
                     new_grids.append(new_grid)
-                    print_2d_array(new_grid)
+                    # print_2d_array(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
                     fuel = fuel - step_l
@@ -309,7 +309,7 @@ def explore_moves(b, g):
                             c.x = x
                             c.y = y-step_l
                             new_boards.append(new_board)
-                            print(new_board.cars)
+                            #print(new_board.cars)
                             #print("next")
                             step_l += 1
                             del new_board
@@ -328,8 +328,8 @@ def explore_moves(b, g):
                     for i in range(length):
                         #print(car.name, "at ", y+step_r-i)
                         new_grid[x][y+length-1+step_r-i] = car.name
-                    print(car.name, "right", step_r)
-                    print_2d_array(new_grid)
+                    #print(car.name, "right", step_r)
+                    #print_2d_array(new_grid)
                     new_grids.append(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
@@ -341,7 +341,7 @@ def explore_moves(b, g):
                             c.x = x
                             c.y = y+step_r
                             new_boards.append(new_board)
-                            print(new_board.cars)
+                            #print(new_board.cars)
                             #print("next")
                             step_r += 1
                             del new_board
@@ -358,15 +358,15 @@ def explore_moves(b, g):
                     #print("tail=", x+length-1-step_u, "x=", x - step_u, "step_u =", step_u)
 
                     for j in range(length):  # erase the tail upwards
-                        print(". at", x+length-1-j)
+                        #print(". at", x+length-1-j)
                         new_grid[x+length-1-j][y] = '.'
                     for j in range(length):  # add to the head upwards
                         new_grid[x-step_u+j][y] = car.name
-                        print(car.name, x-step_u+j)
+                        #print(car.name, x-step_u+j)
 
-                    print(car.name, "up", step_u)
+                    #print(car.name, "up", step_u)
                     new_grids.append(new_grid)
-                    print_2d_array(new_grid)
+                    #print_2d_array(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
                     fuel = fuel - step_u
@@ -377,7 +377,7 @@ def explore_moves(b, g):
                             c.x = x-step_u
                             c.y = y
                             new_boards.append(new_board)
-                            print(new_board.cars)
+                            #print(new_board.cars)
                             #print("next")
                             step_u += 1
                             del new_board
@@ -398,8 +398,8 @@ def explore_moves(b, g):
                     for i in range(length):
                         #print(car.name, "at ", x+step_d-i)
                         new_grid[x+length-1+step_d-i][y] = car.name
-                    print(car.name, "down", step_d)
-                    print_2d_array(new_grid)
+                    #print(car.name, "down", step_d)
+                    #print_2d_array(new_grid)
                     new_grids.append(new_grid)
                     del new_grid
                     # update the board object (fuel and new x and y of the head) append new_boards
@@ -411,7 +411,7 @@ def explore_moves(b, g):
                             c.x = x+step_d
                             c.y = y
                             new_boards.append(new_board)
-                            print(new_board.cars)
+                            #print(new_board.cars)
                             #print("next")
                             step_d += 1
                             del new_board
@@ -719,8 +719,9 @@ def drawBoard(self):
             str = str + board2D[i][j] + " "
         boardToPrint+=[str]
 
-    for line in boardToPrint:
-        print(line)
+    # for line in boardToPrint:
+    #     print(line)
+    return boardToPrint
 
 def brdToGrd(self):
 

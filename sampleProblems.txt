@@ -4,14 +4,14 @@
 #2 medium, solution in 14 moves
 BBICCLG.IJKLGAAJKMGHDDDM.H.....FF...
 
-#3 hard, solution in 30 moves
-BBCCK...I.KL..IAALEEIJ.LH..JFFHGGG..
+#3 no solution
+BBCCK...I.KL..IAALEEIJ.LH..JFFHGGG.. L0
 
 #4 extreme, Error: no solution found after 0.08 seconds
 BBB..K..H..K..HAAKCCIJDDG.IJEEGFFF.. B0 C3
 
-#5 extreme, solution in 39 moves
-.BBBCC..JDDLAAJ.KLIEE.KMIFF..MGGHHHM
+#5 no solution
+.BBBCC..JDDLAAJ.KLIEE.KMIFF..MGGHHHM C0 L0
 
 #6 No Solution
 TDD.RRT..L.MAA.L.M.FFF..G.IOOTG.I..T D0 G50
@@ -31,7 +31,8 @@ BBICCLG.IJKLGAAJKMGHDDDM.H.....FF... F0 C0
 #11 solution in 3 move
 ...CCCMM...LAA...LK..GGGK..DD.......
 
-#12 solution in 3 moves...CCCII..M.AA..MKL..GGKL..EEE......
+#12 solution in 3 moves
+...CCCII..M.AA..MKL..GGKL..EEE......
 
 #13
 I..CCLIFF..LIAA..M.D...M.D.EEE......
@@ -54,5 +55,71 @@ CC.KBB.DDKL.AAMKL...M...IF.HH.IFPP..
 #19 solution in 10 moves
 ..KMMLGGK.FL.AA.FL.I..C..I..C..IDDBB
 
-#20 solution in 10 moves
-.DD.BB..CCK.AAIJKLM.IJKLMHQQ.L.HPPRR
+#20 no solution
+.DD.BB..CCK.AAIJKLM.IJKLMHQQ.L.HPPRR K0 C0 B20
+
+.D.CCC.D..B...AABF.G..BF.GEEE.HHH...
+
+...B.....B..AAAB.GE.DD.GE.CCC..FFF..
+
+G..HHHGFEE.B.FCAAB..C..BDDDK.....K..
+
+..E...F.E...FAAABBF..C..GGGC...HHC..
+
+....B.FF..B.D.AAB.DE..CC.E.....E....
+
+#27 No solution
+.H..I..HBCI.AABC.DG.BEEDG..F..G..F.. B0 C0
+
+.I...B.I...BHHCAAB..C.EE.DDDF.GGG.F.
+
+BBBC....DC....DAAAFFDEEE.GGGH.III.H.
+
+EEE.F.C...F.CAAABBC.D.....DGGG..D...
+
+#31 No Solution
+E....BEDD..BE.CAAB..C...FFC......GGG B0
+
+...EEE.....C..AABCHH..B..G..B..GFFF.
+
+IGGG..I..BC.AAABCD...B.D.F...D.F.EEE
+
+#33 No solution cannot move B and H
+DD..HH.C...B.CAAAB.C....FEEE..F..GGG B0 H0
+
+...B..C..B..CAAB...EDDD..E...G.FF..G
+
+#35 No solution
+.HH.D...B.DEAABCDE..BC.EI.FF..I...GG F0 C0 D2
+
+..BC....BCDDAAB.....EEEF.....F..GGGF
+
+..B.....B...AAB...CCC..D.....D.....D
+
+..B.....B...AAB.......C..DEEC..D..C.
+
+............AA.B..CC.BD..E.BD..EFFD.
+
+#40 No solution
+BBB..C..D..C..DAAC..EFGG..EF....EHH. C0
+
+.BCC.D.BEF.DAAEF.GHHIJ.G..IJ........
+
+F.BGGGF.B....AAC...D.C...DHHHE.....E
+
+.EEEDD..BFFF..BAAC.....CGGGHHH......
+
+EFFFDDE....BEAA..BCCG.....GHHH..G...
+
+EBBFFFE.....AA...CG....CGDDHHHG.....
+
+...L.....LCCMAA..KM.FFFK..B..K..BGGG C0 
+
+#47 No solution
+.....EBBFFFEAAC...H.C...HGGGDDH..... C0
+
+...DDD.FFFEEGGGAAB.....B..CHHH..C...
+
+.DDDEE.BBFFFAA...C.....CGGGHHH......
+
+...E.BFFFE.BAAC...H.C...HGGGDDH.....
