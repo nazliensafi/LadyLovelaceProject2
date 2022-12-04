@@ -1,5 +1,6 @@
 # LadyLovelaceProject2
 comp472 mini project 2, Fall 2022
+URL: https://github.com/nazliensafi/LadyLovelaceProject2/blob/main/README.md
 
 An implementation of Rush Hour game and solvers
 
