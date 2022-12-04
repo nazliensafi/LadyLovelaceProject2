@@ -1,0 +1,942 @@
+Problem puzzle # 1
+Initial Board Configuration: ...CC.DD.K.LIAAK.LI.JEEMFFJ..M.GGG..
+. . . C C . 
+D D . K . L 
+I A A K . L 
+I . J E E M 
+F F J . . M 
+. G G G . . 
+
+Car Fuel Available: 
+G : 100 K : 100 M : 100 E : 100 L : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:0.02194380760192871 s
+Search Path Length: 13
+Solution path length: 4
+
+Final Solution Board
+C C . K . L 
+D D . K . L 
+I . . . A A 
+I . J E E M 
+F F J . . M 
+. G G G . . 
+
+Problem puzzle # 2
+Initial Board Configuration: BBICCLG.IJKLGAAJKMGHDDDM.H.....FF...
+B B I C C L 
+G . I J K L 
+G A A J K M 
+G H D D D M 
+. H . . . . 
+. F F . . . 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 H : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:196.34207272529602 s
+Search Path Length: 4676
+Solution path length: 16
+
+Final Solution Board
+G B B C C L 
+G . . . . L 
+G . . . A A 
+D D D J K M 
+. H I J K M 
+. H I F F . 
+
+Problem puzzle # 3
+Initial Board Configuration: BBCCK...I.KL..IAALEEIJ.LH..JFFHGGG.. L0
+B B C C K . 
+. . I . K L 
+. . I A A L 
+E E I J . L 
+H . . J F F 
+H G G G . . 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 E : 100 L : 0 H : 100 C : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:0.002991914749145508 s
+Search Path Length: 5
+No solution
+Problem puzzle # 4
+Initial Board Configuration: BBB..K..H..K..HAAKCCIJDDG.IJEEGFFF.. B0 C3
+B B B . . K 
+. . H . . K 
+. . H A A K 
+C C I J D D 
+G . I J E E 
+G F F F . . 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 0 E : 100 H : 100 C : 3 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:0.0009970664978027344 s
+Search Path Length: 2
+No solution
+Problem puzzle # 5
+Initial Board Configuration: .BBBCC..JDDLAAJ.KLIEE.KMIFF..MGGHHHM C0 L0
+. B B B C C 
+. . J D D L 
+A A J . K L 
+I E E . K M 
+I F F . . M 
+G G H H H M 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 E : 100 L : 0 H : 100 C : 0 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:0.016954660415649414 s
+Search Path Length: 19
+No solution
+Problem puzzle # 6
+Initial Board Configuration: TDD.RRT..L.MAA.L.M.FFF..G.IOOTG.I..T D0 G50
+T D D . R R 
+T . . L . M 
+A A . L . M 
+T F F F . . 
+G . I O O . 
+G . I . . . 
+
+Car Fuel Available: 
+G : 5 I : 100 M : 100 L : 100 R : 100 D : 0 O : 100 T : 100 A : 100 F : 100 
+Runtime:9.115629434585571 s
+Search Path Length: 1041
+No solution
+Problem puzzle # 7
+Initial Board Configuration: ...CCCMM...LAA...LK.GG..K..BBB...FFF
+. . . C C C 
+M M . . . L 
+A A . . . L 
+K . G G . . 
+K . . B B B 
+. . . F F F 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 A : 100 F : 100 
+Runtime:0.7340362071990967 s
+Search Path Length: 118
+Solution path length: 6
+
+Final Solution Board
+. . C C C L 
+M M . . . L 
+. . . . A A 
+. G G . . . 
+K . . B B B 
+K . . F F F 
+
+Problem puzzle # 8
+Initial Board Configuration: ...L.....LCCMAA..KM.FFFK..B..K..BGGG K0
+. . . L . . 
+. . . L C C 
+M A A . . K 
+M . F F F K 
+. . B . . K 
+. . B G G G 
+
+Car Fuel Available: 
+G : 100 K : 0 B : 100 M : 100 L : 100 C : 100 A : 100 F : 100 
+Runtime:0.7709388732910156 s
+Search Path Length: 243
+No solution
+Problem puzzle # 9
+Initial Board Configuration: ...L.....LCCMAA..KM.FFFK..B..K..BGGG 
+. . . L . . 
+. . . L C C 
+M A A . . K 
+M . F F F K 
+. . B . . K 
+. . B G G G 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 A : 100 F : 100 
+Runtime:10.847000122070312 s
+Search Path Length: 888
+Solution path length: 19
+
+Final Solution Board
+. . B L . . 
+C C B L . . 
+. . . . A A 
+M F F F . K 
+M . . . . K 
+. G G G . K 
+
+Problem puzzle # 10
+Initial Board Configuration: BBICCLG.IJKLGAAJKMGHDDDM.H.....FF... F0 C0
+B B I C C L 
+G . I J K L 
+G A A J K M 
+G H D D D M 
+. H . . . . 
+. F F . . . 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 H : 100 C : 0 D : 100 I : 100 A : 100 J : 100 F : 0 
+Runtime:0.07480001449584961 s
+Search Path Length: 69
+No solution
+Problem puzzle # 11
+Initial Board Configuration: ...CCCMM...LAA...LK..GGGK..DD.......
+. . . C C C 
+M M . . . L 
+A A . . . L 
+K . . G G G 
+K . . D D . 
+. . . . . . 
+
+Car Fuel Available: 
+G : 100 K : 100 M : 100 L : 100 C : 100 D : 100 A : 100 
+Runtime:0.14261865615844727 s
+Search Path Length: 35
+Solution path length: 5
+
+Final Solution Board
+. . C C C L 
+. M M . . L 
+. . . . A A 
+K . . G G G 
+K . . D D . 
+. . . . . . 
+
+Problem puzzle # 12
+Initial Board Configuration: ...CCCII..M.AA..MKL..GGKL..EEE......
+. . . C C C 
+I I . . M . 
+A A . . M K 
+L . . G G K 
+L . . E E E 
+. . . . . . 
+
+Car Fuel Available: 
+G : 100 K : 100 M : 100 E : 100 L : 100 C : 100 I : 100 A : 100 
+Runtime:24.581281423568726 s
+Search Path Length: 1205
+Solution path length: 7
+
+Final Solution Board
+. C C C M K 
+I I . . M K 
+L . . . A A 
+L . . G G . 
+E E E . . . 
+. . . . . . 
+
+Problem puzzle # 13
+Initial Board Configuration: I..CCLIFF..LIAA..M.D...M.D.EEE......
+I . . C C L 
+I F F . . L 
+I A A . . M 
+. D . . . M 
+. D . E E E 
+. . . . . . 
+
+Car Fuel Available: 
+M : 100 E : 100 L : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
+Runtime:0.006980419158935547 s
+Search Path Length: 4
+Solution path length: 3
+
+Final Solution Board
+I . . C C L 
+I F F . . L 
+I . . . A A 
+. D . . . . 
+. D E E E M 
+. . . . . M 
+
+Problem puzzle # 14
+Initial Board Configuration: CC..LLI...KMIAAGKMB..G..B..DD.......
+C C . . L L 
+I . . . K M 
+I A A G K M 
+B . . G . . 
+B . . D D . 
+. . . . . . 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 
+Runtime:1.393275260925293 s
+Search Path Length: 228
+Solution path length: 7
+
+Final Solution Board
+C C . G L L 
+I . . G . . 
+I . . . A A 
+. . . . K M 
+B . D D K M 
+B . . . . . 
+
+Problem puzzle # 15
+Initial Board Configuration: CC.KBB.DDKL.AAMKL...M...IF.HH.IFPP..
+C C . K B B 
+. D D K L . 
+A A M K L . 
+. . M . . . 
+I F . H H . 
+I F P P . . 
+
+Car Fuel Available: 
+K : 100 B : 100 M : 100 L : 100 H : 100 C : 100 D : 100 P : 100 I : 100 A : 100 F : 100 
+Runtime:20.655776023864746 s
+Search Path Length: 1162
+Solution path length: 7
+
+Final Solution Board
+C C B B L . 
+. D D . L . 
+. . . . A A 
+. . . K . . 
+I F M K H H 
+I F M K P P 
+
+Problem puzzle # 16
+Initial Board Configuration: ..DD.K.....K.AA..K..MLCCF.ML..F..LBB
+. . D D . K 
+. . . . . K 
+. A A . . K 
+. . M L C C 
+F . M L . . 
+F . . L B B 
+
+Car Fuel Available: 
+K : 100 B : 100 M : 100 L : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:101.77789378166199 s
+Search Path Length: 3360
+Solution path length: 11
+
+Final Solution Board
+D D . . . . 
+F . . . . . 
+F . . . A A 
+C C M L . K 
+. . M L . K 
+B B . L . K 
+
+Problem puzzle # 17
+Initial Board Configuration: ..MMMKL..GFKLAAGFKLIJCCC.IJ.....DD.. 
+. . M M M K 
+L . . G F K 
+L A A G F K 
+L I J C C C 
+. I J . . . 
+. . D D . . 
+
+Car Fuel Available: 
+G : 100 K : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:8.12228512763977 s
+Search Path Length: 736
+Solution path length: 11
+
+Final Solution Board
+M M M G F . 
+. I J G F . 
+L I J . A A 
+L . C C C K 
+L . . . . K 
+. D D . . K 
+
+Problem puzzle # 18
+Initial Board Configuration: ..KK.L...CCL.AA..LGGMFII.DMF...DM.JJ
+. . K K . L 
+. . . C C L 
+. A A . . L 
+G G M F I I 
+. D M F . . 
+. D M . J J 
+
+Car Fuel Available: 
+G : 100 K : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:6.0189080238342285 s
+Search Path Length: 710
+Solution path length: 7
+
+Final Solution Board
+K K . F . . 
+. C C F . . 
+. . . . A A 
+G G M I I L 
+. D M . . L 
+. D M J J L 
+
+Problem puzzle # 19
+Initial Board Configuration: ..KMMLGGK.FL.AA.FL.I..C..I..C..IDDBB
+. . K M M L 
+G G K . F L 
+. A A . F L 
+. I . . C . 
+. I . . C . 
+. I D D B B 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
+Runtime:6.045835494995117 s
+Search Path Length: 775
+Solution path length: 12
+
+Final Solution Board
+. . M M F . 
+. . G G F . 
+. I . . A A 
+. I . . C L 
+. I K . C L 
+D D K B B L 
+
+Problem puzzle # 20
+Initial Board Configuration: .DD.BB..CCK.AAIJKLM.IJKLMHQQ.L.HPPRR K0 C0 B20
+. D D . B B 
+. . C C K . 
+A A I J K L 
+M . I J K L 
+M H Q Q . L 
+. H P P R R 
+
+Car Fuel Available: 
+K : 0 B : 2 Q : 100 M : 100 L : 100 R : 100 H : 100 C : 0 D : 100 P : 100 I : 100 A : 100 J : 100 
+Runtime:277.90002632141113 s
+Search Path Length: 5690
+No solution
+Problem puzzle # 21
+Initial Board Configuration: .D.CCC.D..B...AABF.G..BF.GEEE.HHH...
+. D . C C C 
+. D . . B . 
+. . A A B F 
+. G . . B F 
+. G E E E . 
+H H H . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.702122688293457 s
+Search Path Length: 164
+Solution path length: 5
+
+Final Solution Board
+. D . C C C 
+. D . . . . 
+. G . . A A 
+. G . . B F 
+. E E E B F 
+. H H H B . 
+
+Problem puzzle # 22
+Initial Board Configuration: ...B.....B..AAAB.GE.DD.GE.CCC..FFF..
+. . . B . . 
+. . . B . . 
+A A A B . G 
+E . D D . G 
+E . C C C . 
+. F F F . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:7.59070611000061 s
+Search Path Length: 525
+No solution
+Problem puzzle # 23
+Initial Board Configuration: G..HHHGFEE.B.FCAAB..C..BDDDK.....K..
+G . . H H H 
+G F E E . B 
+. F C A A B 
+. . C . . B 
+D D D K . . 
+. . . K . . 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.00997304916381836 s
+Search Path Length: 8
+Solution path length: 4
+
+Final Solution Board
+. . . H H H 
+G F E E . . 
+G F C . A A 
+. . C K . B 
+D D D K . B 
+. . . . . B 
+
+Problem puzzle # 24
+Initial Board Configuration: ..E...F.E...FAAABBF..C..GGGC...HHC..
+. . E . . . 
+F . E . . . 
+F A A A B B 
+F . . C . . 
+G G G C . . 
+. H H C . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 A : 100 F : 100 
+Runtime:0.000997304916381836 s
+Search Path Length: 3
+No solution
+Problem puzzle # 25
+Initial Board Configuration: ....B.FF..B.D.AAB.DE..CC.E.....E....
+. . . . B . 
+F F . . B . 
+D . A A B . 
+D E . . C C 
+. E . . . . 
+. E . . . . 
+
+Car Fuel Available: 
+B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.3480699062347412 s
+Search Path Length: 126
+Solution path length: 6
+
+Final Solution Board
+. . . . . . 
+F F . . . . 
+. E . . A A 
+D E C C B . 
+D E . . B . 
+. . . . B . 
+
+Problem puzzle # 26
+Initial Board Configuration: .H..I..HBCI.AABC.DG.BEEDG..F..G..F.. B0 C0
+. H . . I . 
+. H B C I . 
+A A B C . D 
+G . B E E D 
+G . . F . . 
+G . . F . . 
+
+Car Fuel Available: 
+G : 100 B : 0 E : 100 H : 100 C : 0 D : 100 I : 100 A : 100 F : 100 
+Runtime:0.014959573745727539 s
+Search Path Length: 21
+No solution
+Problem puzzle # 27
+Initial Board Configuration: .I...B.I...BHHCAAB..C.EE.DDDF.GGG.F.
+. I . . . B 
+. I . . . B 
+H H C A A B 
+. . C . E E 
+. D D D F . 
+G G G . F . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
+Runtime:0.012965202331542969 s
+Search Path Length: 12
+Solution path length: 4
+
+Final Solution Board
+. I . . . . 
+. I . . . . 
+H H C . A A 
+. . C E E B 
+. D D D F B 
+. G G G F B 
+
+Problem puzzle # 28
+Initial Board Configuration: BBBC....DC....DAAAFFDEEE.GGGH.III.H.
+B B B C . . 
+. . D C . . 
+. . D A A A 
+F F D E E E 
+. G G G H . 
+I I I . H . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
+Runtime:0.0 s
+Search Path Length: 0
+Solution path length: 1
+
+Final Solution Board
+B B B C . . 
+. . D C . . 
+. . D A A A 
+F F D E E E 
+. G G G H . 
+I I I . H . 
+
+Problem puzzle # 29
+Initial Board Configuration: EEE.F.C...F.CAAABBC.D.....DGGG..D...
+E E E . F . 
+C . . . F . 
+C A A A B B 
+C . D . . . 
+. . D G G G 
+. . D . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.0019948482513427734 s
+Search Path Length: 6
+No solution
+Problem puzzle # 30
+Initial Board Configuration: E....BEDD..BE.CAAB..C...FFC......GGG B0
+E . . . . B 
+E D D . . B 
+E . C A A B 
+. . C . . . 
+F F C . . . 
+. . . G G G 
+
+Car Fuel Available: 
+G : 100 B : 0 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:3.9424595832824707 s
+Search Path Length: 501
+No solution
+Problem puzzle # 31
+Initial Board Configuration: ...EEE.....C..AABCHH..B..G..B..GFFF.
+. . . E E E 
+. . . . . C 
+. . A A B C 
+H H . . B . 
+. G . . B . 
+. G F F F . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 A : 100 F : 100 
+Runtime:16.665444135665894 s
+Search Path Length: 1151
+Solution path length: 9
+
+Final Solution Board
+. . . E E E 
+. G . . . . 
+. G . . A A 
+. . H H B C 
+. . . . B C 
+F F F . B . 
+
+Problem puzzle # 32
+Initial Board Configuration: IGGG..I..BC.AAABCD...B.D.F...D.F.EEE
+I G G G . . 
+I . . B C . 
+A A A B C D 
+. . . B . D 
+. F . . . D 
+. F . E E E 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 C : 100 D : 100 I : 100 A : 100 F : 100 
+Runtime:1.5289125442504883 s
+Search Path Length: 303
+Solution path length: 8
+
+Final Solution Board
+I G G G C . 
+I . . . C . 
+. . . A A A 
+. F . B . D 
+. F . B . D 
+E E E B . D 
+
+Problem puzzle # 33
+Initial Board Configuration: DD..HH.C...B.CAAAB.C....FEEE..F..GGG B0 H0
+D D . . H H 
+. C . . . B 
+. C A A A B 
+. C . . . . 
+F E E E . . 
+F . . G G G 
+
+Car Fuel Available: 
+G : 100 B : 0 E : 100 H : 0 C : 100 D : 100 A : 100 F : 100 
+Runtime:3.296187400817871 s
+Search Path Length: 509
+No solution
+Problem puzzle # 34
+Initial Board Configuration: ...B..C..B..CAAB...EDDD..E...G.FF..G
+. . . B . . 
+C . . B . . 
+C A A B . . 
+. E D D D . 
+. E . . . G 
+. F F . . G 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:7.802140474319458 s
+Search Path Length: 635
+Solution path length: 9
+
+Final Solution Board
+C . . . . . 
+C . . . . . 
+. . . . A A 
+D D D B . G 
+. E . B . G 
+. E . B F F 
+
+Problem puzzle # 35
+Initial Board Configuration: .HH.D...B.DEAABCDE..BC.EI.FF..I...GG F0 C0 D2
+. H H . D . 
+. . B . D E 
+A A B C D E 
+. . B C . E 
+I . F F . . 
+I . . . G G 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 0 D : 2 I : 100 A : 100 F : 0 
+Runtime:6.801815032958984 s
+Search Path Length: 793
+No solution
+Problem puzzle # 36
+Initial Board Configuration: ..BC....BCDDAAB.....EEEF.....F..GGGF
+. . B C . . 
+. . B C D D 
+A A B . . . 
+. . E E E F 
+. . . . . F 
+. . G G G F 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.2812473773956299 s
+Search Path Length: 106
+No solution
+Problem puzzle # 37
+Initial Board Configuration: ..B.....B...AAB...CCC..D.....D.....D
+. . B . . . 
+. . B . . . 
+A A B . . . 
+C C C . . D 
+. . . . . D 
+. . . . . D 
+
+Car Fuel Available: 
+B : 100 C : 100 D : 100 A : 100 
+Runtime:0.006981849670410156 s
+Search Path Length: 12
+No solution
+Problem puzzle # 38
+Initial Board Configuration: ..B.....B...AAB.......C..DEEC..D..C.
+. . B . . . 
+. . B . . . 
+A A B . . . 
+. . . . C . 
+. D E E C . 
+. D . . C . 
+
+Car Fuel Available: 
+B : 100 E : 100 C : 100 D : 100 A : 100 
+Runtime:0.1904904842376709 s
+Search Path Length: 117
+Solution path length: 14
+
+Final Solution Board
+. D . . . . 
+. D . . . . 
+. . . . A A 
+. . B . C . 
+E E B . C . 
+. . B . C . 
+
+Problem puzzle # 39
+Initial Board Configuration: ............AA.B..CC.BD..E.BD..EFFD.
+. . . . . . 
+. . . . . . 
+A A . B . . 
+C C . B D . 
+. E . B D . 
+. E F F D . 
+
+Car Fuel Available: 
+B : 100 E : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:1.4361603260040283 s
+Search Path Length: 273
+No solution
+Problem puzzle # 40
+Initial Board Configuration: BBB..C..D..C..DAAC..EFGG..EF....EHH. C0
+B B B . . C 
+. . D . . C 
+. . D A A C 
+. . E F G G 
+. . E F . . 
+. . E H H . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 0 D : 100 A : 100 F : 100 
+Runtime:0.00498652458190918 s
+Search Path Length: 11
+No solution
+Problem puzzle # 41
+Initial Board Configuration: .BCC.D.BEF.DAAEF.GHHIJ.G..IJ........
+. B C C . D 
+. B E F . D 
+A A E F . G 
+H H I J . G 
+. . I J . . 
+. . . . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 I : 100 A : 100 J : 100 F : 100 
+Runtime:38.57387161254883 s
+Search Path Length: 2015
+Solution path length: 20
+
+Final Solution Board
+C C E F . D 
+. . E F . D 
+. . . . A A 
+. H H . . G 
+. B I J . G 
+. B I J . . 
+
+Problem puzzle # 42
+Initial Board Configuration: F.BGGGF.B....AAC...D.C...DHHHE.....E
+F . B G G G 
+F . B . . . 
+. A A C . . 
+. D . C . . 
+. D H H H E 
+. . . . . E 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:13.246584177017212 s
+Search Path Length: 1135
+Solution path length: 12
+
+Final Solution Board
+G G G C . E 
+. . . C . E 
+. . . . A A 
+. . B . . . 
+F D B H H H 
+F D . . . . 
+
+Problem puzzle # 43
+Initial Board Configuration: .EEEDD..BFFF..BAAC.....CGGGHHH......
+. E E E D D 
+. . B F F F 
+. . B A A C 
+. . . . . C 
+G G G H H H 
+. . . . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.01695418357849121 s
+Search Path Length: 26
+No solution
+Problem puzzle # 44
+Initial Board Configuration: EFFFDDE....BEAA..BCCG.....GHHH..G...
+E F F F D D 
+E . . . . B 
+E A A . . B 
+C C G . . . 
+. . G H H H 
+. . G . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.004987001419067383 s
+Search Path Length: 9
+No solution
+Problem puzzle # 45
+Initial Board Configuration: EBBFFFE.....AA...CG....CGDDHHHG.....
+E B B F F F 
+E . . . . . 
+A A . . . C 
+G . . . . C 
+G D D H H H 
+G . . . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.023935794830322266 s
+Search Path Length: 34
+Solution path length: 7
+
+Final Solution Board
+B B F F F C 
+E . . . . C 
+E . . . A A 
+G . . . . . 
+G D D H H H 
+G . . . . . 
+
+Problem puzzle # 46
+Initial Board Configuration: ...L.....LCCMAA..KM.FFFK..B..K..BGGG C0 
+. . . L . . 
+. . . L C C 
+M A A . . K 
+M . F F F K 
+. . B . . K 
+. . B G G G 
+
+Car Fuel Available: 
+G : 100 K : 100 B : 100 M : 100 L : 100 C : 0 A : 100 F : 100 
+Runtime:0.1296539306640625 s
+Search Path Length: 83
+No solution
+Problem puzzle # 47
+Initial Board Configuration: .....EBBFFFEAAC...H.C...HGGGDDH..... C0
+. . . . . E 
+B B F F F E 
+A A C . . . 
+H . C . . . 
+H G G G D D 
+H . . . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 0 D : 100 A : 100 F : 100 
+Runtime:0.0009968280792236328 s
+Search Path Length: 2
+No solution
+Problem puzzle # 48
+Initial Board Configuration: ...DDD.FFFEEGGGAAB.....B..CHHH..C...
+. . . D D D 
+. F F F E E 
+G G G A A B 
+. . . . . B 
+. . C H H H 
+. . C . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.026927947998046875 s
+Search Path Length: 35
+Solution path length: 6
+
+Final Solution Board
+. D D D . B 
+F F F E E B 
+G G G . A A 
+. . . . . . 
+. . C H H H 
+. . C . . . 
+
+Problem puzzle # 49
+Initial Board Configuration: .DDDEE.BBFFFAA...C.....CGGGHHH......
+. D D D E E 
+. B B F F F 
+A A . . . C 
+. . . . . C 
+G G G H H H 
+. . . . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.0359041690826416 s
+Search Path Length: 40
+Solution path length: 5
+
+Final Solution Board
+D D D E E C 
+B B F F F C 
+. . . . A A 
+. . . . . . 
+G G G H H H 
+. . . . . . 
+
+Problem puzzle # 50
+Initial Board Configuration: ...E.BFFFE.BAAC...H.C...HGGGDDH...... . . E . B 
+F F F E . B 
+A A C . . . 
+H . C . . . 
+H G G G D D 
+H . . . . . 
+
+Car Fuel Available: 
+G : 100 B : 100 E : 100 H : 100 C : 100 D : 100 A : 100 F : 100 
+Runtime:0.011968135833740234 s
+Search Path Length: 17
+No solution

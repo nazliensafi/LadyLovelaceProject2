@@ -433,36 +433,6 @@ def goal(self):
         if car.name == 'A' and car.x == 2 and car.y + car.length - 1 == 5:
             return True
 
-# # determines if car A has reached (2,5) in the board
-# def goal(self):
-#     exited = False
-#     i=0
-#     for Car in self.cars:
-#         if Car.name != 'A':
-#             i += 1
-#         else:
-#             break
-#
-#     if(self.cars[i].x == 2 and self.cars[i].y == 5):
-#         exited = True
-#     # add elif to check the position of the tail
-#     #case when A is horizontal
-#     elif(self.cars[i].orientation == 0):
-#         if(self.cars[i].x + self.cars[i].length == 2 and self.cars[i].y == 5):
-#             exited = True
-#         else:
-#             exited = False
-#     #case when A is vertical
-#     elif(self.cars[i].orientation == 1):
-#         if(self.cars[i].x == 2 and self.cars[i].y + self.cars[i].length == 5):
-#             exited = True
-#         else:
-#             exited = False
-#     else:
-#         exited = False
-#
-#     return exited
-
 #Heuristic functions
 #H1: the number of vehicles blocking A
 def h1(self):
@@ -565,66 +535,6 @@ def h3(self, ld):
     hn = hx*ld
     return hn
 
-# #H4: heuristic of our choice
-# def h4(self):
-#     """
-#        The distance of A's head from the exit + the number of cars blocking A
-#        H4 is admissible:
-#        - A must traverse the distance between himself and the exit
-#        - All cars blocking A from the exit must be moved at least once to allow A to traverse to the exit
-#     """
-#     hn = 0
-#     #the number of cars blocking A = value of h1(n)
-#     ha = h1(self)
-
-#     # #the distance of the red car from the exit
-
-#     #find the index of A in the list of cars
-#     i=0
-#     for c in self.cars:
-#         if(c.name != 'A'):
-#             i+=1
-#         else:
-#             break
-
-#     #using the index, determine the coordinate of A's edge
-#     Alength=self.cars[i].length
-#     Ay=self.cars[i].y+Alength-1
-#     Ax=self.cars[i].x
-
-#     #verify if A is at the exit
-#     if(Ax == 2 and Ay == 5):
-#         hn = 0
-
-#     blockingA=[]
-#     #find cars blocking A
-#     else:
-#         for c in self.cars:
-#             #skip A
-#             if(c.name != 'A'):
-#                 #if the car is horizontal and blocking, then its x value is equal to Ax and y value greater than Ay
-#                 if c.orientation == 0:
-#                     if(c.x==Ax and c.y > Ay):
-#                         blockingA+=[c.name]
-#                     else:
-#                         continue
-#                 #if the car is vertical and blocking, its y value is greater than Ay, and its x value is equal to Ax or x+length surpasses 2 when x < 2
-#                 elif c.orientation == 1:
-#                     if((c.x == Ax and c.y>Ay) or (c.x<=2 and (c.x+c.length-1 >= 2) and c.y>Ay)):
-#                         blockingA+=[c.name]
-
-
-#     # #the coordinate y of A's head
-#     # Ay = self.cars[i].y + 1
-
-#     # #distance from the exit
-#     # hd = 5 - Ay
-
-#     # #final h4(n) value
-#     # hn = ha + hd
-
-
-#     return hn
 
 def h4(self):
     """

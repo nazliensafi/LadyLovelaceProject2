@@ -11,20 +11,6 @@ class Car:
     """
     Attributes of car: name, position, length, orientation, and fuel level
     """
-    # def __init__(self, **kwargs):
-    #     for key, value in kwargs.items():
-    #         if key == "name":
-    #             self.name = value
-    #         elif key == "x":
-    #             self.x = value
-    #         elif key == "y":
-    #             self.y = value
-    #         elif key == "length":
-    #             self.length = value
-    #         elif key == "_orientation":
-    #             self.orientation = value # 0 for horizontal, 1 for vertical
-    #         elif key == "fuel":
-    #             self.fuel = value
 
     def __init__(self, name, x, y, length, orientation, fuel):
         self.name = name
@@ -88,11 +74,6 @@ class Car:
         self.x = x    # set the new x
         self.y = y  # set the new y
 
-    # DEVELOPER THOUGHTS
-    # levels of the search tree:
-    # root of the search is the first state of the board (original 2D array)
-    # 1st level: the car heads that can move
-    # 2nd level: possible moves of each car
 
 
 
